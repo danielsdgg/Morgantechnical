@@ -5,7 +5,7 @@ import { useSwipeable } from 'react-swipeable';
 import { Link } from 'react-router-dom';
 import ScrollButton from './ScrollButton';
 
-const Home = () => {
+const Home : React.FC= () => {
   const [scrollY, setScrollY] = useState(0);
   const [visible, setVisible] = useState(false);
 

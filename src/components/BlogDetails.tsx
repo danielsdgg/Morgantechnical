@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from './Navbar';
 import { FaArrowLeft } from "react-icons/fa";

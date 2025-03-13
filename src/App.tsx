@@ -1,4 +1,3 @@
-import React from 'react';
 import Home from './components/Home';
 import Story from './components/About/Story';
 import Team from './components/About/Team';
