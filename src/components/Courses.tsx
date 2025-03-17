@@ -45,7 +45,7 @@ const Courses: React.FC = () => {
               isVisible ? 'translate-x-0 opacity-100' : '-translate-x-60 opacity-0'
             }`}
           >
-            <h2 className="font-semibold text-orange-600 py-2 mt-6 text-2xl sm:text-3xl md:text-5xl lg:text-6xl">
+            <h2 className="font-semibold text-orange-700 py-2 mt-6 text-2xl sm:text-3xl md:text-5xl lg:text-6xl">
               Take the next step:
             </h2>
             <p className="text-sm sm:text-base md:text-lg leading-relaxed">
