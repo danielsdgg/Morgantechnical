@@ -44,7 +44,7 @@ const Team:React.FC = () => {
       <Navbar />
       <section id="team-section" className="bg-gray-200 py-28">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">The Team Behind Morgan Technical Training</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-orange-600 mb-4">The Team Behind Morgan Technical Training</h2>
           <p className="text-lg md:text-xl text-gray-500">{message}</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {/* Team Member 1 */}
@@ -53,13 +53,13 @@ const Team:React.FC = () => {
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
             >
-              <div className="bg-gray-100 rounded-lg p-8 transition-colors duration-300 hover:bg-blue-500 hover:text-white">
+              <div className="bg-gray-100 rounded-lg p-8 transition-colors duration-300 hover:bg-orange-500 hover:text-white">
                 <img
                   src="https://res.cloudinary.com/ddei3mzex/image/upload/v1729591303/1000138333_m8roto.jpg"
                   className="mx-auto w-48 h-48 rounded-full mb-6"
                   alt="Leonard Morgan"
                 />
-                <h3 className="text-xl font-semibold">Leonard Morgan</h3>
+                <h3 className="text-xl text-indigo-600 font-semibold">Leonard Morgan</h3>
                 <div className="mb-4">
                   <p className="text-gray-500">Head of M.T.T</p>
                 </div>
@@ -67,12 +67,12 @@ const Team:React.FC = () => {
                   Leonard, our co-founder, drives Morgan Technical Training with a passion for skill-building. With over fifteen years of experience, he’s crafted innovative curriculums that empower students with top-tier problem-solving and tech expertise.
                 </p>
                 <ul className="flex justify-center mt-6">
-                  <li className="mx-2">
+                  <li className="mx-2 text-indigo-600">
                     <a href="https://x.com/TechnicalM16539">
                       <XIcon />
                     </a>
                   </li>
-                  <li className="mx-2">
+                  <li className="mx-2 text-indigo-600">
                     <a href="http://www.instagram.com">
                       <FaInstagram size={30} />
                     </a>
@@ -86,13 +86,13 @@ const Team:React.FC = () => {
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
             >
-              <div className="bg-gray-100 rounded-lg p-8 transition-colors duration-300 hover:bg-blue-500 hover:text-white">
+              <div className="bg-gray-100 rounded-lg p-8 transition-colors duration-300 hover:bg-orange-500 hover:text-white">
                 <img
                   src="https://res.cloudinary.com/ddei3mzex/image/upload/v1728998699/IMG_5230_qib0qp.jpg"
                   className="mx-auto w-48 h-48 rounded-full mb-6"
                   alt="Nathan Nyongesa"
                 />
-                <h3 className="text-xl font-semibold">Nelson Nyongesa</h3>
+                <h3 className="text-xl text-indigo-600 font-semibold">Nelson Nyongesa</h3>
                 <div className="mb-4">
                   <p className="text-gray-600">Mentor</p>
                 </div>
@@ -100,12 +100,12 @@ const Team:React.FC = () => {
                   Nelson, one of our dedicated mentors, brings a deep passion for technology to Morgan Technical Training. He guides students with hands-on expertise, fostering innovation and mastery in cutting-edge tech skills.
                 </p>
                 <ul className="flex justify-center mt-6">
-                  <li className="mx-2">
+                  <li className="mx-2 text-indigo-600">
                     <a href="http://www.twitter.com">
                       <XIcon />
                     </a>
                   </li>
-                  <li className="mx-2">
+                  <li className="mx-2 text-indigo-600">
                     <a href="http://www.instagram.com">
                       <FaInstagram size={30} />
                     </a>
@@ -119,13 +119,13 @@ const Team:React.FC = () => {
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
             >
-              <div className="bg-gray-100 rounded-lg p-8 transition-colors duration-300 hover:bg-blue-500 hover:text-white">
+              <div className="bg-gray-100 rounded-lg p-8 transition-colors duration-300 hover:bg-orange-500 hover:text-white">
                 <img
                   src="https://res.cloudinary.com/ddei3mzex/image/upload/v1712911719/1690452513365_gaum2x.jpg"
                   className="mx-auto w-48 h-48 rounded-full mb-6"
                   alt="Daniel Muiruri"
                 />
-                <h3 className="text-xl font-semibold">DANIEL MUIRURI</h3>
+                <h3 className="text-xl text-indigo-600 font-semibold">DANIEL MUIRURI</h3>
                 <div className="mb-4">
                   <p className="text-gray-600">Lead Software Engineer</p>
                 </div>
@@ -134,12 +134,12 @@ const Team:React.FC = () => {
                   individuals and small businesses all the way to large enterprise corporations.
                 </p>
                 <ul className="flex justify-center mt-6">
-                  <li className="mx-2">
+                  <li className="mx-2 text-indigo-600">
                     <a href="https://x.com/DanielMuir69423">
                       <XIcon />
                     </a>
                   </li>
-                  <li className="mx-2">
+                  <li className="mx-2 text-indigo-600">
                     <a href="http://www.instagram.com">
                       <FaInstagram size={30} />
                     </a>

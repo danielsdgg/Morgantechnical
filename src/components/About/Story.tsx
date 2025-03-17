@@ -56,7 +56,7 @@ const Story: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
+            <h2 className="text-3xl font-bold text-orange-600 mb-4">Our Mission</h2>
             <p className="text-lg text-gray-600">
               To provide quality affordable and reliable education and training for the modern job market
             </p>
@@ -78,7 +78,7 @@ const Story: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12 13h-9v7L3 14h6z" />
               </svg>
             </div>
-            <h2 className="text-3xl font-bold mb-4">Our Vision</h2>
+            <h2 className="text-3xl font-bold text-orange-600 mb-4">Our Vision</h2>
             <p className="text-lg text-gray-600">
               To become a global tech bootcamp, continuously adapting to emerging technologies and ensuring the highest standards of training to our students.
             </p>
@@ -97,7 +97,7 @@ const Story: React.FC = () => {
             <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
             {/* Text Content */}
             <div className="relative z-10 p-6 sm:p-8 text-white">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">The Morgan Technical Journey</h2>
+              <h2 className="text-3xl sm:text-4xl text-orange-600 font-bold mb-4 sm:mb-6">The Morgan Technical Journey</h2>
               <p className="text-base sm:text-lg mb-4">
                   At Morgan Technical Training, our story begins with a bold vision: to transform lives through the power of technology. Driven by a passion for innovation and learning, we set out to create a training institution that bridges the gap between ambition and opportunity, equipping individuals with the skills to thrive in today’s fast-evolving tech landscape.
               </p>
@@ -115,7 +115,7 @@ const Story: React.FC = () => {
         </div>
       </section>
       {/* 3 */}
-      <div className='w-full bg-gray-800 text-white py-24 px-2 text-center md:text-5xl sm:text-3xl text-3xl'>
+      <div className='w-full bg-gray-800 text-orange-600 py-24 px-2 text-center md:text-5xl sm:text-3xl text-3xl'>
         <p>Begin your story with us today</p>
         </div>
         <ScrollButton/>

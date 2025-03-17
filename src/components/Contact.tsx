@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { motion } from 'framer-motion';
+import logo from '../assets/class3.jpg'
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -69,7 +70,7 @@ const Contact: React.FC = () => {
           >
             <img
               className="w-[800px] h-[500px] rounded-3xl shadow-lg"
-              src="https://africa-school-bucket3.s3.amazonaws.com/static/img/school/2023/07/12/admike.png"
+              src={logo}
               alt="imagery"
             />
           </motion.div>
