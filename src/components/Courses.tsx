@@ -38,14 +38,14 @@ const Courses: React.FC = () => {
       <NavBar />
       {/* Intro to courses */}
       <div id="next-step-section" className="w-full bg-gray-300 py-12 px-4 sm:px-6 lg:px-16">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 mt-8 md:grid-cols-2 gap-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 mt-8 md:grid-cols-2 gap-8">
           {/* Text Content with Animation */}
           <div
             className={`flex flex-col justify-center text-black h-full transition-transform duration-1000 ease-out ${
               isVisible ? 'translate-x-0 opacity-100' : '-translate-x-60 opacity-0'
             }`}
           >
-            <h2 className="font-semibold py-2 mt-6 text-2xl sm:text-3xl md:text-5xl lg:text-6xl">
+            <h2 className="font-semibold text-orange-600 py-2 mt-6 text-2xl sm:text-3xl md:text-5xl lg:text-6xl">
               Take the next step:
             </h2>
             <p className="text-sm sm:text-base md:text-lg leading-relaxed">
