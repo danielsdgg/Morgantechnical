@@ -28,7 +28,9 @@ const NavBar: React.FC = () => {
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo */}
         <div className="flex items-center cursor-pointer animate-fade-in-down">
-        <NavLink to="/"><img src={logo} alt="Logo" className="h-12 w-auto" /></NavLink>
+          <NavLink to="/">
+            <img src={logo} alt="Logo" className="h-12 w-auto" />
+          </NavLink>
           <NavLink to="/">
             <h1 className="font-extrabold text-white ml-2 text-xl tracking-tight">Morgan Technical Training</h1>
           </NavLink>
@@ -61,26 +63,24 @@ const NavBar: React.FC = () => {
             <Link to="/blogs" className="py-2 px-4 text-white hover:text-orange-400 transition-colors duration-200">Blogs</Link>
           </li>
           <li className="relative group">
-            <p className="py-2 px-4 text-white flex items-center cursor-pointer">
-              Programs <AiOutlineDown className="ml-1" />
-            </p>
-            <ul className="absolute w-[250px] left-0 top-full hidden group-hover:block shadow-xl rounded-lg border border-gray-200 transform origin-top animate-dropdown">
+            <p className="py-2 px-4 text-white hover:text-orange-400 flex items-center cursor-pointer">Programs</p>
+            <ul className="absolute w-[250px] left-0 top-full hidden group-hover:block bg-white shadow-xl rounded-lg border border-gray-200 transform origin-top animate-dropdown">
               <li>
-                <p className="block px-4 py-3 text-white font-semibold border-b border-b border-orange-900">Available Courses</p>
+                <p className="block px-4 py-3 text-gray-800 font-semibold border-b border-gray-200">Available Courses</p>
                 <ul className="pl-4">
                   <li>
-                    <Link to="/software" className="block px-4 py-2 text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all duration-200">Software Engineering</Link>
+                    <Link to="/software" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Software Engineering</Link>
                   </li>
                 </ul>
               </li>
               <li>
-                <p className="block px-4 py-3 text-white font-semibold border-b border-orange-900">Upcoming Courses</p>
+                <p className="block px-4 py-3 text-gray-800 font-semibold border-b border-gray-200">Upcoming Courses</p>
                 <ul className="pl-4">
                   <li>
-                    <Link to="/datascience" className="block px-4 py-2 text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all duration-200">Data Science</Link>
+                    <Link to="/datascience" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Data Science</Link>
                   </li>
                   <li>
-                    <Link to="/cyber" className="block px-4 py-2 text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all duration-200">Cyber Security</Link>
+                    <Link to="/cyber" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Cyber Security</Link>
                   </li>
                 </ul>
               </li>
@@ -112,7 +112,9 @@ const NavBar: React.FC = () => {
           >
             <div className="flex items-center justify-between p-4 border-b border-gray-700">
               <div className="flex items-center">
-              <NavLink to="/"><img src={logo} alt="Logo" className="h-10 w-auto" /> </NavLink>
+                <NavLink to="/">
+                  <img src={logo} alt="Logo" className="h-10 w-auto" />
+                </NavLink>
                 <NavLink to="/" onClick={toggleMenu}>
                   <p className="font-bold text-xl text-white ml-2">Morgan Technical Training</p>
                 </NavLink>
