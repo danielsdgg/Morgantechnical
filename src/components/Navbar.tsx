@@ -61,12 +61,12 @@ const NavBar: React.FC = () => {
             <Link to="/blogs" className="py-2 px-4 text-white hover:text-orange-400 transition-colors duration-200">Blogs</Link>
           </li>
           <li className="relative group">
-            <p className="py-2 px-4 text-white hover:text-orange-400 flex items-center cursor-pointer">
+            <p className="py-2 px-4 text-white flex items-center cursor-pointer">
               Programs <AiOutlineDown className="ml-1" />
             </p>
-            <ul className="absolute w-[250px] left-0 top-full hidden group-hover:block bg-white shadow-xl rounded-lg border border-gray-200 transform origin-top animate-dropdown">
+            <ul className="absolute w-[250px] left-0 top-full hidden group-hover:block shadow-xl rounded-lg border border-gray-200 transform origin-top animate-dropdown">
               <li>
-                <p className="block px-4 py-3 text-gray-800 font-semibold border-b border-gray-200">Available Courses</p>
+                <p className="block px-4 py-3 text-white font-semibold border-b border-b border-orange-900">Available Courses</p>
                 <ul className="pl-4">
                   <li>
                     <Link to="/software" className="block px-4 py-2 text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all duration-200">Software Engineering</Link>
@@ -74,7 +74,7 @@ const NavBar: React.FC = () => {
                 </ul>
               </li>
               <li>
-                <p className="block px-4 py-3 text-gray-800 font-semibold border-b border-gray-200">Upcoming Courses</p>
+                <p className="block px-4 py-3 text-white font-semibold border-b border-orange-900">Upcoming Courses</p>
                 <ul className="pl-4">
                   <li>
                     <Link to="/datascience" className="block px-4 py-2 text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all duration-200">Data Science</Link>
@@ -123,11 +123,11 @@ const NavBar: React.FC = () => {
             </div>
             <ul className="p-4 space-y-2">
               <li>
-                <Link to="/" onClick={toggleMenu} className="block py-3 px-4 text-white hover:bg-gray-700 hover:text-orange-400 rounded-lg transition-all duration-200">Home</Link>
+                <Link to="/" onClick={toggleMenu} className="block py-3 px-4 text-white hover:bg-red-900 hover:text-orange-400 rounded-lg transition-all duration-200">Home</Link>
               </li>
               <li>
                 <div
-                  className="flex justify-between items-center py-3 px-4 cursor-pointer hover:bg-orange-600 rounded-lg transition-all duration-200"
+                  className="flex justify-between items-center py-3 px-4 cursor-pointer hover:bg-red-900 rounded-lg transition-all duration-200"
                   onClick={() => toggleSubMenu('about')}
                 >
                   <span className="text-white">About</span>
@@ -149,7 +149,7 @@ const NavBar: React.FC = () => {
               </li>
               <li>
                 <div
-                  className="flex justify-between items-center py-3 px-4 cursor-pointer bg-orange-600 rounded-lg transition-all duration-200"
+                  className="flex justify-between items-center py-3 px-4 cursor-pointer rounded-lg transition-all duration-200"
                   onClick={() => toggleSubMenu('programs')}
                 >
                   <span className="text-white">Programs</span>
@@ -159,10 +159,10 @@ const NavBar: React.FC = () => {
                   <ul className="ml-4 mt-2 space-y-2 animate-fade-in">
                     <li>
                       <div
-                        className="flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-gray-600 rounded-lg transition-all duration-200"
+                        className="flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-orange-600 rounded-lg transition-all duration-200"
                         onClick={() => toggleNestedSubMenu('availableCourses')}
                       >
-                        <span className="text-gray-300">Available Courses</span>
+                        <span className="text-white-300">Available Courses</span>
                         {activeNestedSubMenu === 'availableCourses' ? <AiOutlineUp className="text-orange-400" /> : <AiOutlineDown className="text-orange-400" />}
                       </div>
                       {activeNestedSubMenu === 'availableCourses' && (
