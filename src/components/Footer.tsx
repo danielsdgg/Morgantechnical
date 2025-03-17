@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
               <li>
                 <span className="font-bold text-sl uppercase">Email: </span>
                 <a
-                  href="mailto:contact@morgantechnical72@gmail.com"
+                  href="mailto:morgantechnical72@gmail.com"
                   className="hover:text-orange-400 transition-colors duration-300 underline italic"
                 >
                   morgantechnical72@gmail.com
