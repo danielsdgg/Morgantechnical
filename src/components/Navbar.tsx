@@ -162,7 +162,7 @@ const NavBar: React.FC = () => {
                         className="flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-orange-600 rounded-lg transition-all duration-200"
                         onClick={() => toggleNestedSubMenu('availableCourses')}
                       >
-                        <span className="text-white-300">Available Courses</span>
+                        <span className="text-white">Available Courses</span>
                         {activeNestedSubMenu === 'availableCourses' ? <AiOutlineUp className="text-orange-400" /> : <AiOutlineDown className="text-orange-400" />}
                       </div>
                       {activeNestedSubMenu === 'availableCourses' && (
@@ -175,10 +175,10 @@ const NavBar: React.FC = () => {
                     </li>
                     <li>
                       <div
-                        className="flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-gray-600 rounded-lg transition-all duration-200"
+                        className="flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-orange-600 rounded-lg transition-all duration-200"
                         onClick={() => toggleNestedSubMenu('upcomingCourses')}
                       >
-                        <span className="text-gray-300">Upcoming Courses</span>
+                        <span className="text-white">Upcoming Courses</span>
                         {activeNestedSubMenu === 'upcomingCourses' ? <AiOutlineUp className="text-orange-400" /> : <AiOutlineDown className="text-orange-400" />}
                       </div>
                       {activeNestedSubMenu === 'upcomingCourses' && (
