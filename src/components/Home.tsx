@@ -4,6 +4,7 @@ import Footer from './Footer';
 import { useSwipeable } from 'react-swipeable';
 import { Link } from 'react-router-dom';
 import ScrollButton from './ScrollButton';
+import logo from '../assets/stu.jpg'
 
 const Home : React.FC= () => {
   const [scrollY, setScrollY] = useState(0);
@@ -45,8 +46,8 @@ const Home : React.FC= () => {
 
   const testimonials = [
     {
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcCuCOisgxyOypyBi-hRYYV2Onv7KVI6QTVA&s',
-      name: 'Owen',
+      image: 'https://res.cloudinary.com/ddei3mzex/image/upload/v1728998699/IMG_5230_qib0qp.jpg',
+      name: 'Nathan Nyongesa',
       title: 'Mentor',
       testimonial:
         'Working at Morgan Technical has been significantly more effective in upscaling my skills by training newbie techies.',
@@ -59,10 +60,10 @@ const Home : React.FC= () => {
         'I always wanted to be a frontend developer for a long time and after going through the technical training at M.T.T, I fulfilled my longtime wish.',
     },
     {
-      image: 'https://science.nasa.gov/wp-content/uploads/2024/01/preview-supermoons.jpg?w=4096&format=jpeg',
-      name: 'Martin',
+      image: logo,
+      name: 'Venus Khatievi',
       title: 'School Alumni',
-      testimonial: 'Studying at M.T.T has been fruitful indeed and i have gained incredible skills.!',
+      testimonial: 'Studying at M.T.T has been fruitful indeed and i have gained incredible skills in the ICT fields; from computer training all the way to website creations.!',
     },
   ];
 
@@ -150,7 +151,7 @@ const Home : React.FC= () => {
                   Our mission is to provide outstanding tech skills to our students and ensure they feel satisfied. We
                   have a variety of fascinating courses like{' '}
                   <Link to={'/software'}>
-                    <b className="text-orange-700 hover:text-orange-900 cursor-pointer">Software Engineering</b>
+                    <b className="text-orange-700 hover:text-orange-900 cursor-pointer underline">Software Engineering</b>
                   </Link>
                   . Remember, the secret of getting ahead is getting started.
                 </p>
