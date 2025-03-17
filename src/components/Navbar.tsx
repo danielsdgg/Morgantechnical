@@ -145,11 +145,11 @@ const NavBar: React.FC = () => {
                 )}
               </li>
               <li>
-                <Link to="/blogs" onClick={toggleMenu} className="block py-3 px-4 text-white hover:bg-gray-700 hover:text-orange-400 rounded-lg transition-all duration-200">Blogs</Link>
+                <Link to="/blogs" onClick={toggleMenu} className="block py-3 px-4 text-white hover:bg-orange-600 hover:text-orange-400 rounded-lg transition-all duration-200">Blogs</Link>
               </li>
               <li>
                 <div
-                  className="flex justify-between items-center py-3 px-4 cursor-pointer hover:bg-gray-700 rounded-lg transition-all duration-200"
+                  className="flex justify-between items-center py-3 px-4 cursor-pointer bg-orange-600 rounded-lg transition-all duration-200"
                   onClick={() => toggleSubMenu('programs')}
                 >
                   <span className="text-white">Programs</span>
