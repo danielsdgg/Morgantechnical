@@ -91,7 +91,7 @@ const NavBar: React.FC = () => {
           </li>
           <li>
             <Link to="/portal">
-              <button className="py-2 px-6 bg-orange-600 text-white text-white rounded-full hover:bg-white hover:text-orange-600 cursor-pointer transition-all duration-200 hover:scale-105">Portal</button>
+              <button className="py-2 px-6 bg-orange-600 text-white rounded-full hover:bg-white hover:text-orange-600 cursor-pointer transition-all duration-200 hover:scale-105">Portal</button>
             </Link>
           </li>
         </ul>
@@ -114,7 +114,7 @@ const NavBar: React.FC = () => {
               <div className="flex items-center">
               <NavLink to="/"><img src={logo} alt="Logo" className="h-10 w-auto" /> </NavLink>
                 <NavLink to="/" onClick={toggleMenu}>
-                  <p className="font-bold text-xl text-orange-400 ml-2">Morgan Technical Training</p>
+                  <p className="font-bold text-xl text-white ml-2">Morgan Technical Training</p>
                 </NavLink>
               </div>
               <button onClick={toggleMenu} className="text-2xl text-white hover:text-orange-400 transition-colors duration-200">
@@ -127,14 +127,14 @@ const NavBar: React.FC = () => {
               </li>
               <li>
                 <div
-                  className="flex justify-between items-center py-3 px-4 cursor-pointer hover:bg-gray-700 rounded-lg transition-all duration-200"
+                  className="flex justify-between items-center py-3 px-4 cursor-pointer hover:bg-orange-300 rounded-lg transition-all duration-200"
                   onClick={() => toggleSubMenu('about')}
                 >
                   <span className="text-white">About</span>
                   {activeSubMenu === 'about' ? <AiOutlineUp className="text-orange-400" /> : <AiOutlineDown className="text-orange-400" />}
                 </div>
                 {activeSubMenu === 'about' && (
-                  <ul className="ml-4 mt-2 space-y-2 animate-fade-in">
+                  <ul className="ml-4 mt-2 space-y-2 animate-fade-in hover:bg-white hover:text-orange-600">
                     <li>
                       <Link to="/story" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Our Story</Link>
                     </li>
