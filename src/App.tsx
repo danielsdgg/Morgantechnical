@@ -1,7 +1,7 @@
 import Home from './components/Home';
 import Story from './components/About/Story';
 import Team from './components/About/Team';
-import { Route, Routes } from 'react-router-dom'; // Remove BrowserRouter
+import { Route, Routes } from 'react-router-dom';
 import Contact from './components/Contact';
 import Courses from './components/Courses';
 import Forms from './components/Forms';
@@ -9,6 +9,8 @@ import Portal from './components/Portal';
 import Blogs from './components/Blogs';
 import BlogDetails from './components/BlogDetails';
 import Software from './components/Programs/Software';
+import DataScience from './components/Programs/DataScience';
+import Cyber from './components/Programs/Cyber';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:id" element={<BlogDetails />} />
         <Route path="/form" element={<Forms />} />
+        <Route path="/datascience" element={<DataScience/>} />
+        <Route path="/cyber" element={<Cyber/>} />
       </Routes>
     </div>
   );

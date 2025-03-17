@@ -86,7 +86,7 @@ const Contact: React.FC = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">Get in Touch</h2>
                 <p className="text-gray-600">
                   To contact us, please fill out the form below or send an email to{' '}
-                  <a href="mailto:morgantechnical72@gmail.com" className="text-blue-500">
+                  <a href="mailto:morgantechnical72@gmail.com" className="text-indigo-500">
                     morgantechnical72@gmail.com
                   </a>
                   .
@@ -140,7 +140,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="text-center">
-                <button type="submit" className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition">
+                <button type="submit" className="bg-orange-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-gray-300 hover:text-orange-600 cursor-pointer transition duration-300 text-lg">
                   Send
                 </button>
               </div>

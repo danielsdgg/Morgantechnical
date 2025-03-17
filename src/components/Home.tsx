@@ -109,7 +109,7 @@ const Home : React.FC= () => {
                 visible ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              Welcome to <span className="text-blue-500">Morgan Technical Training</span>
+              Welcome to <span className="text-orange-500">Morgan Technical Training</span>
             </h1>
             <h2
               className={`text-3xl md:text-3xl font-bold mb-4 transition-opacity duration-1000 ease-in ${
@@ -127,9 +127,9 @@ const Home : React.FC= () => {
             </p>
             <Link
               to="/courses"
-              className={`bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 cursor-pointer transition-opacity duration-1000 ease-in ${
+              className={`bg-orange-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-lg  ${
                 visible ? 'opacity-100' : 'opacity-0'
-              } delay-1600`}
+              } delay-100`}
             >
               Get Started
             </Link>
@@ -145,16 +145,16 @@ const Home : React.FC= () => {
                   visible ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <h2 className="text-3xl lg:text-5xl font-bold mb-4">Committed to Excellence</h2>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-orange-600">Committed to Excellence</h2>
                 <p className="text-lg lg:text-xl mb-8">
                   Our mission is to provide outstanding tech skills to our students and ensure they feel satisfied. We
                   have a variety of fascinating courses like{' '}
                   <Link to={'/software'}>
-                    <b className="text-blue-900 cursor-pointer">Software Engineering</b>
+                    <b className="text-orange-700 hover:text-orange-900 cursor-pointer">Software Engineering</b>
                   </Link>
                   . Remember, the secret of getting ahead is getting started.
                 </p>
-                <h3 className="text-2xl font-bold mb-4">Hear Our Students</h3>
+                <h3 className="text-2xl font-bold text-orange-700 mb-4">Hear Our Students</h3>
                 <p className="text-lg lg:text-xl mb-8">“The digital world is here, and we must embrace it.”</p>
               </div>
               <div className="w-full lg:w-1/2">
@@ -213,7 +213,7 @@ const Home : React.FC= () => {
           } delay-1600`}
         >
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Unlock Your Tech Potential</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-orange-600">Unlock Your Tech Potential</h2>
             <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
               Explore cutting-edge courses in Software Engineering, Cybersecurity, and Data Science—designed for the
               future, delivered remotely.
@@ -243,7 +243,7 @@ const Home : React.FC= () => {
             </div>
             <Link
               to="/courses"
-              className="inline-block bg-white text-indigo-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors duration-300"
+              className="inline-block bg-white text-indigo-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-300 transition-colors duration-300"
             >
               Discover Our Curriculum Now
             </Link>

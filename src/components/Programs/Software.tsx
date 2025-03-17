@@ -4,6 +4,7 @@ import Footer from '../Footer';
 import ScrollButton from '../ScrollButton';
 import { FaArrowDown } from 'react-icons/fa';
 // logos
+import logo from '../../assets/class2.jpg'
 import HTML from '../../assets/html.png';
 import CSS from '../../assets/CSS.png';
 import JavaScript from '../../assets/JavaScript.png';
@@ -109,7 +110,7 @@ const Software: React.FC = () => {
         <section className="relative bg-gray-800 h-[700px] flex flex-col justify-center overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29mdHdhcmUlMjBlbmdpbmVlcmluZ3xlbnwwfHwwfHx8MA=="
+              src={logo}
               alt="Software Engineering Hero Background"
               className={`object-cover w-full h-full transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'}`}
               style={{
@@ -126,14 +127,14 @@ const Software: React.FC = () => {
             <p className={`text-md md:text-lg mb-8 transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'} delay-1000`}>
               Build a solid foundation in software engineering with our comprehensive, fully remote program
             </p>
-            <button onClick={openModal} className="bg-indigo-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition duration-300 text-lg">
+            <button onClick={openModal} className="bg-orange-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-lg">
               Apply Now
             </button>
           </div>
         </section>
 
         {/* Intake Information */}
-        <div className="w-full bg-indigo-900 text-orange-400 py-16 px-4 text-center md:text-3xl sm:text-2xl text-xl">
+        <div className="w-full bg-orange-600 text-white py-16 px-4 text-center md:text-3xl sm:text-2xl text-xl">
           <p>
             This course is fully remote and applications are ongoing for the <b>May 19th, 2025</b> intake
           </p>
@@ -142,7 +143,7 @@ const Software: React.FC = () => {
         {/* Overview Section */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-semibold text-indigo-600 mb-8">Course Overview</h2>
+            <h2 className="text-4xl font-semibold text-orange-600 mb-8">Course Overview</h2>
             <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
               Our Software Engineering course is designed to equip you with the skills needed to excel in the tech industry. 
               This fully remote program offers a comprehensive curriculum that covers both frontend and backend development, 
@@ -155,7 +156,7 @@ const Software: React.FC = () => {
         {/* What to Expect */}
         <section className="py-16">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-semibold text-indigo-600 mb-8">What to Expect</h2>
+            <h2 className="text-4xl font-semibold text-orange-600 mb-8">What to Expect</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-gray-100 p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-semibold text-indigo-600 mb-4">Comprehensive Curriculum</h3>
@@ -185,7 +186,7 @@ const Software: React.FC = () => {
       <div className="max-w-[1200px] mx-auto p-6 flex flex-col justify-center w-full h-full">
         {/* Heading */}
         <div className="text-center mb-12">
-        <h2 className="text-4xl font-semibold text-indigo-600 mb-8">Technologies covered</h2>
+        <h2 className="text-4xl font-semibold text-orange-600 mb-8">Technologies covered</h2>
           <p className="py-4 text-xl text-black">These are the technologies you'll cover when studying the program</p>
         </div>
 
@@ -236,7 +237,7 @@ const Software: React.FC = () => {
         <div className="w-full bg-gray-100 py-16 px-4 sm:px-16">
           <div className="max-w-[100%] mx-auto grid md:grid-cols-2 gap-8">
             <div className="flex flex-col justify-center text-black">
-              <h2 className="text-4xl font-semibold text-indigo-600 mb-8">Course Requirements</h2>
+              <h2 className="text-4xl font-semibold text-orange-600 mb-8">Course Requirements</h2>
               <ul className="list-disc list-inside text-left space-y-2 text-lg">
                 <li>Stable internet connection with at least 10 Mbps download speed for remote learning.</li>
                 <li>Basic understanding of computer operations and file management.</li>
@@ -249,8 +250,8 @@ const Software: React.FC = () => {
               </ul>
             </div>
             <img
-              className="w-[700px] mx-auto rounded-3xl my-4"
-              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29mdHdhcmUlMjBlbmdpbmVlcmluZ3xlbnwwfHwwfHx8MA=="
+              className="w-[700px] h-[300px] mx-auto rounded-3xl my-4"
+              src={logo}
               alt="Software Engineering"
             />
           </div>
@@ -259,7 +260,7 @@ const Software: React.FC = () => {
         {/* Course Content with Interactive Roadmap */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-semibold text-indigo-600 mb-8">Course Content</h2>
+            <h2 className="text-4xl font-semibold text-orange-600 mb-8">Course Content</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Course Modules List */}
               <ul className="list-disc list-inside text-left space-y-2 text-lg">
@@ -329,7 +330,7 @@ const Software: React.FC = () => {
           <div className="container mx-auto px-6 lg:px-12 text-center space-y-16">
             {/* Course Duration */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-indigo-600 mb-6">Course Duration</h2>
+              <h2 className="text-4xl font-semibold text-orange-600 mb-8">Course Duration</h2>
               <p className="text-lg md:text-xl text-gray-700">
                 The Software Engineering course spans 18 weeks of intensive, fully remote training, 
                 designed to take you from beginner to job-ready software engineer.
@@ -338,7 +339,7 @@ const Software: React.FC = () => {
 
             {/* Payment Plans */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-indigo-600 mb-6">Payment Plans</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-orange-600 mb-6">Payment Plans</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                 <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
                   <h3 className="text-2xl font-semibold mb-4 text-indigo-600">Full Payment</h3>
@@ -358,8 +359,8 @@ const Software: React.FC = () => {
 
             {/* Apply Button */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-indigo-600 mb-6">Ready to Join?</h2>
-              <button onClick={openModal} className="bg-indigo-600 text-white py-4 px-10 rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 text-lg md:text-xl">
+              <h2 className="text-4xl md:text-5xl font-bold text-orange-600 mb-6">Ready to Join?</h2>
+              <button onClick={openModal} className="bg-orange-600 text-white py-4 px-10 rounded-full shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-lg md:text-xl">
                 Apply Now
               </button>
             </div>

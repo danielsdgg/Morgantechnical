@@ -16,12 +16,12 @@ const XIcon = () => (
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gradient-to-r from-gray-900 via-indigo-950 to-gray-900 text-white py-12">
+    <footer className="bg-red-900 text-white py-12">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Logo and Description */}
           <div className="md:col-span-2 flex flex-col animate-fade-in-up">
-            <h1 className="text-3xl font-extrabold text-indigo-300 mb-4 tracking-tight">
+            <h1 className="text-3xl font-extrabold text-orange-600 mb-4 tracking-tight drop-shadow-md">
               Morgan Technical Training
             </h1>
             <p className="text-gray-200 text-base leading-relaxed max-w-md">
@@ -31,29 +31,29 @@ const Footer: React.FC = () => {
 
           {/* Contact Info */}
           <div className="animate-fade-in-up delay-100">
-            <h2 className="text-xl font-semibold text-indigo-400 mb-4">Contact Us</h2>
-            <ul className="text-gray-200 space-y-3 text-sm">
+            <h2 className="text-xl font-semibold text-orange-600 mb-4">Contact Us</h2>
+            <ul className="text-gray-200 space-y-4 text-sm">
               <li>
-                <span className="font-bold uppercase">Email : </span>
+                <span className="font-bold text-sl uppercase">Email: </span>
                 <a
                   href="mailto:contact@morgantechnical72@gmail.com"
-                  className="hover:text-indigo-300 transition-colors duration-300 underline"
+                  className="hover:text-orange-400 transition-colors duration-300 underline italic"
                 >
                   morgantechnical72@gmail.com
                 </a>
               </li>
               <li>
-                <span className="font-bold uppercase">Phone/WhatsApp : </span>
+                <span className="font-bold uppercase">Phone/WhatsApp: </span>
                 <a
-                  href="tel:+254702106527"
-                  className="hover:text-indigo-300 transition-colors duration-300 underline"
+                  href="tel:+254707319080"
+                  className="hover:text-orange-400 transition-colors duration-300 underline italic"
                 >
                   +254 707 319 080
                 </a>
               </li>
               <li>
-                <span className="font-bold uppercase">Location : </span>
-                <span className="hover:text-indigo-300 transition-colors duration-300 cursor-pointer">
+                <span className="font-bold uppercase">Location: </span>
+                <span className="hover:text-orange-400 transition-colors duration-300 cursor-pointer italic">
                   Kikuyu Town, May House: 1st Floor, Room 1c
                 </span>
               </li>
@@ -62,11 +62,10 @@ const Footer: React.FC = () => {
 
           {/* Social Media Links */}
           <div className="flex flex-col items-start animate-fade-in-up delay-200">
-            <h2 className="text-xl font-semibold text-indigo-400 mb-4">Follow Us</h2>
+            <h2 className="text-xl font-semibold text-orange-600 mb-4">Follow Us</h2>
             <ul className="flex space-x-6">
               {[
-                // { icon: FaFacebookF, href: 'https://www.facebook.com' },
-                { icon: XIcon, href: 'https://x.com/TechnicalM16539' }, 
+                { icon: XIcon, href: 'https://x.com/TechnicalM16539' },
                 { icon: FaInstagram, href: 'https://www.instagram.com/morgan_technical_training?igsh=MWdwZ3Ayems0bmx1Mg==' },
                 { icon: FaLinkedinIn, href: 'https://www.linkedin.com' },
               ].map((social, index) => (
@@ -75,9 +74,9 @@ const Footer: React.FC = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-200 hover:text-indigo-300 hover:scale-110 transition-all duration-300 transform"
+                    className="text-gray-200 hover:text-orange-400 hover:scale-110 transition-all duration-300 transform"
                   >
-                    <social.icon size={24} />
+                    <social.icon size={28} />
                   </a>
                 </li>
               ))}
@@ -87,13 +86,13 @@ const Footer: React.FC = () => {
 
         {/* Google Maps Embed */}
         <div className="mt-12 animate-fade-in-up delay-300">
-          <h2 className="text-xl font-semibold text-indigo-400 mb-4 text-center md:text-left">Our Location</h2>
-          <div className="w-full max-w-2xl mx-auto md:mx-0 rounded-xl shadow-lg border border-gray-800 overflow-hidden">
+          <h2 className="text-xl font-semibold text-orange-600 mb-4 text-center md:text-left">Our Location</h2>
+          <div className="w-full max-w-3xl mx-auto md:mx-0 rounded-xl shadow-2xl border border-gray-700 overflow-hidden transform hover:scale-[1.02] transition-transform duration-300">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.838551624463!2d36.65927901078921!3d-1.2463781358192494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f3f5d9e7b1a9b%3A0x6e8f5f5e9e7b1a9b!2sKikuyu%2C%20Kenya!5e0!3m2!1sen!2ske!4v1728991489342!5m2!1sen!2ske"
-              title="Morgan Technical Training Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.885041735974!2d36.66917767441952!3d-1.2454239987378493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f04e8b6f5e8d9%3A0x7e8e8d8e8f5e8d9!2sKikuyu%20Town%2C%20May%20House!5e0!3m2!1sen!2ske!4v1731890123456!5m2!1sen!2ske"
+              title="Morgan Technical Training Location - Kikuyu Town, May House"
               width="100%"
-              height="250"
+              height="300"
               style={{ border: 0 }}
               allowFullScreen={true}
               loading="lazy"
@@ -103,7 +102,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-10 border-t border-gray-800 pt-6 text-center">
+        <div className="mt-10 border-t border-gray-700 pt-6 text-center">
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} Morgan Technical Training. All rights reserved.
           </p>
