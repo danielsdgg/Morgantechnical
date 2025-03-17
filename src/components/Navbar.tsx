@@ -127,7 +127,7 @@ const NavBar: React.FC = () => {
               </li>
               <li>
                 <div
-                  className="flex justify-between items-center py-3 px-4 cursor-pointer hover:bg-orange-300 rounded-lg transition-all duration-200"
+                  className="flex justify-between items-center py-3 px-4 cursor-pointer hover:bg-orange-600 rounded-lg transition-all duration-200"
                   onClick={() => toggleSubMenu('about')}
                 >
                   <span className="text-white">About</span>
