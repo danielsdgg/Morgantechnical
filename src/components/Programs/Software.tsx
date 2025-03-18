@@ -4,7 +4,7 @@ import Footer from '../Footer';
 import ScrollButton from '../ScrollButton';
 import { FaArrowDown } from 'react-icons/fa';
 // logos
-import logo from '../../assets/class2.png';
+import logo from '../../assets/class2.jpg';
 import HTML from '../../assets/html.png';
 import CSS from '../../assets/CSS.png';
 import JavaScript from '../../assets/JavaScript.png';

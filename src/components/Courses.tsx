@@ -3,7 +3,7 @@ import NavBar from './Navbar';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import ScrollButton from './ScrollButton';
-import logo from '../assets/class.png';
+import logo from '../assets/class1.jpg';
 
 const Courses: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

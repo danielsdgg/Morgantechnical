@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { motion } from 'framer-motion';
-import logo from '../assets/class3.png'
+import logo from '../assets/class3.jpg'
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
