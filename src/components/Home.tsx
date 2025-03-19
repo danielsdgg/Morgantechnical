@@ -49,21 +49,37 @@ const Home : React.FC= () => {
       image: 'https://res.cloudinary.com/ddei3mzex/image/upload/v1728998699/IMG_5230_qib0qp.jpg',
       name: 'Nathan Nyongesa',
       title: 'Mentor',
-      testimonial:
-        'Working at Morgan Technical has been significantly more effective in upscaling my skills by training newbie techies.',
+      testimonial: 'Working at Morgan Technical has been significantly more effective in upscaling my skills by training newbie techies.',
     },
     {
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcCuCOisgxyOypyBi-hRYYV2Onv7KVI6QTVA&s',
       name: 'Adrian',
       title: 'Student',
-      testimonial:
-        'I always wanted to be a frontend developer for a long time and after going through the technical training at M.T.T, I fulfilled my longtime wish.',
+      testimonial: 'I always wanted to be a frontend developer, and after training at M.T.T, I fulfilled my longtime wish.',
     },
     {
       image: logo,
       name: 'Venus Khatievi',
       title: 'School Alumni',
-      testimonial: 'Studying at M.T.T has been fruitful indeed and i have gained incredible skills in the ICT fields; from computer training all the way to website creations.!',
+      testimonial: 'Studying at M.T.T has been fruitful, and I’ve gained incredible skills in ICT, from computer training to website creation!',
+    },
+    {
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcCuCOisgxyOypyBi-hRYYV2Onv7KVI6QTVA&s',
+      name: 'Amina Mwangi',
+      title: 'Student',
+      testimonial: 'The Data Science course at M.T.T opened doors for me in analytics—remote learning made it so accessible!',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3',
+      name: 'James Otieno',
+      title: 'School Alumni',
+      testimonial: 'M.T.T’s Cybersecurity training gave me hands-on skills that landed me a job in network security.',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1962&auto=format&fit=crop&ixlib=rb-4.0.3',
+      name: 'Fatuma Hassan',
+      title: 'Mentor',
+      testimonial: 'Teaching at Morgan Technical Training has been rewarding—helping students grow in tech is inspiring!',
     },
   ];
 
@@ -132,12 +148,54 @@ const Home : React.FC= () => {
                 visible ? 'opacity-100' : 'opacity-0'
               } delay-100`}
             >
-              Get Started
+              Start your journey
             </Link>
           </div>
         </section>
 
         {/* part 2 */}
+        <section
+          id="top-courses-section"
+          className={`py-12 sm:py-16 bg-gray-100 text-black transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-orange-600">Unlock Your Tech Potential</h2>
+            <p className="text-md sm:text-lg lg:text-xl mb-8 sm:mb-10 max-w-3xl mx-auto">
+              Explore cutting-edge courses in Software Engineering, Cybersecurity, and Data Science—fully remote and tailored for the future.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg sm:text-xl font-semibold mb-3 text-indigo-600">Software Engineering</h3>
+                <p className="text-sm sm:text-md">
+                  Master full-stack development with React, Node.js, and Python through hands-on, remote projects.
+                </p>
+                <Link to="/software" className="inline-block mt-4 text-orange-500 hover:text-orange-700 font-medium underline transition-colors duration-300">
+                  Learn More
+                </Link>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg sm:text-xl font-semibold mb-3 text-indigo-600">Cybersecurity</h3>
+                <p className="text-sm sm:text-md">
+                  Secure networks and data with expert-led remote training and real-time simulations.
+                </p>
+                <Link to="/cyber" className="inline-block mt-4 text-orange-500 hover:text-orange-700 font-medium underline transition-colors duration-300">
+                  Learn More
+                </Link>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg sm:text-xl font-semibold mb-3 text-indigo-600">Data Science</h3>
+                <p className="text-sm sm:text-md">
+                  Dive into data analysis and machine learning with flexible, remote coursework.
+                </p>
+                <Link to="/datascience" className="inline-block mt-4 text-orange-500 hover:text-orange-700 font-medium underline transition-colors duration-300">
+                  Learn More
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* part 3 */}
         <div className="bg-gray-400 py-16">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row items-center">
@@ -156,7 +214,7 @@ const Home : React.FC= () => {
                   . Remember, the secret of getting ahead is getting started.
                 </p>
                 <h3 className="text-2xl font-bold text-orange-700 mb-4">Hear Our Students</h3>
-                <p className="text-lg lg:text-xl mb-8">“The digital world is here, and we must embrace it.”</p>
+                <p className="text-md sm:text-lg italic text-gray-700">“The digital world is here, and we must embrace it.”</p>
               </div>
               <div className="w-full lg:w-1/2">
                 <div className="relative" {...handlers}>
@@ -205,51 +263,7 @@ const Home : React.FC= () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* part 3 */}
-        <section
-          className={`py-16 bg-gray-200 from-blue-500 via-indigo-600 to-purple-700 text-black duration-1000 ease-in ${
-            visible ? 'opacity-100' : 'opacity-0'
-          } delay-1600`}
-        >
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-orange-600">Unlock Your Tech Potential</h2>
-            <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-              Explore cutting-edge courses in Software Engineering, Cybersecurity, and Data Science—designed for the
-              future, delivered remotely.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                <h3 className="text-xl font-semibold mb-3 text-indigo-600">Software Engineering</h3>
-                <p className="text-md">
-                  Master full-stack development with hands-on projects in React, Node.js, Python, and more. Build
-                  real-world solutions remotely.
-                </p>
-              </div>
-              <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                <h3 className="text-xl font-semibold mb-3 text-indigo-600">Cybersecurity</h3>
-                <p className="text-md">
-                  Learn to secure networks and data with expert-led training. Remote labs and real-time simulations
-                  included.
-                </p>
-              </div>
-              <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                <h3 className="text-xl font-semibold mb-3 text-indigo-600">Data Science</h3>
-                <p className="text-md">
-                  Dive into data analysis, machine learning, and AI with flexible, remote coursework tailored to
-                  industry needs.
-                </p>
-              </div>
-            </div>
-            <Link
-              to="/courses"
-              className="inline-block bg-white text-indigo-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-300 transition-colors duration-300"
-            >
-              Discover Our Curriculum Now
-            </Link>
-          </div>
-        </section>
+        </div>        
 
         <ScrollButton />
       </div>
