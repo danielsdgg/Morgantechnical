@@ -45,10 +45,10 @@ const Footer: React.FC = () => {
               <li>
                 <span className="font-bold uppercase">Phone/WhatsApp: </span>
                 <a
-                  href="tel:+254707319080"
+                  href="tel:+254726152560"
                   className="hover:text-orange-400 transition-colors duration-300 underline italic"
                 >
-                  +254 707 319 080
+                  +254 726 152 560
                 </a>
               </li>
               <li>
