@@ -54,9 +54,6 @@ const NavBar: React.FC = () => {
               <li>
                 <Link to="/story" className="block px-4 py-3 text-gray-800 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Our Story</Link>
               </li>
-              <li>
-                <Link to="/team" className="block px-4 py-3 text-gray-800 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Our Team</Link>
-              </li>
             </ul>
           </li>
           <li>
@@ -139,9 +136,6 @@ const NavBar: React.FC = () => {
                   <ul className="ml-4 mt-2 space-y-2 animate-fade-in hover:bg-white hover:text-orange-600">
                     <li>
                       <Link to="/story" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Our Story</Link>
-                    </li>
-                    <li>
-                      <Link to="/team" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Our Team</Link>
                     </li>
                   </ul>
                 )}

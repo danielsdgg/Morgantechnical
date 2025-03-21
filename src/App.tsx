@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './components/Home';
 import Story from './components/About/Story';
-import Team from './components/About/Team';
 import Contact from './components/Contact';
 import Courses from './components/Courses';
 import Forms from './components/Forms';
@@ -34,7 +33,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/story" element={<Story />} />
-        <Route path="/team" element={<Team />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/software" element={<Software />} />
         <Route path="/portal" element={<Portal />} />
