@@ -21,7 +21,7 @@ const Dataa: React.FC = () => {
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
-        <span className="ml-2 text-md sm:text-lg font-medium tracking-wide">Back to Home</span>
+        <span className="ml-2 text-md sm:text-lg font-medium tracking-wide">Back</span>
       </div>
 
       {/* Main Content */}

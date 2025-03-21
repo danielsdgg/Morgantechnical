@@ -178,7 +178,7 @@ const Home : React.FC= () => {
                 <p className="text-sm sm:text-md">
                   Secure networks and data with expert-led remote training and real-time simulations.
                 </p>
-                <Link to="/cyber" className="inline-block mt-4 text-orange-500 hover:text-orange-700 font-medium underline transition-colors duration-300">
+                <Link to="/cybersecurity" className="inline-block mt-4 text-orange-500 hover:text-orange-700 font-medium underline transition-colors duration-300">
                   Learn More
                 </Link>
               </div>

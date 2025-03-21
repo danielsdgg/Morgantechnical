@@ -80,7 +80,7 @@ const NavBar: React.FC = () => {
                     <Link to="/datascience" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Data Science</Link>
                   </li>
                   <li>
-                    <Link to="/cyber" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Cyber Security</Link>
+                    <Link to="/cybersecurity" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Cyber Security</Link>
                   </li>
                 </ul>
               </li>
@@ -189,7 +189,7 @@ const NavBar: React.FC = () => {
                             <Link to="/datascience" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Data Science</Link>
                           </li>
                           <li>
-                            <Link to="/cyber" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Cyber Security</Link>
+                            <Link to="/cybersecurity" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Cyber Security</Link>
                           </li>
                         </ul>
                       )}

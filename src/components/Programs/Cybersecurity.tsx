@@ -3,20 +3,21 @@ import NavBar from '../Navbar';
 import Footer from '../Footer';
 import ScrollButton from '../ScrollButton';
 import { FaArrowDown } from 'react-icons/fa';
-// Logos
-import logo from '../../assets/data.jpg';
+// import { NavLink } from 'react-router-dom';
+// Logos (placeholders - replace with actual paths)
+import logo from '../../assets/cyber.jpg';
 import Python from '../../assets/python-programming-language.webp';
-import Pandas from '../../assets/pandas.png';
-import NumPy from '../../assets/numpy.png';
-import TensorFlow from '../../assets/tensorflow.png';
-import SQL from '../../assets/sql.png';
-import Matplotlib from '../../assets/matplotlib.jpg';
-import ScikitLearn from '../../assets/scikitlearn.png';
-import Jupyter from '../../assets/jupyter.png';
-import PowerBI from '../../assets/powerbi.png';
+import Wireshark from '../../assets/wireshark.png';
+import KaliLinux from '../../assets/kali-linux.jpg';
+import Nmap from '../../assets/nmap.jpg';
+import Metasploit from '../../assets/metasploit.png';
+import BurpSuite from '../../assets/burp.png';
+import Linux from '../../assets/linux.png';
+import Git from '../../assets/git.png';
+import Firewall from '../../assets/firewall.png';
 import { NavLink } from 'react-router-dom';
 
-const DataScience: React.FC = () => {
+const Cybersecurity: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [visible, setVisible] = useState(false);
 
@@ -36,11 +37,11 @@ const DataScience: React.FC = () => {
     phone: '',
     gender: '',
     highschool: '',
-    course: 'Data Science',
+    course: 'Cybersecurity',
     feedback: ''
   });
 
-  // const openModal = () => setIsModalOpen(true);
+//   const openModal = () => setIsModalOpen(true);
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -50,7 +51,7 @@ const DataScience: React.FC = () => {
       phone: '',
       gender: '',
       highschool: '',
-      course: 'Data Science',
+      course: 'Cybersecurity',
       feedback: ''
     });
   };
@@ -90,7 +91,7 @@ const DataScience: React.FC = () => {
         phone: '',
         gender: '',
         highschool: '',
-        course: 'Data Science',
+        course: 'Cybersecurity',
         feedback: ''
       });
 
@@ -111,7 +112,7 @@ const DataScience: React.FC = () => {
           <div className="absolute inset-0">
             <img
               src={logo}
-              alt="Data Science Hero Background"
+              alt="Cybersecurity Hero Background"
               className={`object-cover w-full h-full transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'}`}
               style={{ transform: `translateY(${scrollY * 0.5}px)` }} // Parallax effect
             />
@@ -119,23 +120,22 @@ const DataScience: React.FC = () => {
           </div>
           <div className="container mx-auto flex flex-col items-center justify-center h-full text-center text-white relative z-10 px-4 sm:px-6 lg:px-8">
             <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'}`}>
-              Data Science Course
+              Cybersecurity Course
             </h1>
             <p className={`text-sm sm:text-md md:text-lg mb-6 sm:mb-8 transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'} delay-1000`}>
-              Unlock the power of data with our comprehensive, fully remote Data Science program
+              Protect the digital world with our in-depth, fully remote Cybersecurity program
             </p>
-            <NavLink to={'/dataa'}>
-            <button className="bg-orange-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-md sm:text-lg">
+            <NavLink to={'/cyber'}>
+            <button  className="bg-orange-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-md sm:text-lg">
               Apply Now
-            </button>
-            </NavLink>
+            </button></NavLink>
           </div>
         </section>
 
         {/* Intake Information */}
         <div className="w-full bg-orange-600 text-white py-12 px-4 sm:px-6 lg:px-8 text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">
           <p>
-            This course is fully remote and applications are currently <b>closed</b> temporarily
+          This course is fully remote and applications are currently <b>closed</b> temporarily
           </p>
         </div>
 
@@ -144,9 +144,9 @@ const DataScience: React.FC = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">Course Overview</h2>
             <p className="text-md sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Our Data Science course is crafted to transform you into a data-driven professional. This 25-week, fully remote program covers 
-              data analysis, machine learning, and visualization, equipping you with the tools to solve real-world problems. Through hands-on 
-              projects and expert instruction, you’ll master cutting-edge techniques and technologies in demand across industries.
+              Our Cybersecurity course equips you with the skills to safeguard systems and networks from modern threats. This 25-week, fully remote program 
+              dives into ethical hacking, network security, and incident response, preparing you for a career in this critical field. With practical labs and expert 
+              mentorship, you’ll learn to identify vulnerabilities and implement robust defenses.
             </p>
           </div>
         </section>
@@ -157,21 +157,21 @@ const DataScience: React.FC = () => {
             <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">What to Expect</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               <div className="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">In-Depth Curriculum</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">Comprehensive Training</h3>
                 <p className="text-sm sm:text-base">
-                  Master Python, SQL, and machine learning libraries like TensorFlow and Scikit-Learn for data analysis and modeling.
+                  Gain expertise in tools like Wireshark, Nmap, and Metasploit, alongside core security concepts.
                 </p>
               </div>
               <div className="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">Practical Projects</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">Hands-On Labs</h3>
                 <p className="text-sm sm:text-base">
-                  Work on real datasets to build predictive models, visualizations, and dashboards remotely.
+                  Simulate real-world attacks and defenses in virtual environments, fully remotely.
                 </p>
               </div>
               <div className="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">Expert Guidance</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">Expert-Led Instruction</h3>
                 <p className="text-sm sm:text-base">
-                  Learn from seasoned data scientists through live sessions and personalized feedback.
+                  Learn from cybersecurity professionals with real-world experience in threat mitigation.
                 </p>
               </div>
             </div>
@@ -183,7 +183,7 @@ const DataScience: React.FC = () => {
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center w-full">
             <div className="text-center mb-10 sm:mb-12">
               <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">Technologies Covered</h2>
-              <p className="text-md sm:text-lg md:text-xl text-black">Key tools and technologies you’ll master in this program</p>
+              <p className="text-md sm:text-lg md:text-xl text-black">Essential tools and platforms you’ll master in this program</p>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8 text-center">
               <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
@@ -191,36 +191,36 @@ const DataScience: React.FC = () => {
                 <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Python</p>
               </div>
               <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Pandas} alt="Pandas icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Pandas</p>
+                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Wireshark} alt="Wireshark icon" />
+                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Wireshark</p>
               </div>
               <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={NumPy} alt="NumPy icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">NumPy</p>
+                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={KaliLinux} alt="Kali Linux icon" />
+                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Kali Linux</p>
               </div>
               <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={TensorFlow} alt="TensorFlow icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">TensorFlow</p>
+                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Nmap} alt="Nmap icon" />
+                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Nmap</p>
               </div>
               <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={SQL} alt="SQL icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">SQL</p>
+                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Metasploit} alt="Metasploit icon" />
+                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Metasploit</p>
               </div>
               <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Matplotlib} alt="Matplotlib icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Matplotlib</p>
+                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={BurpSuite} alt="Burp Suite icon" />
+                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Burp Suite</p>
               </div>
               <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={ScikitLearn} alt="Scikit-Learn icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Scikit-Learn</p>
+                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Linux} alt="Linux icon" />
+                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Linux</p>
               </div>
               <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Jupyter} alt="Jupyter icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Jupyter</p>
+                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Git} alt="Git icon" />
+                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Git</p>
               </div>
               <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={PowerBI} alt="Power BI icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Power BI</p>
+                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Firewall} alt="Firewall icon" />
+                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Firewall</p>
               </div>
             </div>
           </div>
@@ -233,11 +233,11 @@ const DataScience: React.FC = () => {
               <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">Course Requirements</h2>
               <ul className="list-disc list-inside text-left space-y-2 text-sm sm:text-md md:text-lg">
                 <li>Stable internet connection with at least 10 Mbps download speed for remote learning.</li>
-                <li>Basic understanding of mathematics (algebra, statistics) and computer operations.</li>
-                <li>Commitment to 20 hours per week for study, projects, and self-learning.</li>
+                <li>Basic understanding of computer networks and operating systems.</li>
+                <li>Commitment to 20 hours per week for study, labs, and self-learning.</li>
                 <li>Proficiency in written and spoken English (course materials are in English).</li>
-                <li>Access to a laptop with tools like Jupyter Notebook and Python installed.</li>
-                <li>Willingness to collaborate on group data projects and presentations.</li>
+                <li>Access to a laptop capable of running virtual machines (e.g., Kali Linux).</li>
+                <li>Willingness to collaborate on group security projects and simulations.</li>
                 <li>Professional demeanor and adherence to the institution's code of conduct.</li>
                 <li>Regular attendance in live online classes (prior approval required for absences).</li>
               </ul>
@@ -245,7 +245,7 @@ const DataScience: React.FC = () => {
             <img
               className="w-full h-auto sm:h-[200px] md:h-[250px] lg:h-[300px] mx-auto rounded-3xl my-4 object-cover"
               src={logo}
-              alt="Data Science"
+              alt="Cybersecurity"
             />
           </div>
         </div>
@@ -257,13 +257,13 @@ const DataScience: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
               {/* Course Modules List */}
               <ul className="list-disc list-inside text-left space-y-2 text-sm sm:text-md md:text-lg">
-                <li>Data Manipulation with Python, Pandas, and NumPy</li>
-                <li>Data Visualization using Matplotlib and Power BI</li>
-                <li>SQL for Data Querying and Management</li>
-                <li>Statistics and Probability for Data Science</li>
-                <li>Machine Learning with Scikit-Learn and TensorFlow</li>
-                <li>Big Data Basics and Cloud Integration</li>
-                <li>Capstone Project: End-to-End Data Solution</li>
+                <li>Networking Fundamentals and Security</li>
+                <li>Ethical Hacking with Kali Linux and Metasploit</li>
+                <li>Network Analysis using Wireshark and Nmap</li>
+                <li>Web Application Security with Burp Suite</li>
+                <li>Python for Security Scripting</li>
+                <li>Incident Response and Forensics</li>
+                <li>Capstone Project: Secure a Simulated Network</li>
               </ul>
 
               {/* Interactive Roadmap */}
@@ -275,29 +275,29 @@ const DataScience: React.FC = () => {
                     <div className="relative">
                       <div className="absolute left-0 sm:left-2 w-4 sm:w-6 h-4 sm:h-6 bg-indigo-600 rounded-full border-2 sm:border-4 border-white"></div>
                       <div className="ml-8 sm:ml-12 bg-white p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 1-6: Data Foundations</h4>
-                        <p className="text-gray-700 text-sm sm:text-base">Learn Python, Pandas, NumPy, and SQL for data manipulation and querying.</p>
+                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 1-6: Security Basics</h4>
+                        <p className="text-gray-700 text-sm sm:text-base">Learn networking fundamentals, Linux basics, and introductory security concepts.</p>
                       </div>
                     </div>
                     <div className="relative">
                       <div className="absolute left-0 sm:left-2 w-4 sm:w-6 h-4 sm:h-6 bg-indigo-600 rounded-full border-2 sm:border-4 border-white"></div>
                       <div className="ml-8 sm:ml-12 bg-white p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 7-12: Visualization & Statistics</h4>
-                        <p className="text-gray-700 text-sm sm:text-base">Master data visualization with Matplotlib and Power BI, plus core statistics.</p>
+                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 7-12: Ethical Hacking</h4>
+                        <p className="text-gray-700 text-sm sm:text-base">Master Kali Linux, Nmap, and Metasploit for penetration testing.</p>
                       </div>
                     </div>
                     <div className="relative">
                       <div className="absolute left-0 sm:left-2 w-4 sm:w-6 h-4 sm:h-6 bg-indigo-600 rounded-full border-2 sm:border-4 border-white"></div>
                       <div className="ml-8 sm:ml-12 bg-white p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 13-20: Machine Learning</h4>
-                        <p className="text-gray-700 text-sm sm:text-base">Build models with Scikit-Learn and TensorFlow, exploring supervised and unsupervised learning.</p>
+                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 13-20: Advanced Security</h4>
+                        <p className="text-gray-700 text-sm sm:text-base">Dive into Wireshark, Burp Suite, and Python scripting for security.</p>
                       </div>
                     </div>
                     <div className="relative">
                       <div className="absolute left-0 sm:left-2 w-4 sm:w-6 h-4 sm:h-6 bg-indigo-600 rounded-full border-2 sm:border-4 border-white"></div>
                       <div className="ml-8 sm:ml-12 bg-white p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 21-25: Advanced Topics & Capstone</h4>
-                        <p className="text-gray-700 text-sm sm:text-base">Tackle big data basics and deliver a capstone project analyzing real-world data.</p>
+                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 21-25: Response & Capstone</h4>
+                        <p className="text-gray-700 text-sm sm:text-base">Explore incident response and complete a capstone securing a network.</p>
                       </div>
                     </div>
                   </div>
@@ -314,7 +314,7 @@ const DataScience: React.FC = () => {
             <div>
               <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">Course Duration</h2>
               <p className="text-md sm:text-lg md:text-xl text-gray-700">
-                The Data Science course spans 25 weeks of intensive, fully remote training, designed to take you from beginner to data expert.
+                The Cybersecurity course spans 25 weeks of intensive, fully remote training, designed to take you from beginner to cybersecurity expert.
               </p>
             </div>
 
@@ -341,9 +341,9 @@ const DataScience: React.FC = () => {
             {/* Apply Button */}
             <div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-600 mb-4 sm:mb-6">Ready to Join?</h2>
-              <NavLink to={'/dataa'}><button className="bg-orange-600 text-white py-3 sm:py-4 px-8 sm:px-10 rounded-full shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-md sm:text-lg md:text-xl">
+              <NavLink to={'/cyber'}><button className="bg-orange-600 text-white py-3 sm:py-4 px-8 sm:px-10 rounded-full shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-md sm:text-lg md:text-xl">
                 Apply Now
-              </button></NavLink>
+              </button> </NavLink>
             </div>
           </div>
         </section>
@@ -440,7 +440,7 @@ const DataScience: React.FC = () => {
                   onChange={handleChange}
                   disabled
                 >
-                  <option value="Data Science">Data Science</option>
+                  <option value="Cybersecurity">Cybersecurity</option>
                 </select>
               </div>
               <div className="mb-4">
@@ -470,4 +470,4 @@ const DataScience: React.FC = () => {
   );
 };
 
-export default DataScience;
+export default Cybersecurity;

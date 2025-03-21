@@ -110,7 +110,7 @@ const Courses: React.FC = () => {
               <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
                 <b>This is an upcoming course in our curriculum</b> - Cybersecurity protects systems, networks, and data from cyber threats like attacks and breaches. It involves implementing security measures, monitoring for suspicious activity, and responding to incidents to ensure data integrity and confidentiality.
               </p>
-              <Link to="/cyber">
+              <Link to="/cybersecurity">
                 <p className="text-indigo-600 hover:text-indigo-800 hover:underline mt-4 block font-medium transition-colors duration-300">
                   Learn More
                 </p>
