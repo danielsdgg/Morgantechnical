@@ -86,11 +86,11 @@ const NavBar: React.FC = () => {
           <li>
             <Link to="/contact" className="py-2 px-4 text-white hover:text-orange-400 transition-colors duration-200">Contact</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/portal">
               <button className="py-2 px-6 bg-orange-600 text-white rounded-full hover:bg-white hover:text-orange-600 cursor-pointer transition-all duration-200 hover:scale-105">Portal</button>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
 
@@ -194,11 +194,11 @@ const NavBar: React.FC = () => {
               <li>
                 <Link to="/contact" onClick={toggleMenu} className="block py-3 px-4 text-white hover:bg-gray-700 hover:text-orange-400 rounded-lg transition-all duration-200">Contact</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/portal" onClick={toggleMenu}>
                   <button className="w-full py-3 px-4 mt-4 bg-orange-600 text-white rounded-full hover:bg-white text-orange-600 cursor-pointer transition-all duration-300 hover:scale-105">Portal</button>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </>

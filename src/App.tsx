@@ -5,7 +5,7 @@ import Story from './components/About/Story';
 import Contact from './components/Contact';
 import Courses from './components/Courses';
 import Forms from './components/Forms';
-import Portal from './components/Portal';
+// import Portal from './components/Portal';
 import Blogs from './components/Blogs';
 import BlogDetails from './components/BlogDetails';
 import Software from './components/Programs/Software';
@@ -35,7 +35,7 @@ function App() {
         <Route path="/story" element={<Story />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/software" element={<Software />} />
-        <Route path="/portal" element={<Portal />} />
+        {/* <Route path="/portal" element={<Portal />} /> */}
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:id" element={<BlogDetails />} />
         <Route path="/form" element={<Forms />} />
