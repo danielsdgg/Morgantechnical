@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
               <li>
                 <span className="font-medium">Location: </span>
                 <span className="hover:text-orange-400 transition-colors duration-300 cursor-pointer">
-                  Kikuyu Town, May House: 1st Floor, Room 1c
+                  Kikuyu Town, May House: 1st Floor, Suite 1c
                 </span>
               </li>
             </ul>
