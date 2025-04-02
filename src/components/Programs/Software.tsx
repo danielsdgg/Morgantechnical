@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import NavBar from '../Navbar';
 import Footer from '../Footer';
 import ScrollButton from '../ScrollButton';
@@ -103,6 +104,13 @@ const Software: React.FC = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Software Engineering Program - Morgan Technical Training</title>
+      <meta
+        name="description"
+        content="Join our 18-week remote Software Engineering course at Morgan Technical Training. Master HTML, React, Python, and more with projects."
+      />
+    </Helmet>
       <NavBar />
       <div className={`bg-white text-black ${isModalOpen ? 'blur-lg' : ''}`}>
         {/* Hero Section */}

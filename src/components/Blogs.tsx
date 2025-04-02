@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import NavBar from './Navbar';
+import { Helmet } from 'react-helmet-async';
+
 
 const Blogs = () => {
   const navigate = useNavigate();
@@ -34,6 +36,13 @@ const Blogs = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Software Engineering Program - Morgan Technical Training</title>
+        <meta
+          name="description"
+          content="Join our 18-week remote Software Engineering course at Morgan Technical Training. Master HTML, React, Python, and more with hands-on projects."
+        />
+      </Helmet>
     <NavBar/>
     <div className="bg-gray-100 py-10 px-4">
     <div className="max-w-7xl mx-auto">

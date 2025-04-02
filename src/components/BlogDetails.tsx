@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import NavBar from './Navbar';
 import { FaArrowLeft } from "react-icons/fa";
-
 
 const blogPosts = [
   {
@@ -63,7 +63,7 @@ const blogPosts = [
         text: `Strategies discussed included zero-trust architectures, regular penetration testing, and leveraging AI for real-time threat detection.`,
       },
       {
-        heading: 'Looking Ahead: Future Trends',
+        heading: 'How Our Courses Prepare You',
         text: `Future innovations in cybersecurity are likely to include automated incident response systems, blockchain-based security solutions, and improved user awareness through gamified training.`,
       },
     ],
@@ -71,7 +71,7 @@ const blogPosts = [
 ];
 
 const BlogDetails = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const blog = blogPosts.find((post) => post.id === Number(id));
 
@@ -81,13 +81,22 @@ const BlogDetails = () => {
 
   return (
     <>
-    <NavBar/>
-
-    <div className="bg-gray-100 py-10 px-4 mt-10">
+    <Helmet>
+      <title>{`${blog.title} - Morgan Technical Training`}</title>
+      <meta
+        name="description"
+        content={`${blog.content.substring(0, 150)}... Read more at Morgan Technical Training.`}
+      />
+    </Helmet>
+      <NavBar />
+      <div className="bg-gray-100 py-10 px-4 mt-10">
         {/* Back Button */}
-        <button onClick={() => navigate(-1)} className="flex items-center text-gray-600 hover:text-blue-600 mb-6 transition-all duration-300 ease-in-out transform hover:scale-105">
-            <FaArrowLeft className="mr-2" />
-            Back to Blogs
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center text-gray-600 hover:text-blue-600 mb-6 transition-all duration-300 ease-in-out transform hover:scale-105"
+        >
+          <FaArrowLeft className="mr-2" />
+          Back to Blogs
         </button>
         <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
           <img src={blog.image} alt={blog.title} className="w-full h-64 object-cover" />
@@ -95,7 +104,7 @@ const BlogDetails = () => {
             <h1 className="text-3xl font-bold text-gray-800 mb-4">{blog.title}</h1>
             <p className="text-sm text-gray-500 mb-6">{blog.date}</p>
             <p className="text-gray-700 leading-relaxed mb-6">{blog.content}</p>
-    
+
             {blog.additionalSections && (
               <div className="mt-8">
                 {blog.additionalSections.map((section, index) => (
@@ -108,9 +117,8 @@ const BlogDetails = () => {
             )}
           </div>
         </div>
-    </div>
+      </div>
     </>
-
   );
 };
 

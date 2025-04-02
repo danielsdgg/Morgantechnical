@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async'; // Add this import
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useSwipeable } from 'react-swipeable';
 import { Link } from 'react-router-dom';
 import ScrollButton from './ScrollButton';
-import logo from '../assets/stu.jpg'
+import logo from '../assets/stu.jpg';
 
-const Home : React.FC= () => {
+const Home: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [visible, setVisible] = useState(false);
 
@@ -105,6 +106,13 @@ const Home : React.FC= () => {
 
   return (
     <>
+    <Helmet>
+      <title>Tech Courses - Morgan Technical Training</title>
+      <meta
+        name="description"
+        content="Explore top tech courses at Morgan Technical Training in software engineering, cybersecurity, and data science. Start your career remotely."
+      />
+    </Helmet>
       <Navbar />
       <div>
         {/* part 1 */}

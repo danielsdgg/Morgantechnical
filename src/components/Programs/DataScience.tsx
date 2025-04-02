@@ -15,6 +15,7 @@ import ScikitLearn from '../../assets/scikitlearn.png';
 import Jupyter from '../../assets/jupyter.png';
 import PowerBI from '../../assets/powerbi.png';
 import { NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const DataScience: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -104,6 +105,13 @@ const DataScience: React.FC = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Data Science Program - Morgan Technical Training</title>
+      <meta
+        name="description"
+        content="Join our 25-week remote Data Science course at Morgan Technical Training. Master Python, TensorFlow, and more to excel in data."
+      />
+    </Helmet>
       <NavBar />
       <div className={`bg-white text-black ${isModalOpen ? 'blur-lg' : ''}`}>
         {/* Hero Section */}

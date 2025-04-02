@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async'; // Add this import
 import NavBar from './Navbar';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
@@ -35,6 +36,13 @@ const Courses: React.FC = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Our Tech Courses - Morgan Technical Training</title>
+      <meta
+        name="description"
+        content="Discover our tech courses at Morgan Technical Training: software engineering, cybersecurity, and data science. Learn remotely with experts."
+      />
+    </Helmet>
       <NavBar />
       {/* Intro to courses */}
       <div id="next-step-section" className="w-full bg-gray-300 py-12 px-4 sm:px-6 lg:px-16">

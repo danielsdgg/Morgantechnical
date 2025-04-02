@@ -16,6 +16,7 @@ import Linux from '../../assets/linux.png';
 import Git from '../../assets/git.png';
 import Firewall from '../../assets/firewall.png';
 import { NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Cybersecurity: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -105,6 +106,13 @@ const Cybersecurity: React.FC = () => {
 
   return (
     <>
+    <Helmet>
+    <title>Cybersecurity Program - Morgan Technical Training</title>
+    <meta
+        name="description"
+        content="Join our 25-week remote Cybersecurity course at Morgan Technical Training. Master Kali Linux, Nmap, and more to become an expert."
+    />
+    </Helmet>
       <NavBar />
       <div className={`bg-white text-black ${isModalOpen ? 'blur-lg' : ''}`}>
         {/* Hero Section */}

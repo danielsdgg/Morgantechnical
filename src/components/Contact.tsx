@@ -3,6 +3,8 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { motion } from 'framer-motion';
 import logo from '../assets/class3.jpg'
+import { Helmet } from 'react-helmet-async';
+
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -58,6 +60,12 @@ const Contact: React.FC = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Software Engineering Program - Morgan Technical Training</title>
+      <meta name="description"
+      content="Join our 18-week remote Software Engineering course at Morgan Technical Training. Master HTML, React, Python, and more with hands-on projects."
+            />
+          </Helmet>
       <Navbar />
       <div className="w-full h-auto bg-gray-100 py-28 px-12">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
