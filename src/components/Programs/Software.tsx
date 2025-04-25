@@ -143,7 +143,7 @@ const Software: React.FC = () => {
         {/* Intake Information */}
         <div className="w-full bg-orange-600 text-white py-12 px-4 sm:px-6 lg:px-8 text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">
           <p>
-            This course is fully remote and applications are ongoing for the <b>May 19th, 2025</b> intake
+            This course is fully remote and applications are ongoing for the <b>June 2025</b> intake
           </p>
         </div>
 
