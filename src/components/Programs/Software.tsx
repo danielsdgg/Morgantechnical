@@ -4,7 +4,7 @@ import NavBar from '../Navbar';
 import Footer from '../Footer';
 import ScrollButton from '../ScrollButton';
 import { FaArrowDown } from 'react-icons/fa';
-// logos
+import { motion } from 'framer-motion';
 import logo from '../../assets/class2.jpg';
 import HTML from '../../assets/html.png';
 import CSS from '../../assets/CSS.png';
@@ -18,17 +18,20 @@ import Python from '../../assets/python-programming-language.webp';
 
 const Software: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    setVisible(true);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+  const [visibleSections, setVisibleSections] = useState({
+    hero: false,
+    intake: false,
+    overview: false,
+    expect: false,
+    tech: false,
+    requirements: false,
+    content: false,
+    duration: false,
+    alumni: false,
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notification, setNotification] = useState<string | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -37,8 +40,69 @@ const Software: React.FC = () => {
     gender: '',
     highschool: '',
     course: 'Software Engineering',
-    feedback: ''
+    feedback: '',
   });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress((window.scrollY / totalHeight) * 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => ({
+              ...prev,
+              [entry.target.id]: true,
+            }));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    const sections = [
+      'hero',
+      'intake',
+      'overview',
+      'expect',
+      'tech',
+      'requirements',
+      'content',
+      'duration',
+      'alumni',
+    ].map((id) => document.querySelector(`#${id}-section`));
+
+    sections.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    const timer = setTimeout(() => {
+      setVisibleSections({
+        hero: true,
+        intake: true,
+        overview: true,
+        expect: true,
+        tech: true,
+        requirements: true,
+        content: true,
+        duration: true,
+        alumni: true,
+      });
+    }, 1500);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      sections.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+      clearTimeout(timer);
+    };
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
 
@@ -51,11 +115,13 @@ const Software: React.FC = () => {
       gender: '',
       highschool: '',
       course: 'Software Engineering',
-      feedback: ''
+      feedback: '',
     });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -68,17 +134,9 @@ const Software: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          gender: formData.gender,
-          highschool: formData.highschool,
-          course: formData.course,
-          feedback: formData.feedback,
-        }),
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) throw new Error('Failed to submit form');
@@ -91,7 +149,7 @@ const Software: React.FC = () => {
         gender: '',
         highschool: '',
         course: 'Software Engineering',
-        feedback: ''
+        feedback: '',
       });
 
       setTimeout(() => setNotification(null), 5000);
@@ -102,415 +160,921 @@ const Software: React.FC = () => {
     }
   };
 
+  const faqs = [
+    {
+      question: 'Can I switch payment plans later?',
+      answer: 'Yes, you can switch from the installment plan to full payment before the third installment. Contact our team for assistance.',
+    },
+    {
+      question: 'Are there scholarships available?',
+      answer: 'We offer limited scholarships based on financial need and merit but at the moment there are no scholarships available.',
+    },
+    {
+      question: 'What happens if I miss a payment?',
+      answer: 'If you miss a payment, we’ll contact you to arrange a solution. Continued non-payment may pause your course access until resolved.',
+    },
+  ];
+
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
   return (
     <>
-    <Helmet>
-      <title>Software Engineering Program - Morgan Technical Training</title>
-      <meta
-        name="description"
-        content="Join our 18-week remote Software Engineering course at Morgan Technical Training. Master HTML, React, Python, and more with projects."
-      />
-    </Helmet>
+      <Helmet>
+        <title>Software Engineering Program | Morgan Technical Training</title>
+        <meta
+          name="description"
+          content="Join our 18-week remote Software Engineering bootcamp at Morgan Technical Training in Nairobi. Master HTML, CSS, JavaScript, React, Python, Flask, and more through hands-on projects."
+        />
+        <meta
+          name="keywords"
+          content="software engineering course, Morgan Technical Training, Nairobi tech bootcamp, learn coding, HTML, React, Python, Flask, remote tech course"
+        />
+      </Helmet>
       <NavBar />
+
+      {/* Progress Bar */}
+      <div
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-orange-500 to-orange-600 z-50"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
       <div className={`bg-white text-black ${isModalOpen ? 'blur-lg' : ''}`}>
-        {/* Hero Section */}
-        <section className="relative bg-gray-800 flex flex-col justify-center overflow-hidden min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+        {/* Section 1: Hero */}
+        <section
+          id="hero-section"
+          className={`relative bg-gradient-to-b from-indigo-900 to-purple-900 flex flex-col justify-center overflow-hidden min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px] transition-all duration-1000 ease-out ${
+            visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <div className="absolute inset-0">
             <img
               src={logo}
-              alt="Software Engineering Hero Background"
-              className={`object-cover w-full h-full transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'}`}
-              style={{
-                transform: `translateY(${scrollY * 0.5}px)`, // Parallax effect
-              }}
+              alt="Students coding in Morgan Technical Training's Software Engineering course"
+              className="object-cover w-full h-full"
+              loading="lazy"
+              style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+              onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/1920x1080?text=Hero+Image')}
             />
-            <div className="absolute inset-0 bg-black opacity-50"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/60 to-purple-900/60"></div>
           </div>
-
           <div className="container mx-auto flex flex-col items-center justify-center h-full text-center text-white relative z-10 px-4 sm:px-6 lg:px-8">
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'}`}>
-              Software Engineering Course
-            </h1>
-            <p className={`text-sm sm:text-md md:text-lg mb-6 sm:mb-8 transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'} delay-1000`}>
-              Build a solid foundation in software engineering with our comprehensive, fully remote program
-            </p>
-            <button onClick={openModal} className="bg-orange-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-md sm:text-lg">
-              Apply Now
-            </button>
+            <motion.div
+              className="bg-white/10 backdrop-blur-lg p-6 sm:p-8 rounded-2xl border border-gray-200/20"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h1
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-inter text-orange-400 mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                Software Engineering Bootcamp
+              </motion.h1>
+              <motion.p
+                className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                Build a solid foundation in software engineering with our 18-week, fully remote program designed to launch your tech career.
+              </motion.p>
+              <motion.button
+                onClick={openModal}
+                className="mt-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-inter font-semibold text-md sm:text-lg hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                aria-label="Apply now for Software Engineering course"
+              >
+                Apply Now
+              </motion.button>
+            </motion.div>
           </div>
         </section>
 
-        {/* Intake Information */}
-        <div className="w-full bg-orange-600 text-white py-12 px-4 sm:px-6 lg:px-8 text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">
-          <p>
-            This course is fully remote and applications are ongoing for the <b>June 2025</b> intake
-          </p>
-        </div>
+        {/* Section 2: Intake Information */}
+        <section
+          id="intake-section"
+          className={`bg-gradient-to-r from-orange-500 to-orange-600 text-white py-12 px-4 sm:px-6 lg:px-8 text-center transition-all duration-1000 ease-out ${
+            visibleSections.intake ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <motion.p
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-inter"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Fully remote course | Applications open for the <b>June 2025</b> intake
+          </motion.p>
+        </section>
 
-        {/* Overview Section */}
-        <section className="py-12 sm:py-16 bg-gray-50">
+        {/* Section 3: Overview */}
+        <section
+          id="overview-section"
+          className={`py-16 sm:py-20 bg-gray-50 transition-all duration-1000 ease-out ${
+            visibleSections.overview ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">Course Overview</h2>
-            <p className="text-md sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Our Software Engineering course is designed to equip you with the skills needed to excel in the tech industry. 
-              This fully remote program offers a comprehensive curriculum that covers both frontend and backend development, 
-              preparing you to build robust, scalable applications. With hands-on projects and expert guidance, you'll gain practical 
-              experience in modern technologies and methodologies.
-            </p>
-          </div>
-        </section>
-
-        {/* What to Expect */}
-        <section className="py-12 sm:py-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">What to Expect</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              <div className="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">Comprehensive Curriculum</h3>
-                <p className="text-sm sm:text-base">
-                  Learn a wide range of technologies including HTML, CSS, JavaScript, and Python, along with frameworks like React and Flask.
-                </p>
-              </div>
-              <div className="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">Hands-On Projects</h3>
-                <p className="text-sm sm:text-base">
-                  Build real-world projects to apply your skills, from responsive web designs to full-stack applications.
-                </p>
-              </div>
-              <div className="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-md">
-                <h3 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">Expert-Led Instruction</h3>
-                <p className="text-sm sm:text-base">
-                  Receive mentorship from industry professionals with years of experience in software engineering.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Technologies Covered */}
-        <div className="w-full bg-gray-200 py-12 sm:py-16">
-          {/* Container */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center w-full">
-            {/* Heading */}
-            <div className="text-center mb-10 sm:mb-12">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">Technologies Covered</h2>
-              <p className="text-md sm:text-lg md:text-xl text-black">These are the technologies you'll cover when studying the program</p>
-            </div>
-
-            {/* Skills Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8 text-center">
-              {/* Skill Item */}
-              <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={HTML} alt="HTML icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">HTML</p>
-              </div>
-              <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={CSS} alt="CSS icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">CSS</p>
-              </div>
-              <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={JavaScript} alt="JavaScript icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">JavaScript</p>
-              </div>
-              <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={ReactImg} alt="React icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">React</p>
-              </div>
-              <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Node} alt="Node.js icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Node</p>
-              </div>
-              <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Flask} alt="Flask icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Flask</p>
-              </div>
-              <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Tailwind} alt="TailwindCSS icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">TailwindCSS</p>
-              </div>
-              <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={GitHub} alt="GitHub icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">GitHub</p>
-              </div>
-              <div className="group shadow-lg hover:scale-110 duration-300 transform hover:translate-y-2 p-4 sm:p-6 rounded-xl bg-[#112240] hover:bg-blue-500">
-                <img className="w-16 sm:w-20 md:w-24 mx-auto group-hover:opacity-80" src={Python} alt="Python icon" />
-                <p className="mt-4 text-md sm:text-lg font-semibold text-gray-300">Python</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Course Requirements */}
-        <div className="w-full bg-gray-100 py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <div className="flex flex-col justify-center text-black">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">Course Requirements</h2>
-              <ul className="list-disc list-inside text-left space-y-2 text-sm sm:text-md md:text-lg">
-                <li>Stable internet connection with at least 10 Mbps download speed for remote learning.</li>
-                <li>Basic understanding of computer operations and file management.</li>
-                <li>Commitment to 20 hours per week for study, projects, and self-learning.</li>
-                <li>Proficiency in written and spoken English (course materials and instructions are in English).</li>
-                <li>Access to development tools such as code editors (e.g., VS Code) and web browsers (e.g., Chrome).</li>
-                <li>Willingness to collaborate on team projects and group assignments.</li>
-                <li>Professional demeanor and adherence to the institution's code of conduct.</li>
-                <li>Regular attendance in live online classes (prior approval required for absences).</li>
-              </ul>
-            </div>
-            <img
-              className="w-full h-auto sm:h-[200px] md:h-[250px] lg:h-[300px] mx-auto rounded-3xl my-4 object-cover"
-              src={logo}
-              alt="Software Engineering"
-            />
-          </div>
-        </div>
-
-        {/* Course Content with Interactive Roadmap */}
-        <section className="py-12 sm:py-16 bg-gray-50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">Course Content</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-              {/* Course Modules List */}
-              <ul className="list-disc list-inside text-left space-y-2 text-sm sm:text-md md:text-lg">
-                <li>Frontend Development: HTML5, CSS3, Tailwind CSS</li>
-                <li>JavaScript (ES6+), Node and React.js Fundamentals</li>
-                <li>Backend Development: Python, Flask</li>
-                <li>Database Management: SQLite3</li>
-                <li>Building Full-Stack Applications</li>
-                <li>API Development and Integration</li>
-                <li>Version Control with Git</li>
-                <li>Capstone Project: Develop a Complete Software Solution</li>
-              </ul>
-
-              {/* Interactive Roadmap */}
-              <div className="relative">
-                <h3 className="text-xl sm:text-2xl font-semibold text-indigo-600 mb-4 sm:mb-6">Your Learning Journey</h3>
-                <div className="relative pl-6 sm:pl-8">
-                  {/* Vertical Line */}
-                  <div className="absolute left-2 sm:left-4 top-0 h-full w-1 bg-indigo-200"></div>
-
-                  {/* Roadmap Items */}
-                  <div className="space-y-6 sm:space-y-8">
-                    {/* Week 1-6: Frontend Development */}
-                    <div className="relative">
-                      <div className="absolute left-0 sm:left-2 w-4 sm:w-6 h-4 sm:h-6 bg-indigo-600 rounded-full border-2 sm:border-4 border-white"></div>
-                      <div className="ml-8 sm:ml-12 bg-white p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 1-6: Frontend Foundations</h4>
-                        <p className="text-gray-700 text-sm sm:text-base">Master HTML5, CSS3, Tailwind CSS, and JavaScript to build interactive user interfaces.</p>
-                      </div>
-                    </div>
-
-                    {/* Week 7-10: React.js */}
-                    <div className="relative">
-                      <div className="absolute left-0 sm:left-2 w-4 sm:w-6 h-4 sm:h-6 bg-indigo-600 rounded-full border-2 sm:border-4 border-white"></div>
-                      <div className="ml-8 sm:ml-12 bg-white p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 7-10: Frontend with React</h4>
-                        <p className="text-gray-700 text-sm sm:text-base">Dive into React.js, learning components, state management, and hooks for dynamic apps.</p>
-                      </div>
-                    </div>
-
-                    {/* Week 11-16: Backend Development */}
-                    <div className="relative">
-                      <div className="absolute left-0 sm:left-2 w-4 sm:w-6 h-4 sm:h-6 bg-indigo-600 rounded-full border-2 sm:border-4 border-white"></div>
-                      <div className="ml-8 sm:ml-12 bg-white p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 11-16: Backend Mastery</h4>
-                        <p className="text-gray-700 text-sm sm:text-base">Learn Python, Flask, and SQLite3 to build robust server-side applications.</p>
-                      </div>
-                    </div>
-
-                    {/* Week 16-18: Full-Stack & Capstone */}
-                    <div className="relative">
-                      <div className="absolute left-0 sm:left-2 w-4 sm:w-6 h-4 sm:h-6 bg-indigo-600 rounded-full border-2 sm:border-4 border-white"></div>
-                      <div className="ml-8 sm:ml-12 bg-white p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <h4 className="text-md sm:text-lg font-semibold text-indigo-600">Weeks 16-18: Full-Stack & Capstone Project</h4>
-                        <p className="text-gray-700 text-sm sm:text-base">Integrate frontend and backend, use Git, and complete a capstone project.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Course Duration & Payment */}
-        <section className="py-12 sm:py-16 bg-gradient-to-r from-gray-100 to-gray-300">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12 text-center space-y-12 sm:space-y-16">
-            {/* Course Duration */}
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-semibold text-orange-600 mb-6 sm:mb-8">Course Duration</h2>
-              <p className="text-md sm:text-lg md:text-xl text-gray-700">
-                The Software Engineering course spans 18 weeks of intensive, fully remote training, 
-                designed to take you from beginner to job-ready software engineer.
+            <motion.h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-orange-400 mb-6 sm:mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Course Overview
+            </motion.h2>
+            <motion.div
+              className="bg-white/90 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200/20 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <p className="text-base sm:text-lg lg:text-xl text-gray-700 font-inter leading-relaxed">
+                Our Software Engineering bootcamp equips you with in-demand skills to thrive in the tech industry. This 18-week remote program covers
+                frontend and backend development, enabling you to build scalable, real-world applications. With hands-on projects and expert mentorship,
+                you’ll graduate job-ready with a professional portfolio.
               </p>
-            </div>
+            </motion.div>
+          </div>
+        </section>
 
-            {/* Payment Plans */}
-            <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-600 mb-4 sm:mb-6">Payment Plans</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-3xl mx-auto">
-                <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-                  <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-indigo-600">Full Payment</h3>
-                  <p className="text-gray-600 mb-4 text-sm sm:text-base">Pay upfront and save on the total cost.</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-gray-800">KSH 120,000</p>
-                </div>
-                <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-                  <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-indigo-600">Installment Plan</h3>
-                  <p className="text-gray-600 mb-4 flex items-center justify-center text-sm sm:text-base">
-                    Pay in 4 installments of KSH 32,000 each over a period of 4 months, totaling to Kshs 128,000/=
-                    <FaArrowDown className="ml-2 text-indigo-500 text-md sm:text-lg animate-bounce hover:text-indigo-700 transition-colors duration-200" />
+        {/* Section 4: What to Expect */}
+        <section
+          id="expect-section"
+          className={`py-16 sm:py-20 bg-gradient-to-r from-indigo-50 to-purple-50 transition-all duration-1000 ease-out ${
+            visibleSections.expect ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              What You’ll Gain
+            </motion.h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              <motion.div
+                className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <svg
+                  className="w-12 h-12 mx-auto mb-4 text-orange-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+                <h3 className="text-lg sm:text-xl font-semibold font-inter text-indigo-900 mb-4">
+                  In-Depth Curriculum
+                </h3>
+                <p className="text-sm sm:text-base text-gray-700 font-inter">
+                  Master modern tools like React, Flask, and Python to build full-stack applications from scratch.
+                </p>
+              </motion.div>
+              <motion.div
+                className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <svg
+                  className="w-12 h-12 mx-auto mb-4 text-orange-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
+                </svg>
+                <h3 className="text-lg sm:text-xl font-semibold font-inter text-indigo-900 mb-4">
+                  Real-World Projects
+                </h3>
+                <p className="text-sm sm:text-base text-gray-700 font-inter">
+                  Develop a portfolio of projects, including responsive websites and full-stack apps, to showcase your skills.
+                </p>
+              </motion.div>
+              <motion.div
+                className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <svg
+                  className="w-12 h-12 mx-auto mb-4 text-orange-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 005.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+                <h3 className="text-lg sm:text-xl font-semibold font-inter text-indigo-900 mb-4">
+                  Expert Mentorship
+                </h3>
+                <p className="text-sm sm:text-base text-gray-700 font-inter">
+                  Learn from seasoned developers who provide personalized guidance throughout your journey.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 5: Technologies Covered */}
+        <section
+          id="tech-section"
+          className={`py-16 sm:py-20 bg-gray-50 transition-all duration-1000 ease-out ${
+            visibleSections.tech ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-12 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Technologies You’ll Master
+            </motion.h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8">
+              {[
+                { src: HTML, name: 'HTML', tooltip: 'Structure web pages' },
+                { src: CSS, name: 'CSS', tooltip: 'Style web interfaces' },
+                { src: JavaScript, name: 'JavaScript', tooltip: 'Add interactivity' },
+                { src: ReactImg, name: 'React', tooltip: 'Build dynamic UIs' },
+                { src: Node, name: 'Node.js', tooltip: 'Run JavaScript server-side' },
+                { src: Flask, name: 'Flask', tooltip: 'Create lightweight APIs' },
+                { src: Tailwind, name: 'Tailwind CSS', tooltip: 'Style with utility classes' },
+                { src: GitHub, name: 'GitHub', tooltip: 'Manage code versions' },
+                { src: Python, name: 'Python', tooltip: 'Develop backend logic' },
+              ].map((tech, index) => (
+                <motion.div
+                  key={tech.name}
+                  className="group bg-white/90 backdrop-blur-lg p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300 relative"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                >
+                  <img
+                    className="w-16 sm:w-20 mx-auto group-hover:opacity-80"
+                    src={tech.src}
+                    alt={`${tech.name} icon for Software Engineering course`}
+                    loading="lazy"
+                    onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/100?text=Tech+Icon')}
+                  />
+                  <p className="mt-4 text-md sm:text-lg font-semibold font-inter text-indigo-900 text-center">
+                    {tech.name}
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-gray-800">KSH 128,000</p>
-                </div>
-              </div>
+                  <div className="absolute bottom-full mb-2 hidden group-hover:block bg-indigo-900 text-white text-xs rounded py-1 px-2">
+                    {tech.tooltip}
+                  </div>
+                </motion.div>
+              ))}
             </div>
+          </div>
+        </section>
 
-            {/* Apply Button */}
-            <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-600 mb-4 sm:mb-6">Ready to Join?</h2>
-              <button onClick={openModal} className="bg-orange-600 text-white py-3 sm:py-4 px-8 sm:px-10 rounded-full shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-md sm:text-lg md:text-xl">
+        {/* Section 6: Course Requirements */}
+        <section
+          id="requirements-section"
+          className={`py-16 sm:py-20 bg-gradient-to-r from-indigo-50 to-purple-50 transition-all duration-1000 ease-out ${
+            visibleSections.requirements ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-12 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Course Requirements
+            </motion.h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              <motion.div
+                className="bg-white/90 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200/20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <ul className="list-disc list-inside space-y-3 text-base sm:text-lg text-gray-700 font-inter">
+                  {[
+                    'Stable internet connection (10 Mbps+ for remote learning)',
+                    'Basic computer literacy and file management skills',
+                    'Commitment to 20 hours/week for study and projects',
+                    'Proficiency in written and spoken English',
+                    'Access to code editors (e.g., VS Code) and browsers (e.g., Chrome)',
+                    'Willingness to collaborate on team projects',
+                    'Professional demeanor and adherence to code of conduct',
+                    'Regular attendance in live online classes',
+                  ].map((item, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                    >
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+              <motion.img
+                className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-2xl shadow-xl"
+                src={logo}
+                alt="Coding classroom at Morgan Technical Training"
+                loading="lazy"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/600x400?text=Classroom+Image')}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Section 7: Course Content */}
+        <section
+          id="content-section"
+          className={`py-16 sm:py-20 bg-gray-50 transition-all duration-1000 ease-out ${
+            visibleSections.content ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-12 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Course Content
+            </motion.h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+              <motion.div
+                className="bg-white/90 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200/20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-4">
+                  Modules Covered
+                </h3>
+                <ul className="list-disc list-inside space-y-3 text-base sm:text-lg text-gray-700 font-inter">
+                  {[
+                    'Frontend: HTML5, CSS3, Tailwind CSS',
+                    'JavaScript (ES6+), Node, React.js',
+                    'Backend: Python, Flask',
+                    'Database: SQLite3',
+                    'Full-Stack Application Development',
+                    'API Development and Integration',
+                    'Version Control with Git',
+                    'Capstone: Build a Complete Software Solution',
+                  ].map((item, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                    >
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-6 text-center">
+                  Your Learning Journey
+                </h3>
+                <div className="relative pl-6 sm:pl-8">
+                  <div className="absolute left-2 sm:left-4 top-0 h-full w-1 bg-gradient-to-b from-orange-500 to-orange-600"></div>
+                  {[
+                    {
+                      weeks: 'Weeks 1-6',
+                      title: 'Frontend Foundations',
+                      desc: 'Master HTML5, CSS3, Tailwind CSS, and JavaScript to build interactive user interfaces.',
+                    },
+                    {
+                      weeks: 'Weeks 7-10',
+                      title: 'Frontend with React',
+                      desc: 'Dive into React.js, learning components, state management, and hooks for dynamic apps.',
+                    },
+                    {
+                      weeks: 'Weeks 11-16',
+                      title: 'Backend Mastery',
+                      desc: 'Learn Python, Flask, and SQLite3 to build robust server-side applications.',
+                    },
+                    {
+                      weeks: 'Weeks 16-18',
+                      title: 'Full-Stack & Capstone',
+                      desc: 'Integrate frontend and backend, use Git, and complete a capstone project.',
+                    },
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      className="relative mb-6 sm:mb-8"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.8, delay: 0.6 + index * 0.2 }}
+                    >
+                      <div className="absolute left-0 sm:left-2 w-4 sm:w-6 h-4 sm:h-6 bg-orange-500 rounded-full border-2 sm:border-4 border-white"></div>
+                      <div className="ml-8 sm:ml-12 bg-white/90 backdrop-blur-lg p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300">
+                        <h4 className="text-md sm:text-lg font-semibold font-inter text-indigo-900">
+                          {item.weeks}: {item.title}
+                        </h4>
+                        <p className="text-gray-700 text-sm sm:text-base font-inter">{item.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 8: Course Duration & Payment */}
+        <section
+          id="duration-section"
+          className={`py-16 sm:py-20 bg-gradient-to-r from-indigo-50 to-purple-50 transition-all duration-1000 ease-out ${
+            visibleSections.duration ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-12 text-center space-y-12 sm:space-y-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-6">
+                Course Duration
+              </h2>
+              <p className="text-base sm:text-lg lg:text-xl text-gray-700 font-inter max-w-3xl mx-auto">
+                Our 18-week intensive bootcamp is fully remote, transforming beginners into job-ready software engineers
+                through hands-on training.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-6">
+                Payment Plans
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-3xl mx-auto">
+                <motion.div
+                  className="bg-white/90 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-4">
+                    Full Payment
+                  </h3>
+                  <p className="text-gray-700 font-inter mb-4 text-sm sm:text-base">
+                    Pay upfront and save on the total cost.
+                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold font-inter text-indigo-900">KSH 120,000</p>
+                </motion.div>
+                <motion.div
+                  className="bg-white/90 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                >
+                  <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-4">
+                    Installment Plan
+                  </h3>
+                  <p className="text-gray-700 font-inter mb-4 text-sm sm:text-base flex items-center justify-center">
+                    4 installments of KSH 32,000 over 4 months
+                    <FaArrowDown className="ml-2 text-orange-500 animate-bounce" />
+                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold font-inter text-indigo-900">KSH 128,000</p>
+                </motion.div>
+              </div>
+            </motion.div>
+            <motion.div
+              className="max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-4">
+                Payment FAQs
+              </h3>
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white/90 backdrop-blur-lg p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-200/20 mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 + index * 0.2 }}
+                >
+                  <button
+                    className="w-full text-left text-base sm:text-lg font-semibold font-inter text-indigo-900 flex justify-between items-center"
+                    onClick={() => toggleFaq(index)}
+                    aria-expanded={openFaq === index}
+                    aria-controls={`faq-${index}`}
+                  >
+                    {faq.question}
+                    <svg
+                      className={`w-5 h-5 transform transition-transform ${openFaq === index ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  {openFaq === index && (
+                    <motion.div
+                      id={`faq-${index}`}
+                      className="mt-2 text-gray-700 font-inter text-sm sm:text-base"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-6">
+                Ready to Start?
+              </h2>
+              <button
+                onClick={openModal}
+                className="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 sm:py-4 px-8 sm:px-10 rounded-full font-inter font-semibold text-md sm:text-lg hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300"
+                aria-label="Apply now for Software Engineering course"
+              >
                 Apply Now
               </button>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Section 9: Alumni Success */}
+        <section
+          id="alumni-section"
+          className={`py-16 sm:py-20 bg-gray-50 transition-all duration-1000 ease-out ${
+            visibleSections.alumni ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Our Alumni Success
+            </motion.h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+              <motion.div
+                className="bg-white/90 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <p className="text-gray-700 font-inter text-base sm:text-lg italic mb-4">
+                  “This course transformed my career. I landed a mentorship role at the bootcamp.”
+                </p>
+                <p className="text-indigo-900 font-inter font-semibold">— Alex M., Class of 2024</p>
+              </motion.div>
+              <motion.div
+                className="bg-white/90 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <p className="text-gray-700 font-inter text-base sm:text-lg italic mb-4">
+                  “The hands-on projects and mentorship gave me the confidence to build real-world apps and start my own startup.”
+                </p>
+                <p className="text-indigo-900 font-inter font-semibold">— Wilson, Class of 2025</p>
+              </motion.div>
             </div>
           </div>
         </section>
       </div>
 
       {/* Application Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
-          {/* Background Blur */}
-          <div className="absolute inset-0 bg-black opacity-30"></div>
+      {
+  isModalOpen && (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      role="dialog"
+      aria-labelledby="application-form-title"
+      aria-modal="true"
+    >
+      <motion.div
+        className="relative w-full max-w-md sm:max-w-lg mx-auto bg-white/95 backdrop-blur-xl p-8 sm:p-10 rounded-2xl shadow-2xl border border-orange-400/20 overflow-auto max-h-[90vh]"
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+      >
+        {/* Close Button */}
+        <motion.button
+          onClick={closeModal}
+          className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm p-2 rounded-full border border-gray-200/20 text-gray-700 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 hover:text-white transition-all duration-300 group"
+          aria-label="Close application form"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <span className="text-lg">✕</span>
+          <span className="absolute hidden group-hover:block bg-indigo-900 text-white text-xs rounded py-1 px-2 -top-8 right-0">
+            Close form
+          </span>
+        </motion.button>
 
-          {/* Form Container */}
-          <div className="relative w-full max-w-lg mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg overflow-auto max-h-[90vh]">
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-700 hover:text-gray-900 text-lg sm:text-xl"
+        {/* Notification */}
+        {notification && (
+          <motion.div
+            className={`mb-6 p-4 text-center rounded-xl ${
+              notification.includes('successfully')
+                ? 'bg-green-100/90 backdrop-blur-md border border-green-200 text-green-800'
+                : 'bg-red-100/90 backdrop-blur-md border border-red-200 text-red-800'
+            } shadow-md`}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            role="alert"
+            aria-describedby="notification-message"
+          >
+            <span id="notification-message">{notification}</span>
+          </motion.div>
+        )}
+
+        {/* Form Title */}
+        <motion.h2
+          id="application-form-title"
+          className="text-2xl sm:text-3xl font-bold font-inter text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-orange-600 mb-6 relative"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Apply for Software Engineering
+          <span className="absolute left-1/2 -bottom-2 w-24 h-1 bg-gradient-to-r from-orange-500 to-orange-600 transform -translate-x-1/2 rounded-full"></span>
+        </motion.h2>
+
+        {/* Form */}
+        <form onSubmit={sendEmail} className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Full Name */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              ✕
-            </button>
+              <label
+                htmlFor="fullName"
+                className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+              >
+                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+                placeholder="Enter your full name"
+                className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+                value={formData.fullName}
+                onChange={handleChange}
+                aria-label="Full name input for application"
+              />
+            </motion.div>
 
-            {/* Notification Section */}
-            {notification && (
-              <div className="mb-4 p-4 text-center bg-green-100 text-green-800 rounded-lg text-sm sm:text-base">
-                {notification}
-              </div>
-            )}
+            {/* Email Address */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <label
+                htmlFor="email"
+                className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+              >
+                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="Enter your email address"
+                className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+                value={formData.email}
+                onChange={handleChange}
+                aria-label="Email address input for application"
+              />
+            </motion.div>
 
-            <h2 className="text-xl sm:text-2xl font-bold text-center text-indigo-600 mb-4 sm:mb-6">Application Form</h2>
-            <form onSubmit={sendEmail}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                {/* Full Name */}
-                <div>
-                  <label className="block text-gray-700 text-sm sm:text-base">Full Name</label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    required
-                    placeholder="Enter your full name"
-                    className="w-full border border-gray-300 rounded-lg p-2 text-sm sm:text-base"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                  />
-                </div>
+            {/* Phone Number */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <label
+                htmlFor="phone"
+                className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+              >
+                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder="Enter your phone number"
+                className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+                value={formData.phone}
+                onChange={handleChange}
+                aria-label="Phone number input for application"
+              />
+            </motion.div>
 
-                {/* Email Address */}
-                <div>
-                  <label className="block text-gray-700 text-sm sm:text-base">Email Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    placeholder="Enter your email address"
-                    className="w-full border border-gray-300 rounded-lg p-2 text-sm sm:text-base"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                {/* Phone Number */}
-                <div>
-                  <label className="block text-gray-700 text-sm sm:text-base">Phone Number</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    required
-                    placeholder="Enter your phone number"
-                    className="w-full border border-gray-300 rounded-lg p-2 text-sm sm:text-base"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                {/* Gender */}
-                <div>
-                  <label className="block text-gray-700 text-sm sm:text-base">Gender</label>
-                  <select
-                    name="gender"
-                    className="w-full border border-gray-300 rounded-lg p-2 text-sm sm:text-base"
-                    value={formData.gender}
-                    onChange={handleChange}
-                  >
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* High School Completion */}
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm sm:text-base">Have you completed high school?</label>
-                <select
-                  name="highschool"
-                  className="w-full border border-gray-300 rounded-lg p-2 text-sm sm:text-base"
-                  value={formData.highschool}
-                  onChange={handleChange}
-                >
-                  <option value="">Select</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-
-              {/* Course of Study */}
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm sm:text-base">Course Of Study</label>
-                <select
-                  name="course"
-                  className="w-full border border-gray-300 rounded-lg p-2 bg-gray-200 cursor-not-allowed text-sm sm:text-base"
-                  value={formData.course}
-                  onChange={handleChange}
-                  disabled
-                >
-                  <option value="Software Engineering">Software Engineering</option>
-                </select>
-              </div>
-
-              {/* Feedback */}
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm sm:text-base">How did you hear about Morgan Technical Training?*</label>
-                <textarea
-                  name="feedback"
-                  required
-                  placeholder="...."
-                  className="w-full border border-gray-300 rounded-lg p-2 text-sm sm:text-base"
-                  rows={3}
-                  value={formData.feedback}
-                  onChange={handleChange}
-                ></textarea>
-              </div>
-
-              {/* Submit Button */}
-              <div className="flex justify-center mb-4">
-                <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm sm:text-base">
-                  Submit Application
-                </button>
-              </div>
-            </form>
+            {/* Gender */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <label
+                htmlFor="gender"
+                className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+              >
+                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                Gender
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+                value={formData.gender}
+                onChange={handleChange}
+                aria-label="Gender selection for application"
+              >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </motion.div>
           </div>
-        </div>
-      )}
+
+          {/* High School */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <label
+              htmlFor="highschool"
+              className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+            >
+              <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+              Have you completed high school?
+            </label>
+            <select
+              id="highschool"
+              name="highschool"
+              className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+              value={formData.highschool}
+              onChange={handleChange}
+              aria-label="High school completion status for application"
+            >
+              <option value="">Select</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </motion.div>
+
+          {/* Course of Study */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <label
+              htmlFor="course"
+              className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+            >
+              <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+              Course of Study
+            </label>
+            <select
+              id="course"
+              name="course"
+              className="w-full bg-gradient-to-r from-gray-200 to-gray-300 border border-gray-200 rounded-xl p-3 shadow-inner italic text-gray-600 cursor-not-allowed font-inter text-sm sm:text-base"
+              value={formData.course}
+              onChange={handleChange}
+              disabled
+              aria-label="Course of study (Software Engineering, disabled)"
+            >
+              <option value="Software Engineering">Software Engineering</option>
+            </select>
+          </motion.div>
+
+          {/* Feedback */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            <label
+              htmlFor="feedback"
+              className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+            >
+              <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+              How did you hear about us? *
+            </label>
+            <textarea
+              id="feedback"
+              name="feedback"
+              required
+              placeholder="Tell us how you found Morgan Technical Training"
+              className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base resize-y"
+              rows={5}
+              value={formData.feedback}
+              onChange={handleChange}
+              aria-label="Feedback on how you heard about Morgan Technical Training"
+            ></textarea>
+          </motion.div>
+
+          {/* Submit Button */}
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <motion.button
+              type="submit"
+              className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white px-8 py-4 rounded-full font-inter font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-800 hover:scale-105 transition-all duration-300 relative overflow-hidden"
+              aria-label="Submit application form"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10">Submit Application</span>
+              <motion.span
+                className="absolute inset-0 bg-white/20"
+                initial={{ scale: 0, opacity: 0 }}
+                whileHover={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              ></motion.span>
+            </motion.button>
+          </motion.div>
+        </form>
+      </motion.div>
+    </motion.div>
+  )}
+
       <ScrollButton />
       <Footer />
     </>

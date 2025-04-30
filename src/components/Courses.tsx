@@ -1,147 +1,325 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async'; // Add this import
+import { Helmet } from 'react-helmet-async';
 import NavBar from './Navbar';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import ScrollButton from './ScrollButton';
+import { motion } from 'framer-motion';
 import logo from '../assets/class1.jpg';
 
 const Courses: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visibleSections, setVisibleSections] = useState({
+    intro: false,
+    courses: false,
+    highlights: false,
+  });
 
   useEffect(() => {
-    const section = document.getElementById('next-step-section');
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsVisible(true);
-          } else {
-            setIsVisible(false); // To re-trigger animation when scrolling back up
+            setVisibleSections((prev) => ({
+              ...prev,
+              [entry.target.id]: true,
+            }));
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.1, rootMargin: '50px' }
     );
 
-    if (section) {
-      observer.observe(section);
-    }
+    const sections = [
+      document.querySelector('#intro-section'),
+      document.querySelector('#courses-section'),
+      document.querySelector('#highlights-section'),
+    ];
+
+    sections.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    // Fallback: Ensure sections are visible after a delay
+    const timer = setTimeout(() => {
+      setVisibleSections({ intro: true, courses: true, highlights: true });
+    }, 1500);
 
     return () => {
-      if (section) observer.unobserve(section);
+      sections.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+      clearTimeout(timer);
     };
   }, []);
 
   return (
     <>
-    <Helmet>
-      <title>Our Tech Courses - Morgan Technical Training</title>
-      <meta
-        name="description"
-        content="Discover our tech courses at Morgan Technical Training: software engineering, cybersecurity, and data science. Learn remotely with experts."
-      />
-    </Helmet>
+      <Helmet>
+        <title>Courses | Morgan Technical Training</title>
+        <meta
+          name="description"
+          content="Explore hands-on tech courses at Morgan Technical Training in Nairobi, Kenya. Learn Software Engineering, Cybersecurity, and Data Science with expert instructors."
+        />
+        <meta
+          name="keywords"
+          content="tech bootcamp, software engineering course, cybersecurity training, data science program, Nairobi tech courses, Morgan Technical Training"
+        />
+      </Helmet>
       <NavBar />
-      {/* Intro to courses */}
-      <div id="next-step-section" className="w-full bg-gray-300 py-12 px-4 sm:px-6 lg:px-16">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 mt-8 md:grid-cols-2 gap-8">
-          {/* Text Content with Animation */}
-          <div
-            className={`flex flex-col justify-center text-black h-full transition-transform duration-1000 ease-out ${
-              isVisible ? 'translate-x-0 opacity-100' : '-translate-x-60 opacity-0'
-            }`}
-          >
-            <h2 className="font-semibold text-orange-700 py-2 mt-6 text-2xl sm:text-3xl md:text-5xl lg:text-6xl">
-              Take the next step:
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-              At Morgan Technical, we offer a diverse range of courses designed to
-              equip students with the skills and knowledge needed for success in
-              today's competitive world. Our programs span various disciplines,
-              including Business, Computer Science, Engineering, and the Arts,
-              each taught by experienced faculty. With a focus on both theoretical
-              understanding and practical application, our courses are tailored to
-              meet industry demands. Join us and take the first step toward a
-              fulfilling career through our comprehensive and innovative
-              curriculum.
-            </p>
-          </div>
 
-          {/* Image with Animation */}
-          <img
-            className={`w-full h-full object-cover rounded-3xl my-4 transition-transform duration-1000 ease-out delay-200 ${
-              isVisible ? 'translate-x-0 opacity-100' : 'translate-x-60 opacity-0'
-            }`}
-            src={logo}
-            alt="Classroom"
-          />
-        </div>
-      </div>
-
-      {/* List of courses */}
-      <section className="bg-gray-100 py-12 sm:py-16">
+      {/* Section 1: Intro to Courses */}
+      <section
+        id="intro-section"
+        className={`mt-16 sm:mt-20 bg-gradient-to-r from-indigo-50 to-purple-50 py-16 sm:py-20 transition-all duration-1000 ease-out ${
+          visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center text-2xl font-bold text-orange-700 mb-4 underline">
-            Our Programs:
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+            {/* Text Content */}
+            <motion.div
+              className="flex flex-col justify-center bg-white/90 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-gray-200/20"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-4">
+                Master Tech Skills
+              </h2>
+              <p className="text-lg sm:text-xl text-gray-700 font-inter leading-relaxed mb-6">
+                At Morgan Technical Training, our industry-aligned courses in Software Engineering, Cybersecurity, and Data Science empower you with hands-on skills to thrive in the tech world. Learn from expert instructors and build a future-ready career.
+              </p>
+              {/* <a
+                href="#courses-section"
+                className="inline-block text-orange-500 font-inter font-semibold hover:text-orange-600 transition-colors duration-300"
+              >
+                Explore Our Programs
+              </a> */}
+            </motion.div>
+
+            {/* Image */}
+            <motion.div
+              className="flex justify-center items-center"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <img
+                className="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-2xl shadow-xl border border-gray-200/20"
+                src={logo}
+                alt="Morgan Technical Training Classroom"
+                onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/800x500?text=Classroom+Image')}
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 2: List of Courses */}
+      <section
+        id="courses-section"
+        className={`bg-gray-50 py-16 sm:py-20 transition-all duration-1000 ease-out ${
+          visibleSections.courses ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-12 text-center">
+            Our Programs
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {/* Feature 1 */}
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300">
+            {/* Course 1: Software Engineering */}
+            <motion.div
+              className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHOidFsuemGaWGxr16QKfvzI52EFQeFTrN4Q&s"
-                alt="Software Engineering Icon"
-                className="mx-auto mb-4 h-16 w-16 object-cover"
+                alt="Software Engineering Course"
+                className="mx-auto mb-4 h-24 w-24 object-cover rounded-full"
               />
-              <h3 className="text-xl font-semibold mb-2 text-indigo-600">Software Engineering</h3>
-              <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-                <b>This course is available</b> - Software engineers design, develop, and maintain robust applications, mastering both frontend and backend technologies. 
-                Our course trains you in HTML, CSS, Tailwind CSS, JavaScript, React, Node.js, Python, Flask, and SQLite to build full-stack solutions. 
-                You'll learn to collaborate on projects, optimize performance, and deploy scalable systems across platforms.
+              <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-3">
+                Software Engineering
+              </h3>
+              <p className="text-gray-700 font-inter text-sm sm:text-base mb-4">
+                <span className="font-medium text-green-600">Available Now</span> - Master full-stack development in this 6-month program. Learn HTML, CSS, Tailwind CSS, JavaScript, React, Node.js, Python, Flask, and SQLite. Build real-world projects and deploy scalable applications.
               </p>
-              <Link to="/software">
-                <p className="text-indigo-600 hover:text-indigo-800 hover:underline mt-4 block font-medium transition-colors duration-300">
-                  Learn More
-                </p>
+              <Link
+                to="/software"
+                className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-inter font-semibold text-sm sm:text-base hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300"
+                aria-label="Learn more about Software Engineering course"
+              >
+                Learn More
               </Link>
-            </div>
+            </motion.div>
 
-            {/* Feature 2 */}
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300">
+            {/* Course 2: Cybersecurity */}
+            <motion.div
+              className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               <img
                 src="https://www.technologysolutions.net/wp-content/uploads/2023/09/pros-and-cons-scaled-2560x1280.jpeg"
-                alt="Cyber Security Icon"
-                className="mx-auto mb-4 h-16 w-16 object-cover"
+                alt="Cybersecurity Course"
+                className="mx-auto mb-4 h-24 w-24 object-cover rounded-full"
               />
-              <h3 className="text-xl font-semibold mb-2 text-indigo-600">Cyber Security</h3>
-              <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-                <b>This is an upcoming course in our curriculum</b> - Cybersecurity protects systems, networks, and data from cyber threats like attacks and breaches. It involves implementing security measures, monitoring for suspicious activity, and responding to incidents to ensure data integrity and confidentiality.
+              <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-3">
+                Cybersecurity
+              </h3>
+              <p className="text-gray-700 font-inter text-sm sm:text-base mb-4">
+                <span className="font-medium text-yellow-600">Coming July 2025</span> - Learn to protect systems and data from cyber threats. This 21-22 week course covers security measures, threat monitoring, and incident response. Join the waitlist to stay updated.
               </p>
-              <Link to="/cybersecurity">
-                <p className="text-indigo-600 hover:text-indigo-800 hover:underline mt-4 block font-medium transition-colors duration-300">
-                  Learn More
-                </p>
+              <Link
+                to="/cybersecurity"
+                className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-inter font-semibold text-sm sm:text-base hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300"
+                aria-label="Join waitlist for Cybersecurity course"
+              >
+                Join Waitlist
               </Link>
-            </div>
+            </motion.div>
 
-            {/* Feature 3 */}
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300">
+            {/* Course 3: Data Science */}
+            <motion.div
+              className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               <img
                 src="https://wallpapers.com/images/featured/data-science-xe1pmo7wm4jcokpd.jpg"
-                alt="Data Science Icon"
-                className="mx-auto mb-4 h-16 w-16 object-cover"
+                alt="Data Science Course"
+                className="mx-auto mb-4 h-24 w-24 object-cover rounded-full"
               />
-              <h3 className="text-xl font-semibold mb-2 text-indigo-600">Data Science</h3>
-              <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-                <b>This is an upcoming course in our curriculum</b> - A data scientist is responsible for analyzing and interpreting complex data to help organizations make data-driven decisions. We train on tools like Python, R, and SQL to analyze large datasets, build predictive models, and visualize data insights. Their role includes collaborating with stakeholders, identifying trends, and ensuring the accuracy and integrity of data-driven solutions.
+              <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-3">
+                Data Science
+              </h3>
+              <p className="text-gray-700 font-inter text-sm sm:text-base mb-4">
+                <span className="font-medium text-yellow-600">Coming Q2 2026</span> - Analyze and visualize data to drive decisions. This 5-month program teaches Python, R, SQL, and predictive modeling. Build a portfolio of data-driven projects.
               </p>
-              <Link to="/datascience">
-                <p className="text-indigo-600 hover:text-indigo-800 hover:underline mt-4 block font-medium transition-colors duration-300">
-                  Learn More
-                </p>
+              <Link
+                to="/datascience"
+                className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-inter font-semibold text-sm sm:text-base hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300"
+                aria-label="Join waitlist for Data Science course"
+              >
+                Join Waitlist
               </Link>
-            </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3: Learning Experience Highlights */}
+      <section
+        id="highlights-section"
+        className={`bg-gradient-to-r from-indigo-50 to-purple-50 py-16 sm:py-20 transition-all duration-1000 ease-out ${
+          visibleSections.highlights ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-indigo-900 mb-12 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Why Learn with Us
+          </motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* Highlight 1: Hands-on Projects */}
+            <motion.div
+              className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="text-orange-500 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-12 w-12 mx-auto"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-semibold font-inter text-indigo-900 mb-3 text-center">
+                Hands-on Projects
+              </h3>
+              <p className="text-gray-700 font-inter text-sm sm:text-base text-center">
+                Build real-world applications and portfolios through practical, industry-relevant projects guided by expert instructors.
+              </p>
+            </motion.div>
+
+            {/* Highlight 2: Expert Instructors */}
+            <motion.div
+              className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="text-orange-500 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-12 w-12 mx-auto"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 005.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-semibold font-inter text-indigo-900 mb-3 text-center">
+                Expert Instructors
+              </h3>
+              <p className="text-gray-700 font-inter text-sm sm:text-base text-center">
+                Learn from industry professionals with years of experience, dedicated to your success in tech.
+              </p>
+            </motion.div>
+
+            {/* Highlight 3: Flexible Learning */}
+            <motion.div
+              className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="text-orange-500 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-12 w-12 mx-auto"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-3 text-center">
+                Flexible Learning
+              </h3>
+              <p className="text-gray-700 font-inter text-sm sm:text-base text-center">
+                Study remotely at your own pace with our flexible online platform, designed for busy learners.
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>

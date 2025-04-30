@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async'; // Add this import
+import { Helmet } from 'react-helmet-async';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useSwipeable } from 'react-swipeable';
@@ -9,40 +9,59 @@ import logo from '../assets/stu.jpg';
 
 const Home: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [visible, setVisible] = useState(false);
+  const [visibleSections, setVisibleSections] = useState({
+    hero: true, // Start with hero visible
+    courses: false,
+    testimonials: false,
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setVisible(true);
+            setVisibleSections((prev) => ({
+              ...prev,
+              [entry.target.id]: true,
+            }));
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '50px' } // Adjusted for smoother triggering
     );
 
-    const section = document.querySelector('#top-courses-section');
-    if (section) {
-      observer.observe(section);
-    }
+    const sections = [
+      document.querySelector('#hero-section'),
+      document.querySelector('#top-courses-section'),
+      document.querySelector('#testimonials-section'),
+    ];
+
+    sections.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    // Fallback: Ensure sections become visible after a delay
+    const timer = setTimeout(() => {
+      setVisibleSections((prev) => ({
+        ...prev,
+        courses: true,
+        testimonials: true,
+      }));
+    }, 2000);
 
     return () => {
-      if (section) {
-        observer.unobserve(section);
-      }
+      sections.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+      clearTimeout(timer);
     };
   }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
-    setVisible(true);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const testimonials = [
@@ -66,9 +85,9 @@ const Home: React.FC = () => {
     },
     {
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcCuCOisgxyOypyBi-hRYYV2Onv7KVI6QTVA&s',
-      name: 'Amina Mwangi',
-      title: 'Student',
-      testimonial: 'The Data Science course at M.T.T opened doors for me in analytics—remote learning made it so accessible!',
+      name: 'Alex Munene',
+      title: 'Mentor',
+      testimonial: 'It is facinating to see students grow in their tech skills. I am proud to be part of their journey!',
     },
     {
       image: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3',
@@ -78,7 +97,7 @@ const Home: React.FC = () => {
     },
     {
       image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1962&auto=format&fit=crop&ixlib=rb-4.0.3',
-      name: 'Fatuma Hassan',
+      name: 'Azhar',
       title: 'Mentor',
       testimonial: 'Teaching at Morgan Technical Training has been rewarding—helping students grow in tech is inspiring!',
     },
@@ -96,159 +115,184 @@ const Home: React.FC = () => {
     trackMouse: true,
   });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <>
-    <Helmet>
-      <title>Tech Courses - Morgan Technical Training</title>
-      <meta
-        name="description"
-        content="Explore top tech courses at Morgan Technical Training in software engineering, cybersecurity, and data science. Start your career remotely."
-      />
-    </Helmet>
+      <Helmet>
+        <title>Morgan Technical Training</title>
+        <meta
+          name="description"
+          content="Explore top tech courses at Morgan Technical Training in software engineering, cybersecurity, and data science. Start your career remotely."
+        />
+      </Helmet>
       <Navbar />
       <div>
-        {/* part 1 */}
-        <section className="relative bg-gray-800 h-[700px] flex flex-col justify-center overflow-hidden">
+        {/* Hero Section (Unchanged) */}
+        <section
+          id="hero-section"
+          className="relative bg-gradient-to-b from-indigo-900 to-purple-900 h-[800px] flex flex-col justify-center overflow-hidden"
+        >
           <div className="absolute inset-0">
             <img
               src="https://miro.medium.com/v2/resize:fit:1400/0*7VyEZgzwUhQMeBqb"
               alt="Hero Background"
-              className={`object-cover w-full h-full transition-opacity duration-1000 ease-in ${
-                visible ? 'opacity-100' : 'opacity-0'
+              className={`object-cover w-full h-full transition-transform duration-1000 ease-out ${
+                visibleSections.hero ? 'scale-100 opacity-90' : 'scale-110 opacity-0'
               }`}
-              style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+              style={{ transform: `translateY(${scrollY * 0.3}px)` }}
             />
-            <div className="absolute inset-0 bg-black opacity-60"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent"></div>
           </div>
-          <div className="container mx-auto flex flex-col items-center justify-center h-full text-center text-white relative z-10 px-4">
+          <div className="container mx-auto flex flex-col items-center justify-center h-full text-center text-white relative z-10 px-4 sm:px-6">
             <h1
-              className={`text-4xl md:text-5xl font-bold text-white transition-opacity duration-1000 ease-in ${
-                visible ? 'opacity-100' : 'opacity-0'
+              className={`text-5xl sm:text-6xl lg:text-7xl font-bold font-inter tracking-tight transition-all duration-1000 ease-out ${
+                visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              Welcome to <span className="text-orange-500">Morgan Technical Training</span>
+              Welcome to <span className="text-orange-400">Morgan Technical Training</span>
             </h1>
             <h2
-              className={`text-3xl md:text-3xl font-bold mb-4 transition-opacity duration-1000 ease-in ${
-                visible ? 'opacity-100' : 'opacity-0'
-              } delay-1000`}
+              className={`text-2xl sm:text-3xl lg:text-4xl font-semibold font-inter mt-4 transition-all duration-1000 ease-out delay-200 ${
+                visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
             >
               Empowering Your Digital Future
             </h2>
             <p
-              className={`text-md md:text-lg mb-8 transition-opacity duration-1000 ease-in ${
-                visible ? 'opacity-100' : 'opacity-0'
-              } delay-1600`}
+              className={`text-lg sm:text-xl lg:text-2xl mt-6 max-w-3xl mx-auto font-inter transition-all duration-1000 ease-out delay-400 ${
+                visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
             >
               Join us in navigating the world of technology with innovative solutions designed for your success.
             </p>
             <Link
               to="/courses"
-              className={`bg-orange-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-white hover:text-orange-600 cursor-pointer transition duration-300 text-lg  ${
-                visible ? 'opacity-100' : 'opacity-0'
-              } delay-100`}
+              className={`mt-8 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-inter text-lg font-semibold shadow-lg hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300 ${
+                visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              } delay-600`}
             >
-              Start your journey
+              Start Your Journey
             </Link>
           </div>
         </section>
 
-        {/* part 2 */}
+        {/* Courses Section */}
         <section
           id="top-courses-section"
-          className={`py-12 sm:py-16 bg-gray-100 text-black transition-opacity duration-1000 ease-in ${visible ? 'opacity-100' : 'opacity-0'}`}
+          className={`py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-gray-100 text-black transition-all duration-1000 ease-out ${
+            visibleSections.courses ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-orange-600">Unlock Your Tech Potential</h2>
-            <p className="text-md sm:text-lg lg:text-xl mb-8 sm:mb-10 max-w-3xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-inter mb-6 text-indigo-900">
+              Unlock Your Tech Potential
+            </h2>
+            <p className="text-lg sm:text-xl lg:text-2xl mb-12 max-w-4xl mx-auto font-inter text-gray-700">
               Explore cutting-edge courses in Software Engineering, Cybersecurity, and Data Science—fully remote and tailored for the future.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
-              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
-                <h3 className="text-lg sm:text-xl font-semibold mb-3 text-indigo-600">Software Engineering</h3>
-                <p className="text-sm sm:text-md">
-                  Master full-stack development with React, Node.js, and Python through hands-on, remote projects.
-                </p>
-                <Link to="/software" className="inline-block mt-4 text-orange-500 hover:text-orange-700 font-medium underline transition-colors duration-300">
-                  Learn More
-                </Link>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
-                <h3 className="text-lg sm:text-xl font-semibold mb-3 text-indigo-600">Cybersecurity</h3>
-                <p className="text-sm sm:text-md">
-                  Secure networks and data with expert-led remote training and real-time simulations.
-                </p>
-                <Link to="/cybersecurity" className="inline-block mt-4 text-orange-500 hover:text-orange-700 font-medium underline transition-colors duration-300">
-                  Learn More
-                </Link>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
-                <h3 className="text-lg sm:text-xl font-semibold mb-3 text-indigo-600">Data Science</h3>
-                <p className="text-sm sm:text-md">
-                  Dive into data analysis and machine learning with flexible, remote coursework.
-                </p>
-                <Link to="/datascience" className="inline-block mt-4 text-orange-500 hover:text-orange-700 font-medium underline transition-colors duration-300">
-                  Learn More
-                </Link>
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  title: 'Software Engineering',
+                  description: 'Master full-stack development with React, Node.js, and Python through hands-on, remote projects.',
+                  link: '/software',
+                },
+                {
+                  title: 'Cybersecurity',
+                  description: 'Secure networks and data with expert-led remote training and real-time simulations.',
+                  link: '/cybersecurity',
+                },
+                {
+                  title: 'Data Science',
+                  description: 'Dive into data analysis and machine learning with flexible, remote coursework.',
+                  link: '/datascience',
+                },
+              ].map((course, index) => (
+                <div
+                  key={index}
+                  className={`bg-white/90 backdrop-blur-lg p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 border border-gray-200/50 ${
+                    visibleSections.courses ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  } delay-${index * 200}`}
+                >
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-indigo-600 font-inter">
+                    {course.title}
+                  </h3>
+                  <p className="text-md sm:text-lg text-gray-600 font-inter mb-6">{course.description}</p>
+                  <Link
+                    to={course.link}
+                    className="inline-block text-orange-500 hover:text-orange-600 font-inter font-medium text-lg underline transition-colors duration-300"
+                  >
+                    Learn More
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* part 3 */}
-        <div className="bg-gray-400 py-16">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row items-center">
+        {/* Testimonials Section */}
+        <section
+          id="testimonials-section"
+          className={`py-16 sm:py-20 bg-gradient-to-r from-indigo-100 to-purple-100 transition-all duration-1000 ease-out ${
+            visibleSections.testimonials ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row items-center gap-12">
               <div
-                className={`w-full lg:w-1/2 mb-8 lg:mb-0 lg:pr-8 transition-opacity duration-2000 ease-in-out ${
-                  visible ? 'opacity-100' : 'opacity-0'
+                className={`w-full lg:w-1/2 transition-all duration-1000 ease-out ${
+                  visibleSections.testimonials ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
               >
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-orange-600">Committed to Excellence</h2>
-                <p className="text-lg lg:text-xl mb-8">
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-inter mb-6 text-indigo-900">
+                  Committed to Excellence
+                </h2>
+                <p className="text-lg sm:text-xl lg:text-2xl mb-8 font-inter text-gray-700">
                   Our mission is to provide outstanding tech skills to our students and ensure they feel satisfied. We
                   have a variety of fascinating courses like{' '}
-                  <Link to={'/software'}>
-                    <b className="text-orange-700 hover:text-orange-900 cursor-pointer underline">Software Engineering</b>
+                  <Link
+                    to="/software"
+                    className="text-orange-500 hover:text-orange-600 font-medium underline transition-colors duration-300"
+                  >
+                    Software Engineering
                   </Link>
                   . Remember, the secret of getting ahead is getting started.
                 </p>
-                <h3 className="text-2xl font-bold text-orange-700 mb-4">Hear Our Students</h3>
-                <p className="text-md sm:text-lg italic text-gray-700">“The digital world is here, and we must embrace it.”</p>
+                <h3 className="text-2xl sm:text-3xl font-bold font-inter text-orange-600 mb-4">
+                  Hear Our Students
+                </h3>
+                <p className="text-md sm:text-lg italic text-gray-600 font-inter">
+                  “The digital world is here, and we must embrace it.”
+                </p>
               </div>
               <div className="w-full lg:w-1/2">
                 <div className="relative" {...handlers}>
-                  <div className="overflow-hidden relative h-64">
+                  <div className="overflow-hidden relative h-80 sm:h-96">
                     <div
-                      className={`flex duration-2000 transition-opacity duration-1000 ease-in ${
-                        visible ? 'opacity-100' : 'opacity-0'
-                      } delay-1000`}
+                      className="flex transition-transform duration-700 ease-in-out"
                       style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                     >
                       {testimonials.map((testimonial, index) => (
                         <div
                           key={index}
-                          className="flex-shrink-0 w-full h-full flex items-center justify-center bg-white text-black shadow-lg p-6 transition-transform duration-2000 ease-in-out"
+                          className={`flex-shrink-0 w-full h-full flex items-center justify-center bg-white/90 backdrop-blur-lg text-black shadow-xl p-8 rounded-2xl border border-gray-200/50 transition-all duration-700 ${
+                            visibleSections.testimonials ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                          } delay-${index * 100}`}
                         >
                           <div className="text-center">
-                            <p className="text-lg mb-4">{testimonial.testimonial}</p>
-                            <div className="flex items-center justify-center">
+                            <p className="text-lg sm:text-xl font-inter text-gray-700 mb-6">
+                              {testimonial.testimonial}
+                            </p>
+                            <div className="flex items-center justify-center gap-4">
                               <img
                                 src={testimonial.image}
                                 alt={testimonial.name}
-                                className="w-12 h-12 rounded-full mr-4"
+                                className="w-16 h-16 rounded-full object-cover shadow-md transition-transform duration-300 hover:scale-110"
                               />
                               <div>
-                                <p className="font-bold">{testimonial.name}</p>
-                                <p className="text-sm">{testimonial.title}</p>
+                                <p className="font-bold font-inter text-lg text-indigo-900">
+                                  {testimonial.name}
+                                </p>
+                                <p className="text-md font-inter text-gray-600">{testimonial.title}</p>
                               </div>
                             </div>
                           </div>
@@ -256,22 +300,24 @@ const Home: React.FC = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 flex justify-center">
+                  <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
                     {testimonials.map((_, index) => (
-                      <div
+                      <button
                         key={index}
-                        className={`w-2.5 h-2.5 mx-1 rounded-full cursor-pointer ${
-                          index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                          index === currentIndex
+                            ? 'bg-orange-500 scale-125'
+                            : 'bg-gray-300 hover:bg-gray-400'
                         }`}
                         onClick={() => goToSlide(index)}
-                      ></div>
+                      />
                     ))}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>        
+        </section>
 
         <ScrollButton />
       </div>

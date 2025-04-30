@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { AiOutlineMenu, AiOutlineClose, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
+import {
+  AiOutlineMenu,
+  AiOutlineClose,
+  AiOutlineDown,
+  AiOutlineUp,
+} from 'react-icons/ai';
 import { Link, NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import logo from '../assets/morgan_ai.png';
 
 const NavBar: React.FC = () => {
@@ -24,181 +30,296 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-red-900 shadow-lg fixed w-full z-20 top-0 left-0">
-      <div className="container mx-auto flex items-center justify-between p-4">
+    <nav className="bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-900 shadow-xl fixed w-full z-20 top-0 left-0">
+      <style>
+        {`
+          .group:hover .group-hover\\:delay-300 {
+            transition-delay: 300ms;
+          }
+        `}
+      </style>
+      <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <div className="flex items-center cursor-pointer animate-fade-in-down">
+        <div className="flex items-center cursor-pointer transition-transform duration-300 hover:scale-105">
           <NavLink to="/">
-            <img src={logo} alt="Logo" className="h-12 w-auto" />
+            <img src={logo} alt="Morgan Technical Training logo" className="h-14 w-auto" />
           </NavLink>
-          <NavLink to="/">
-            <h1 className="font-extrabold text-white ml-2 text-xl tracking-tight">Morgan Technical Training</h1>
+          <NavLink to="/" className="ml-3">
+            <h1 className="font-bold text-white text-2xl tracking-tight font-inter">
+              Morgan Technical Training
+            </h1>
           </NavLink>
         </div>
 
-        {/* Hamburger menu for mobile */}
+        {/* Hamburger Menu */}
         <div className="lg:hidden">
-          <button onClick={toggleMenu} className="text-3xl text-white focus:outline-none transition-transform duration-200 hover:scale-110">
+          <button
+            onClick={toggleMenu}
+            className="text-3xl text-white hover:text-indigo-300 transition-colors duration-200"
+            aria-label={isOpen ? 'Close mobile menu' : 'Open mobile menu'}
+          >
             {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
           </button>
         </div>
 
-        {/* Menu links for desktop */}
-        <ul className="hidden lg:flex lg:items-center space-x-6">
+        {/* Desktop Menu */}
+        <ul className="hidden lg:flex lg:items-center space-x-8">
           <li>
-            <Link to="/" className="py-2 px-4 text-white hover:text-orange-400 transition-colors duration-200">Home</Link>
-          </li>
-          <li className="relative group">
-            <p className="py-2 px-4 text-white hover:text-orange-400 flex items-center cursor-pointer">About</p>
-            <ul className="absolute w-[200px] left-0 top-full hidden group-hover:block bg-white shadow-xl rounded-lg border border-gray-200 transform origin-top animate-dropdown">
-              <li>
-                <Link to="/story" className="block px-4 py-3 text-gray-800 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Our Story</Link>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <Link to="/blogs" className="py-2 px-4 text-white hover:text-orange-400 transition-colors duration-200">Blogs</Link>
-          </li>
-          <li className="relative group">
-            <p className="py-2 px-4 text-white hover:text-orange-400 flex items-center cursor-pointer">Programs</p>
-            <ul className="absolute w-[250px] left-0 top-full hidden group-hover:block bg-white shadow-xl rounded-lg border border-gray-200 transform origin-top animate-dropdown">
-              <li>
-                <p className="block px-4 py-3 text-gray-800 font-semibold border-b border-gray-200">Available Courses</p>
-                <ul className="pl-4">
-                  <li>
-                    <Link to="/software" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Software Engineering</Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <p className="block px-4 py-3 text-gray-800 font-semibold border-b border-gray-200">Upcoming Courses</p>
-                <ul className="pl-4">
-                  <li>
-                    <Link to="/datascience" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Data Science</Link>
-                  </li>
-                  <li>
-                    <Link to="/cybersecurity" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-all duration-200">Cyber Security</Link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <Link to="/contact" className="py-2 px-4 text-white hover:text-orange-400 transition-colors duration-200">Contact</Link>
-          </li>
-          {/* <li>
-            <Link to="/portal">
-              <button className="py-2 px-6 bg-orange-600 text-white rounded-full hover:bg-white hover:text-orange-600 cursor-pointer transition-all duration-200 hover:scale-105">Portal</button>
+            <Link
+              to="/"
+              className="text-white font-inter font-medium text-lg hover:text-indigo-300 transition-colors duration-200"
+            >
+              Home
             </Link>
-          </li> */}
+          </li>
+          <li>
+            <Link
+              to="/about"
+              className="text-white font-inter font-medium text-lg hover:text-indigo-300 transition-colors duration-200"
+            >
+              About
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/blogs"
+              className="text-white font-inter font-medium text-lg hover:text-indigo-300 transition-colors duration-200"
+            >
+              Blogs
+            </Link>
+          </li>
+          <li className="relative group">
+            <button
+              className="flex items-center text-white font-inter font-medium text-lg hover:text-indigo-300 transition-colors duration-200"
+              aria-expanded={!!activeSubMenu}
+              aria-controls="programs-dropdown"
+              aria-haspopup="true"
+            >
+              Programs <AiOutlineDown className="ml-2" />
+            </button>
+            <motion.div
+              id="programs-dropdown"
+              className="absolute top-full left-1/2 transform -translate-x-1/2 bg-white/95 backdrop-blur-xl shadow-xl rounded-2xl hidden group-hover:block min-w-[320px] w-[360px] max-w-[90vw] mx-4 mt-2 border border-orange-400/20 shadow-inner opacity-0 group-hover:opacity-100 group-hover:delay-300 transition-all duration-300 transform group-hover:translate-y-0 translate-y-2"
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              role="menu"
+            >
+              <div className="relative grid grid-cols-2 gap-6 px-5 py-5">
+                {/* Vertical Gradient Divider */}
+                <div className="absolute left-[calc(50%-0.5px)] top-0 bottom-0 w-px bg-gradient-to-b from-orange-500 to-orange-600 bg-opacity-80 z-0"></div>
+
+                {/* Available Courses */}
+                <div>
+                  <motion.h3
+                    className="text-gray-800 font-inter font-semibold text-base mb-3 relative"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.1 }}
+                  >
+                    Available Courses
+                    <span className="absolute left-0 -bottom-1 w-10 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></span>
+                  </motion.h3>
+                  <ul>
+                    <motion.li
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.2 }}
+                    >
+                      <Link
+                        to="/software"
+                        className="block w-full px-5 py-3 text-gray-800 font-inter text-sm relative hover:bg-white/40 hover:backdrop-blur-md hover:text-orange-600 hover:scale-105 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 group"
+                        aria-label="Navigate to Software Engineering course"
+                        role="menuitem"
+                      >
+                        Software Engineering
+                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-200"></span>
+                      </Link>
+                    </motion.li>
+                  </ul>
+                </div>
+                {/* Upcoming Courses */}
+                <div>
+                  <motion.h3
+                    className="text-gray-800 font-inter font-semibold text-base mb-3 relative"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 }}
+                  >
+                    Upcoming Courses
+                    <span className="absolute left-0 -bottom-1 w-10 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></span>
+                  </motion.h3>
+                  <ul>
+                    <motion.li
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.4 }}
+                    >
+                      <Link
+                        to="/datascience"
+                        className="block w-full px-5 py-3 text-gray-800 font-inter text-sm relative hover:bg-white/40 hover:backdrop-blur-md hover:text-orange-600 hover:scale-105 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 group"
+                        aria-label="Navigate to Data Science course"
+                        role="menuitem"
+                      >
+                        Data Science
+                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-200"></span>
+                      </Link>
+                    </motion.li>
+                    <motion.li
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.5 }}
+                    >
+                      <Link
+                        to="/cybersecurity"
+                        className="block w-full px-5 py-3 text-gray-800 font-inter text-sm relative hover:bg-white/40 hover:backdrop-blur-md hover:text-orange-600 hover:scale-105 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 group"
+                        aria-label="Navigate to Cyber Security course"
+                        role="menuitem"
+                      >
+                        Cyber Security
+                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-200"></span>
+                      </Link>
+                    </motion.li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </li>
+          <li>
+            <Link
+              to="/contact"
+              className="text-white font-inter font-medium text-lg hover:text-indigo-300 transition-colors duration-200"
+            >
+              Contact
+            </Link>
+          </li>
         </ul>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu (Unchanged) */}
       {isOpen && (
         <>
-          {/* Overlay */}
           <div
-            className="fixed inset-0 bg-black bg-opacity-60 z-10 lg:hidden animate-fade-in"
+            className="fixed inset-0 bg-black bg-opacity-70 z-10 lg:hidden"
             onClick={toggleMenu}
           ></div>
 
-          {/* Mobile Dropdown */}
-          <div
-            className="fixed top-0 left-0 w-full bg-red-900 text-white shadow-2xl z-20 lg:hidden transform transition-all duration-500 ease-in-out animate-slide-down"
-          >
-            <div className="flex items-center justify-between p-4 border-b border-gray-700">
-              <div className="flex items-center">
-                <NavLink to="/">
-                  <img src={logo} alt="Logo" className="h-10 w-auto" />
-                </NavLink>
-                <NavLink to="/" onClick={toggleMenu}>
-                  <p className="font-bold text-xl text-white ml-2">Morgan Technical Training</p>
-                </NavLink>
-              </div>
-              <button onClick={toggleMenu} className="text-2xl text-white hover:text-orange-400 transition-colors duration-200">
+          <div className="fixed top-0 left-0 w-4/5 max-w-sm bg-gradient-to-b from-indigo-900 to-purple-900 text-white z-20 lg:hidden p-6 h-full transform transition-transform duration-300 ease-in-out translate-x-0">
+            {/* Top header with logo and close */}
+            <div className="flex items-center justify-between border-b border-white/20 pb-4">
+              <NavLink to="/" className="flex items-center" onClick={toggleMenu}>
+                <img src={logo} alt="Morgan Technical Training logo" className="h-12 w-auto" />
+                <span className="font-bold text-xl ml-3 font-inter">Morgan Technical Training</span>
+              </NavLink>
+              <button onClick={toggleMenu} className="text-2xl text-white hover:text-indigo-300">
                 <AiOutlineClose />
               </button>
             </div>
-            <ul className="p-4 space-y-2">
+
+            {/* Links */}
+            <ul className="mt-6 space-y-3">
               <li>
-                <Link to="/" onClick={toggleMenu} className="block py-3 px-4 text-white hover:bg-red-900 hover:text-orange-400 rounded-lg transition-all duration-200">Home</Link>
-              </li>
-              <li>
-                <div
-                  className="flex justify-between items-center py-3 px-4 cursor-pointer hover:bg-red-900 rounded-lg transition-all duration-200"
-                  onClick={() => toggleSubMenu('about')}
+                <Link
+                  to="/"
+                  onClick={toggleMenu}
+                  className="block py-3 px-4 font-inter text-lg hover:bg-white/10 rounded-lg transition-colors duration-200"
                 >
-                  <span className="text-white">About</span>
-                  {activeSubMenu === 'about' ? <AiOutlineUp className="text-orange-400" /> : <AiOutlineDown className="text-orange-400" />}
-                </div>
-                {activeSubMenu === 'about' && (
-                  <ul className="ml-4 mt-2 space-y-2 animate-fade-in hover:bg-white hover:text-orange-600">
-                    <li>
-                      <Link to="/story" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Our Story</Link>
-                    </li>
-                  </ul>
-                )}
-              </li>
-              <li>
-                <Link to="/blogs" onClick={toggleMenu} className="block py-3 px-4 text-white hover:bg-orange-600 hover:text-orange-400 rounded-lg transition-all duration-200">Blogs</Link>
-              </li>
-              <li>
-                <div
-                  className="flex justify-between items-center py-3 px-4 cursor-pointer rounded-lg transition-all duration-200"
-                  onClick={() => toggleSubMenu('programs')}
-                >
-                  <span className="text-white">Programs</span>
-                  {activeSubMenu === 'programs' ? <AiOutlineUp className="text-orange-400" /> : <AiOutlineDown className="text-orange-400" />}
-                </div>
-                {activeSubMenu === 'programs' && (
-                  <ul className="ml-4 mt-2 space-y-2 animate-fade-in">
-                    <li>
-                      <div
-                        className="flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-orange-600 rounded-lg transition-all duration-200"
-                        onClick={() => toggleNestedSubMenu('availableCourses')}
-                      >
-                        <span className="text-white">Available Courses</span>
-                        {activeNestedSubMenu === 'availableCourses' ? <AiOutlineUp className="text-orange-400" /> : <AiOutlineDown className="text-orange-400" />}
-                      </div>
-                      {activeNestedSubMenu === 'availableCourses' && (
-                        <ul className="ml-4 mt-2 space-y-2 animate-fade-in">
-                          <li>
-                            <Link to="/software" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Software Engineering</Link>
-                          </li>
-                        </ul>
-                      )}
-                    </li>
-                    <li>
-                      <div
-                        className="flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-orange-600 rounded-lg transition-all duration-200"
-                        onClick={() => toggleNestedSubMenu('upcomingCourses')}
-                      >
-                        <span className="text-white">Upcoming Courses</span>
-                        {activeNestedSubMenu === 'upcomingCourses' ? <AiOutlineUp className="text-orange-400" /> : <AiOutlineDown className="text-orange-400" />}
-                      </div>
-                      {activeNestedSubMenu === 'upcomingCourses' && (
-                        <ul className="ml-4 mt-2 space-y-2 animate-fade-in">
-                          <li>
-                            <Link to="/datascience" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Data Science</Link>
-                          </li>
-                          <li>
-                            <Link to="/cybersecurity" onClick={toggleMenu} className="block py-2 px-4 text-gray-300 hover:bg-gray-600 hover:text-orange-400 rounded-lg transition-all duration-200">Cyber Security</Link>
-                          </li>
-                        </ul>
-                      )}
-                    </li>
-                  </ul>
-                )}
-              </li>
-              <li>
-                <Link to="/contact" onClick={toggleMenu} className="block py-3 px-4 text-white hover:bg-gray-700 hover:text-orange-400 rounded-lg transition-all duration-200">Contact</Link>
-              </li>
-              {/* <li>
-                <Link to="/portal" onClick={toggleMenu}>
-                  <button className="w-full py-3 px-4 mt-4 bg-orange-600 text-white rounded-full hover:bg-white text-orange-600 cursor-pointer transition-all duration-300 hover:scale-105">Portal</button>
+                  Home
                 </Link>
-              </li> */}
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  onClick={toggleMenu}
+                  className="block py-3 px-4 font-inter text-lg hover:bg-white/10 rounded-lg transition-colors duration-200"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blogs"
+                  onClick={toggleMenu}
+                  className="block py-3 px-4 font-inter text-lg hover:bg-white/10 rounded-lg transition-colors duration-200"
+                >
+                  Blogs
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={() => toggleSubMenu('programs')}
+                  className="flex w-full justify-between items-center py-3 px-4 font-inter text-lg hover:bg-white/10 rounded-lg transition-colors duration-200"
+                >
+                  <span>Programs</span>
+                  {activeSubMenu === 'programs' ? <AiOutlineUp /> : <AiOutlineDown />}
+                </button>
+                {activeSubMenu === 'programs' && (
+                  <ul className="ml-4 mt-3 space-y-2">
+                    <li>
+                      <button
+                        onClick={() => toggleNestedSubMenu('available')}
+                        className="flex w-full justify-between items-center py-3 px-4 font-inter text-base hover:bg-gray-800 rounded-lg transition-colors duration-200"
+                      >
+                        <span>Available Courses</span>
+                        {activeNestedSubMenu === 'available' ? <AiOutlineUp /> : <AiOutlineDown />}
+                      </button>
+                      {activeNestedSubMenu === 'available' && (
+                        <ul className="ml-4 mt-2">
+                          <li>
+                            <Link
+                              to="/software"
+                              onClick={toggleMenu}
+                              className="block py-3 px-4 font-inter text-base hover:bg-indigo-700 rounded-lg transition-colors duration-200"
+                            >
+                              Software Engineering
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => toggleNestedSubMenu('upcoming')}
+                        className="flex w-full justify-between items-center py-3 px-4 font-inter text-base hover:bg-gray-800 rounded-lg transition-colors duration-200"
+                      >
+                        <span>Upcoming Courses</span>
+                        {activeNestedSubMenu === 'upcoming' ? <AiOutlineUp /> : <AiOutlineDown />}
+                      </button>
+                      {activeNestedSubMenu === 'upcoming' && (
+                        <ul className="ml-4 mt-2">
+                          <li>
+                            <Link
+                              to="/datascience"
+                              onClick={toggleMenu}
+                              className="block py-3 px-4 font-inter text-base hover:bg-indigo-700 rounded-lg transition-colors duration-200"
+                            >
+                              Data Science
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/cybersecurity"
+                              onClick={toggleMenu}
+                              className="block py-3 px-4 font-inter text-base hover:bg-indigo-700 rounded-lg transition-colors duration-200"
+                            >
+                              Cyber Security
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
+                    </li>
+                  </ul>
+                )}
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  onClick={toggleMenu}
+                  className="block py-3 px-4 font-inter text-lg hover:bg-white/10 rounded-lg transition-colors duration-200"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
         </>
