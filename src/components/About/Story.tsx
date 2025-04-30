@@ -54,7 +54,7 @@ const Story: React.FC = () => {
         id="mission-vision-section"
         className="bg-white py-20 sm:py-24 transition-all duration-1000 ease-out"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mt-4 mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
             {/* Mission */}
             <div

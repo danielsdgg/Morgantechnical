@@ -167,7 +167,7 @@ const Software: React.FC = () => {
     },
     {
       question: 'Are there scholarships available?',
-      answer: 'We offer limited scholarships based on financial need and merit but at the moment there are no scholarships available.',
+      answer: 'We offer limited scholarships based on financial need and merit.',
     },
     {
       question: 'What happens if I miss a payment?',
