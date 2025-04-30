@@ -76,7 +76,7 @@ const blogPosts = [
   },
 ];
 
-const BlogDetails = () => {
+const BlogDetails:React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const blog = blogPosts.find((post) => post.id === Number(id));
