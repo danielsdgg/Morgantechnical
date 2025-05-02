@@ -197,12 +197,10 @@ const Software: React.FC = () => {
       <NavBar />
 
       {/* Progress Bar */}
-      <div
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-orange-500 to-orange-600 z-50"
-        style={{ width: `${scrollProgress}%` }}
-      />
+      <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-orange-500 to-orange-600 z-50"
+      style={{ width: `${scrollProgress}%`, paddingTop: 'env(safe-area-inset-top)' }}/>
 
-      <div className={`bg-white text-black ${isModalOpen ? 'blur-lg' : ''}`}>
+      <div className={`bg-white text-black ${isModalOpen ? 'blur-lg' : ''} mt-16 sm:mt-0`}>
         {/* Section 1: Hero */}
         <section
           id="hero-section"
