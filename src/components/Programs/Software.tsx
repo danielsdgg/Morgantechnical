@@ -661,7 +661,7 @@ const Software: React.FC = () => {
                   <p className="text-gray-700 font-inter mb-4 text-sm sm:text-base">
                     Pay upfront and save on the total cost.
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold font-inter text-indigo-900">KSH 120,000</p>
+                  <p className="text-2xl sm:text-3xl font-bold font-inter text-indigo-900">KSH 100,000</p>
                 </motion.div>
                 <motion.div
                   className="bg-white/90 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
@@ -673,10 +673,10 @@ const Software: React.FC = () => {
                     Installment Plan
                   </h3>
                   <p className="text-gray-700 font-inter mb-4 text-sm sm:text-base flex items-center justify-center">
-                    4 installments of KSH 32,000 over 4 months
+                    4 installments of KSH 27,000 over 4 months
                     <FaArrowDown className="ml-2 text-orange-500 animate-bounce" />
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold font-inter text-indigo-900">KSH 128,000</p>
+                  <p className="text-2xl sm:text-3xl font-bold font-inter text-indigo-900">KSH 108,000</p>
                 </motion.div>
               </div>
             </motion.div>
