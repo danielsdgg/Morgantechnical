@@ -31,13 +31,28 @@ const NavBar: React.FC = () => {
 
   return (
     <nav className="bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-900 shadow-xl fixed w-full z-20 top-0 left-0">
-      <style>
-        {`
-          .group:hover .group-hover\\:delay-300 {
-            transition-delay: 300ms;
-          }
-        `}
-      </style>
+    <style>
+      {`
+        .group:hover .group-hover\\:delay-300 {
+          transition-delay: 300ms;
+        }
+        .group:not(:hover) .group-hover\\:delay-300 {
+          transition-delay: 800ms;
+        }
+        .group {
+          position: relative;
+        }
+        .group:before {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          height: 10px;
+          z-index: 1;
+        }
+      `}
+    </style>
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <div className="flex items-center cursor-pointer transition-transform duration-300 hover:scale-105">
