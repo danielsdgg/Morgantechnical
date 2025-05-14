@@ -40,7 +40,7 @@ const Software: React.FC = () => {
     gender: '',
     highschool: '',
     course: 'Software Engineering',
-    feedback: '',
+    hearSay: '',
   });
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const Software: React.FC = () => {
       gender: '',
       highschool: '',
       course: 'Software Engineering',
-      feedback: '',
+      hearSay: '',
     });
   };
 
@@ -149,7 +149,7 @@ const Software: React.FC = () => {
         gender: '',
         highschool: '',
         course: 'Software Engineering',
-        feedback: '',
+        hearSay: '',
       });
 
       setTimeout(() => setNotification(null), 5000);
@@ -1019,7 +1019,7 @@ const Software: React.FC = () => {
             </select>
           </motion.div>
 
-          {/* Feedback */}
+          {/* hearSay */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1033,13 +1033,13 @@ const Software: React.FC = () => {
               How did you hear about us? *
             </label>
             <textarea
-              id="feedback"
-              name="feedback"
+              id="hearSay"
+              name="hearSay"
               required
               placeholder="Tell us how you found Morgan Technical Training"
               className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base resize-y"
               rows={5}
-              value={formData.feedback}
+              value={formData.hearSay}
               onChange={handleChange}
               aria-label="Feedback on how you heard about Morgan Technical Training"
             ></textarea>
