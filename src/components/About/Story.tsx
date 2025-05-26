@@ -53,10 +53,32 @@ const Story: React.FC = () => {
         <title>About Morgan Technical Training | Kikuyu, Kenya</title>
         <meta
           name="description"
-          content="Learn about Morgan Technical Training, a leading tech bootcamp in Kikuyu, Kenya, dedicated to empowering students with in-demand tech skills."
+          content="Learn about Morgan Technical Training, a leading tech bootcamp in Kikuyu Town, Kenya, dedicated to empowering students with in-demand technology skills."
         />
-        <meta name="keywords" content="Morgan Technical Training, tech bootcamp Kikuyu, about tech training Kenya" />
+        <meta
+          name="keywords"
+          content="Morgan Technical Training, tech bootcamp Kikuyu Town, about tech training Kenya"
+        />
         <link rel="canonical" href="https://morgantechnicaltraining.com/about" />
+        <meta name="robots" content="index, follow" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            'name': 'Morgan Technical Training',
+            'url': 'https://morgantechnicaltraining.com',
+            'address': {
+              '@type': 'PostalAddress',
+              'streetAddress': 'Kikuyu Town, opposite Cleanshelf',
+              'addressLocality': 'Kikuyu',
+              'addressRegion': 'Kiambu County',
+              'postalCode': '00902',
+              'addressCountry': 'KE'
+            },
+            'telephone': '+254726152560',
+            'email': 'morgantechnical72@gmail.com'
+          })}
+        </script>
       </Helmet>
       <NavBar />
       {/* Section 1: Mission & Vision (Retained) */}

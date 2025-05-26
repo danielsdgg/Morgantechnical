@@ -187,10 +187,36 @@ const Software: React.FC = () => {
         <title>Software Engineering Course | Morgan Technical Training</title>
         <meta
           name="description"
-          content="Join our Software Engineering course at Morgan Technical Training in Kikuyu, Kenya. Master coding, web development, and more with remote learning options."
+          content="Join our Software Engineering course at Morgan Technical Training in Kikuyu, Kenya. Master full-stack development with HTML, CSS, JavaScript, React, and more remotely."
         />
-        <meta name="keywords" content="Morgan Technical Training software engineering, software engineering course Kikuyu, coding bootcamp Kenya, remote software training" />
+        <meta
+          name="keywords"
+          content="Morgan Technical Training software engineering, software engineering course Kikuyu, coding bootcamp Kenya, full-stack development, remote software training"
+        />
         <link rel="canonical" href="https://morgantechnicaltraining.com/software" />
+        <meta name="robots" content="index, follow" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Course',
+            'name': 'Software Engineering',
+            'description': 'An 5-month remote bootcamp at Morgan Technical Training in Kikuyu, Kenya, teaching HTML, CSS, Tailwind CSS, JavaScript, React, Node.js, Python, Flask, and SQLite.',
+            'provider': {
+              '@type': 'Organization',
+              'name': 'Morgan Technical Training',
+              'url': 'https://morgantechnicaltraining.com',
+              'address': {
+                '@type': 'PostalAddress',
+                'streetAddress': 'Kikuyu Town, opposite Cleanshelf',
+                'addressLocality': 'Kikuyu',
+                'addressRegion': 'Kiambu County',
+                'postalCode': '00902',
+                'addressCountry': 'KE'
+              }
+            },
+            'url': 'https://morgantechnicaltraining.com/software'
+          })}
+        </script>
       </Helmet>
     <NavBar />
 

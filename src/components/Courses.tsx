@@ -39,7 +39,6 @@ const Courses: React.FC = () => {
       if (section) observer.observe(section);
     });
 
-    // Fallback: Ensure sections are visible after a delay
     const timer = setTimeout(() => {
       setVisibleSections({ intro: true, courses: true, highlights: true });
     }, 1500);
@@ -54,14 +53,60 @@ const Courses: React.FC = () => {
 
   return (
     <>
-<Helmet>
+      <Helmet>
         <title>Tech Courses at Morgan Technical Training | Software Engineering, Cybersecurity, Data Science</title>
         <meta
           name="description"
           content="Discover top tech courses at Morgan Technical Training in Kikuyu, Kenya. Learn Software Engineering, Cybersecurity, and Data Science remotely to launch your tech career."
         />
-        <meta name="keywords" content="Morgan Technical Training courses, tech courses Kikuyu, software engineering course, cybersecurity course, data science course, remote tech training" />
+        <meta
+          name="keywords"
+          content="Morgan Technical Training courses, tech courses Kikuyu, software engineering course, cybersecurity course, data science course, remote tech training"
+        />
         <link rel="canonical" href="https://morgantechnicaltraining.com/courses" />
+        <meta name="robots" content="index, follow" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'EducationalOrganization',
+            'name': 'Morgan Technical Training',
+            'url': 'https://morgantechnicaltraining.com',
+            'address': {
+              '@type': 'PostalAddress',
+              'streetAddress': 'Kikuyu Town, opposite Cleanshelf',
+              'addressLocality': 'Kikuyu',
+              'addressRegion': 'Kiambu County',
+              'postalCode': '00902',
+              'addressCountry': 'KE',
+            },
+            'telephone': '+254726152560',
+            'email': 'morgantechnical72@gmail.com',
+            'hasOfferCatalog': {
+              '@type': 'OfferCatalog',
+              'name': 'Tech Courses',
+              'itemListElement': [
+                {
+                  '@type': 'Course',
+                  'name': 'Software Engineering',
+                  'description': 'A 6-month remote bootcamp teaching HTML, CSS, JavaScript, React, Node.js, Python, Flask, and SQLite.',
+                  'url': 'https://morgantechnicaltraining.com/software',
+                },
+                {
+                  '@type': 'Course',
+                  'name': 'Cybersecurity',
+                  'description': 'A 21-22 week remote course covering security measures, threat monitoring, and incident response.',
+                  'url': 'https://morgantechnicaltraining.com/cybersecurity',
+                },
+                {
+                  '@type': 'Course',
+                  'name': 'Data Science',
+                  'description': 'A 5-month remote program teaching Python, R, SQL, and predictive modeling.',
+                  'url': 'https://morgantechnicaltraining.com/datascience',
+                },
+              ],
+            },
+          })}
+        </script>
       </Helmet>
       <NavBar />
 
@@ -74,7 +119,6 @@ const Courses: React.FC = () => {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
-            {/* Text Content */}
             <motion.div
               className="flex flex-col justify-center bg-white/90 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-gray-200/20"
               initial={{ opacity: 0, x: -50 }}
@@ -87,15 +131,14 @@ const Courses: React.FC = () => {
               <p className="text-lg sm:text-xl text-gray-700 font-inter leading-relaxed mb-6">
                 At Morgan Technical Training, our industry-aligned courses in Software Engineering, Cybersecurity, and Data Science empower you with hands-on skills to thrive in the tech world. Learn from expert instructors and build a future-ready career.
               </p>
-              {/* <a
-                href="#courses-section"
+              <Link
+                to="/courses#courses-section"
                 className="inline-block text-orange-500 font-inter font-semibold hover:text-orange-600 transition-colors duration-300"
+                aria-label="Explore tech courses"
               >
                 Explore Our Programs
-              </a> */}
+              </Link>
             </motion.div>
-
-            {/* Image */}
             <motion.div
               className="flex justify-center items-center"
               initial={{ opacity: 0, x: 50 }}
@@ -105,7 +148,7 @@ const Courses: React.FC = () => {
               <img
                 className="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-2xl shadow-xl border border-gray-200/20"
                 src={logo}
-                alt="Morgan Technical Training Classroom"
+                alt="Tech Courses at Morgan Technical Training"
                 onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/800x500?text=Classroom+Image')}
               />
             </motion.div>
@@ -125,7 +168,6 @@ const Courses: React.FC = () => {
             Our Programs
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {/* Course 1: Software Engineering */}
             <motion.div
               className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
@@ -134,7 +176,7 @@ const Courses: React.FC = () => {
             >
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHOidFsuemGaWGxr16QKfvzI52EFQeFTrN4Q&s"
-                alt="Software Engineering Course"
+                alt="Software Engineering Course at Morgan Technical Training"
                 className="mx-auto mb-4 h-24 w-24 object-cover rounded-full"
               />
               <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-3">
@@ -151,8 +193,6 @@ const Courses: React.FC = () => {
                 Learn More
               </Link>
             </motion.div>
-
-            {/* Course 2: Cybersecurity */}
             <motion.div
               className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
@@ -161,7 +201,7 @@ const Courses: React.FC = () => {
             >
               <img
                 src="https://www.technologysolutions.net/wp-content/uploads/2023/09/pros-and-cons-scaled-2560x1280.jpeg"
-                alt="Cybersecurity Course"
+                alt="Cybersecurity Course at Morgan Technical Training"
                 className="mx-auto mb-4 h-24 w-24 object-cover rounded-full"
               />
               <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-3">
@@ -178,8 +218,6 @@ const Courses: React.FC = () => {
                 Join Waitlist
               </Link>
             </motion.div>
-
-            {/* Course 3: Data Science */}
             <motion.div
               className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
@@ -188,7 +226,7 @@ const Courses: React.FC = () => {
             >
               <img
                 src="https://wallpapers.com/images/featured/data-science-xe1pmo7wm4jcokpd.jpg"
-                alt="Data Science Course"
+                alt="Data Science Course at Morgan Technical Training"
                 className="mx-auto mb-4 h-24 w-24 object-cover rounded-full"
               />
               <h3 className="text-xl sm:text-2xl font-semibold font-inter text-orange-400 mb-3">
@@ -226,7 +264,6 @@ const Courses: React.FC = () => {
             Why Learn with Us
           </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {/* Highlight 1: Hands-on Projects */}
             <motion.div
               className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
@@ -256,8 +293,6 @@ const Courses: React.FC = () => {
                 Build real-world applications and portfolios through practical, industry-relevant projects guided by expert instructors.
               </p>
             </motion.div>
-
-            {/* Highlight 2: Expert Instructors */}
             <motion.div
               className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
@@ -287,8 +322,6 @@ const Courses: React.FC = () => {
                 Learn from industry professionals with years of experience, dedicated to your success in tech.
               </p>
             </motion.div>
-
-            {/* Highlight 3: Flexible Learning */}
             <motion.div
               className="bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200/20 hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
