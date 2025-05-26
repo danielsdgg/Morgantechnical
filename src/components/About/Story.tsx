@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '../Navbar';
 import Footer from '../Footer';
 import ScrollButton from '../ScrollButton';
+import { Helmet } from 'react-helmet-async';
 
 const Story: React.FC = () => {
   const [visibleSections, setVisibleSections] = useState({
@@ -48,6 +49,15 @@ const Story: React.FC = () => {
 
   return (
     <>
+    <Helmet>
+        <title>About Morgan Technical Training | Kikuyu, Kenya</title>
+        <meta
+          name="description"
+          content="Learn about Morgan Technical Training, a leading tech bootcamp in Kikuyu, Kenya, dedicated to empowering students with in-demand tech skills."
+        />
+        <meta name="keywords" content="Morgan Technical Training, tech bootcamp Kikuyu, about tech training Kenya" />
+        <link rel="canonical" href="https://morgantechnicaltraining.com/about" />
+      </Helmet>
       <NavBar />
       {/* Section 1: Mission & Vision (Retained) */}
       <section

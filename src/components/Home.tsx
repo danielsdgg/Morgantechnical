@@ -123,6 +123,8 @@ const Home: React.FC = () => {
           name="description"
           content="Explore top tech courses at Morgan Technical Training in software engineering, cybersecurity, and data science. Start your career remotely."
         />
+        <meta name="keywords" content="Morgan Technical Training, tech bootcamp Kikuyu, software engineering, cybersecurity, data science, remote tech courses" />
+        <link rel="canonical" href="https://morgantechnicaltraining.com" />
         <script type="application/ld+json">
           {`
             {
