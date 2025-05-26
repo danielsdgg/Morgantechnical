@@ -54,17 +54,62 @@ const Courses: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Courses | Morgan Technical Training</title>
-        <meta
-          name="description"
-          content="Explore hands-on tech courses at Morgan Technical Training in Nairobi, Kenya. Learn Software Engineering, Cybersecurity, and Data Science with expert instructors."
-        />
-        <meta
-          name="keywords"
-          content="tech bootcamp, software engineering course, cybersecurity training, data science program, Nairobi tech courses, Morgan Technical Training"
-        />
-      </Helmet>
+    <Helmet>
+      <title>Tech Courses | Morgan Technical Training - Kikuyu, Kenya</title>
+      <meta
+        name="description"
+        content="Explore hands-on tech courses at Morgan Technical Training in Kikuyu Town, opposite Cleanshelf, Kenya. Learn Software Engineering, Cybersecurity, and Data Science remotely with expert instructors. Contact us at +254 726 152 560 or morgantechnical72@gmail.com."
+      />
+      <meta
+        name="keywords"
+        content="tech bootcamp, software engineering course, cybersecurity training, data science program, tech courses, Morgan Technical Training, Kikuyu tech training, Kenya coding bootcamp, remote tech courses"
+      />
+      <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            "name": "Morgan Technical Training",
+            "description": "A technical training bootcamp in Kikuyu, Kenya, offering hands-on courses in Software Engineering, Cybersecurity, and Data Science.",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Kikuyu Town, opposite Cleanshelf",
+              "addressLocality": "Kikuyu",
+              "addressRegion": "Kiambu County",
+              "postalCode": "00902",
+              "addressCountry": "Kenya"
+            },
+            "telephone": "+254726152560",
+            "email": "morgantechnical72@gmail.com",
+            "url": "https://morgantechnicaltraining.com",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Tech Courses",
+              "itemListElement": [
+                {
+                  "@type": "Course",
+                  "name": "Software Engineering Bootcamp",
+                  "description": "An 18-week remote bootcamp teaching HTML, CSS, JavaScript, React, Python, Flask, and more through hands-on projects.",
+                  "url": "https://morgantechnicaltraining.com/software"
+                },
+                {
+                  "@type": "Course",
+                  "name": "Cybersecurity Training",
+                  "description": "Remote training in securing networks and data with expert-led simulations and practical exercises.",
+                  "url": "https://morgantechnicaltraining.com/cybersecurity"
+                },
+                {
+                  "@type": "Course",
+                  "name": "Data Science Program",
+                  "description": "A remote program covering data analysis, machine learning, and more through flexible coursework.",
+                  "url": "https://morgantechnicaltraining.com/datascience"
+                }
+              ]
+            }
+          }
+        `}
+      </script>
+    </Helmet>
       <NavBar />
 
       {/* Section 1: Intro to Courses */}

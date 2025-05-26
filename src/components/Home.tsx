@@ -123,6 +123,27 @@ const Home: React.FC = () => {
           name="description"
           content="Explore top tech courses at Morgan Technical Training in software engineering, cybersecurity, and data science. Start your career remotely."
         />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "School",
+              "name": "Morgan Technical Training",
+              "description": "A technical training bootcamp offering courses in software engineering, cybersecurity, and data science.",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Kikuyu Town, opposite Cleanshelf",
+                "addressLocality": "Kikuyu",
+                "addressRegion": "Kiambu County",
+                "postalCode": "00902",
+                "addressCountry": "Kenya"
+              },
+              "telephone": "+254726152560",
+              "email": "morgantechnical72@gmail.com",
+              "url": "https://morgantechnicaltraining.com"
+            }
+          `}
+        </script>
       </Helmet>
       <Navbar />
       <div>

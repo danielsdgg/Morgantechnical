@@ -98,10 +98,33 @@ const Contact: React.FC = () => {
   return (
     <>
     <Helmet>
-      <title>Morgan Technical Training</title>
-      <meta name="description"
-      content="Explore top tech courses at Morgan Technical Training in software engineering, cybersecurity, and data science. Start your career remotely."/>
-    </Helmet>
+  <title>Contact Morgan Technical Training - Kikuyu, Kenya</title>
+  <meta
+    name="description"
+    content="Get in touch with Morgan Technical Training, a tech bootcamp in Kikuyu Town, opposite Cleanshelf, Kenya. Call +254 726 152 560 or email morgantechnical72@gmail.com to learn about our software engineering, cybersecurity, and data science courses."
+  />
+  <script type="application/ld+json">
+    {`
+      {
+        "@context": "https://schema.org",
+        "@type": "School",
+        "name": "Morgan Technical Training",
+        "description": "A technical training bootcamp offering courses in software engineering, cybersecurity, and data science.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Kikuyu Town, opposite Cleanshelf",
+          "addressLocality": "Kikuyu",
+          "addressRegion": "Kiambu County",
+          "postalCode": "00902",
+          "addressCountry": "Kenya"
+        },
+        "telephone": "+254726152560",
+        "email": "morgantechnical72@gmail.com",
+        "url": "https://morgantechnicaltraining.com"
+      }
+    `}
+  </script>
+</Helmet>
     <Navbar />
       {/* Section 1: Hero */}
       <section

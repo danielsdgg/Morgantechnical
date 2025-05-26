@@ -184,17 +184,59 @@ const Software: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Software Engineering Program | Morgan Technical Training</title>
+        <title>Software Engineering Bootcamp | Morgan Technical Training - Kikuyu, Kenya</title>
         <meta
           name="description"
-          content="Join our 18-week remote Software Engineering bootcamp at Morgan Technical Training in Nairobi. Master HTML, CSS, JavaScript, React, Python, Flask, and more through hands-on projects."
+          content="Join our 18-week remote Software Engineering bootcamp at Morgan Technical Training in Kikuyu Town, opposite Cleanshelf, Kenya. Master HTML, CSS, JavaScript, React, Python, Flask, and more through hands-on projects. Contact us at +254 726 152 560 or morgantechnical72@gmail.com."
         />
-        <meta
-          name="keywords"
-          content="software engineering course, Morgan Technical Training, Nairobi tech bootcamp, learn coding, HTML, React, Python, Flask, remote tech course"
+        <meta name="keywords"
+        content="software engineering bootcamp, Morgan Technical Training, Kikuyu tech bootcamp, learn coding, HTML, CSS, JavaScript, React, Python, Flask, remote coding course, Kenya tech training"
         />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Course",
+              "name": "Software Engineering Bootcamp",
+              "description": "An 18-week remote Software Engineering bootcamp offered by Morgan Technical Training in Kikuyu, Kenya, teaching HTML, CSS, JavaScript, React, Python, Flask, and more through hands-on projects.",
+              "provider": {
+                "@type": "School",
+                "name": "Morgan Technical Training",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Kikuyu Town, opposite Cleanshelf",
+                  "addressLocality": "Kikuyu",
+                  "addressRegion": "Kiambu County",
+                  "postalCode": "00902",
+                  "addressCountry": "Kenya"
+                },
+                "telephone": "+254726152560",
+                "email": "morgantechnical72@gmail.com",
+                "url": "https://morgantechnicaltraining.com"
+              },
+              "url": "https://morgantechnicaltraining.com/software",
+              "hasCourseInstance": {
+                "@type": "CourseInstance",
+                "courseMode": "online",
+                "duration": "P18W",
+                "location": {
+                  "@type": "Place",
+                  "name": "Morgan Technical Training",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Kikuyu Town, opposite Cleanshelf",
+                    "addressLocality": "Kikuyu",
+                    "addressRegion": "Kiambu County",
+                    "postalCode": "00902",
+                    "addressCountry": "Kenya"
+                  }
+                }
+              }
+            }
+          `}
+        </script>
       </Helmet>
-      <NavBar />
+    <NavBar />
 
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-orange-500 to-orange-600 z-50"
