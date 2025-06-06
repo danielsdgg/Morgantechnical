@@ -50,7 +50,7 @@ const Story: React.FC = () => {
   return (
     <>
     <Helmet>
-        <title>About Morgan Technical Training | Kikuyu, Kenya</title>
+        <title>About Morgan Technical Training | Explore Tech Courses</title>
         <meta
           name="description"
           content="Learn about Morgan Technical Training, a leading tech bootcamp in Kikuyu Town, Kenya, dedicated to empowering students with in-demand technology skills."
