@@ -208,7 +208,7 @@ const Courses: React.FC = () => {
                 Cybersecurity
               </h3>
               <p className="text-gray-700 font-inter text-sm sm:text-base mb-4">
-                <span className="font-medium text-yellow-600">Coming July 2025</span> - Learn to protect systems and data from cyber threats. This 21-22 week course covers security measures, threat monitoring, and incident response. Join the waitlist to stay updated.
+                <span className="font-medium text-yellow-600">Coming September 2025</span> - Learn to protect systems and data from cyber threats. This 21-22 week course covers security measures, threat monitoring, and incident response. Join the waitlist to stay updated.
               </p>
               <Link
                 to="/cybersecurity"

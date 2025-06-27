@@ -293,7 +293,7 @@ const Software: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Fully remote course | Applications open for the <b>June 2025</b> intake
+            Fully remote course | Applications open for the <b>September 2025</b> intake
           </motion.p>
         </section>
 
