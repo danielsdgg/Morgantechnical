@@ -215,7 +215,7 @@ const Courses: React.FC = () => {
                 className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-inter font-semibold text-sm sm:text-base hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300"
                 aria-label="Join waitlist for Cybersecurity course"
               >
-                Join Waitlist
+                Learn More
               </Link>
             </motion.div>
             <motion.div
@@ -240,7 +240,7 @@ const Courses: React.FC = () => {
                 className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-inter font-semibold text-sm sm:text-base hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300"
                 aria-label="Join waitlist for Data Science course"
               >
-                Join Waitlist
+                Learn More
               </Link>
             </motion.div>
           </div>
