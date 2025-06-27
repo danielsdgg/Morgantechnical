@@ -186,11 +186,11 @@ const Footer: React.FC = () => {
               >
                 <FaPhone className="mr-2 text-orange-300" />
                 <a
-                  href="tel:+254726152560"
+                  href="tel:+254702106527"
                   className="hover:text-orange-300 transition-colors duration-300"
                   aria-label="Call Morgan Technical Training"
                 >
-                  +254 726 152 560
+                  +254 702 106 527 /+254 707 319 080
                 </a>
               </li>
               <li
