@@ -233,7 +233,7 @@ const Courses: React.FC = () => {
                 Data Science
               </h3>
               <p className="text-gray-700 font-inter text-sm sm:text-base mb-4">
-                <span className="font-medium text-yellow-600">Coming Q2 2026</span> - Analyze and visualize data to drive decisions. This 5-month program teaches Python, R, SQL, and predictive modeling. Build a portfolio of data-driven projects.
+                <span className="font-medium text-yellow-600">Coming Late 2026</span> - Analyze and visualize data to drive decisions. This 5-month program teaches Python, R, SQL, and predictive modeling. Build a portfolio of data-driven projects.
               </p>
               <Link
                 to="/datascience"
