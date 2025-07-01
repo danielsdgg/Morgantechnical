@@ -43,8 +43,8 @@ const Footer: React.FC = () => {
 
   const courseLinks = [
     { name: 'Software Engineering', to: '/software' },
-    { name: 'Cybersecurity', to: '/cybersecurity' },
-    { name: 'Data Science', to: '/datascience' },
+    { name: 'Cybersecurity', to: '/cyber' },
+    { name: 'Data Science', to: '/dataa' },
   ];
 
   return (
@@ -186,11 +186,11 @@ const Footer: React.FC = () => {
               >
                 <FaPhone className="mr-2 text-orange-300" />
                 <a
-                  href="tel:+254702106527"
+                  href="tel:+254726152560"
                   className="hover:text-orange-300 transition-colors duration-300"
                   aria-label="Call Morgan Technical Training"
                 >
-                  +254 702 106 527 /+254 707 319 080
+                  +254 726 152 560 / +254 707 319 080
                 </a>
               </li>
               <li

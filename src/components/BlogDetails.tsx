@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import NavBar from './Navbar';
 import { FaArrowLeft } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import Footer from './Footer';
 
 const blogPosts = [
   {
@@ -328,6 +329,7 @@ const BlogDetails:React.FC = () => {
           </motion.div>
         </div>
       </section>
+      <Footer/>
     </>
   );
 };

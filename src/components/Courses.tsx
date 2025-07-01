@@ -129,15 +129,15 @@ const Courses: React.FC = () => {
                 Master Tech Skills
               </h2>
               <p className="text-lg sm:text-xl text-gray-700 font-inter leading-relaxed mb-6">
-                At Morgan Technical Training, our industry-aligned courses in Software Engineering, Cybersecurity, and Data Science empower you with hands-on skills to thrive in the tech world. Learn from expert instructors and build a future-ready career.
+                At Morgan Technical Training, our industry-aligned courses in Software Engineering, Cybersecurity, and Data Science empower you with hands-on skills to thrive in the tech world. Learn from expert instructors and build a future-ready career. Explore our courses in-depth below.
               </p>
-              <Link
-                to="/courses#courses-section"
+              {/* <Link
+                to="/courses"
                 className="inline-block text-orange-500 font-inter font-semibold hover:text-orange-600 transition-colors duration-300"
                 aria-label="Explore tech courses"
               >
                 Explore Our Programs
-              </Link>
+              </Link> */}
             </motion.div>
             <motion.div
               className="flex justify-center items-center"
@@ -183,7 +183,7 @@ const Courses: React.FC = () => {
                 Software Engineering
               </h3>
               <p className="text-gray-700 font-inter text-sm sm:text-base mb-4">
-                <span className="font-medium text-green-600">Available Now</span> - Master full-stack development in this 6-month program. Learn HTML, CSS, Tailwind CSS, JavaScript, React, Node.js, Python, Flask, and SQLite. Build real-world projects and deploy scalable applications.
+                <span className="font-medium text-green-600">Available Now</span> - Master full-stack development in this 18-weeks program. Learn HTML, CSS, Tailwind CSS, JavaScript, React, Node.js, Python, Flask, and SQLite. Build real-world projects and deploy scalable applications.
               </p>
               <Link
                 to="/software"
@@ -208,10 +208,10 @@ const Courses: React.FC = () => {
                 Cybersecurity
               </h3>
               <p className="text-gray-700 font-inter text-sm sm:text-base mb-4">
-                <span className="font-medium text-yellow-600">Coming September 2025</span> - Learn to protect systems and data from cyber threats. This 21-22 week course covers security measures, threat monitoring, and incident response. Learn more to stay updated when the course commences.
+                <span className="font-medium text-yellow-600">Coming Late 2025</span> - Learn to protect systems and data from cyber threats. This 21-22 week course covers security measures, threat monitoring, and incident response. Learn more to stay updated when the course commences.
               </p>
               <Link
-                to="/cybersecurity"
+                to="/cyber"
                 className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-inter font-semibold text-sm sm:text-base hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300"
                 aria-label="Join waitlist for Cybersecurity course"
               >
@@ -233,10 +233,10 @@ const Courses: React.FC = () => {
                 Data Science
               </h3>
               <p className="text-gray-700 font-inter text-sm sm:text-base mb-4">
-                <span className="font-medium text-yellow-600">Coming Late 2026</span> - Analyze and visualize data to drive decisions. This 5-month program teaches Python, R, SQL, and predictive modeling. Build a portfolio of data-driven projects.
+                <span className="font-medium text-yellow-600">Coming early 2026</span> - Analyze and visualize data to drive decisions. This 5-month program teaches Python, R, SQL, and predictive modeling. Build a portfolio of data-driven projects.
               </p>
               <Link
-                to="/datascience"
+                to="/dataa"
                 className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-inter font-semibold text-sm sm:text-base hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all duration-300"
                 aria-label="Join waitlist for Data Science course"
               >

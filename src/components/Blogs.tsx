@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import NavBar from './Navbar';
 import { motion } from 'framer-motion';
+import Footer from './Footer';
 
 const Blogs = () => {
   const navigate = useNavigate();
@@ -265,6 +266,7 @@ const Blogs = () => {
           </motion.form>
         </div>
       </section>
+      <Footer/>
     </>
   );
 };

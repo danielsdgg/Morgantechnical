@@ -9,10 +9,10 @@ import Forms from './components/Forms';
 import Blogs from './components/Blogs';
 import BlogDetails from './components/BlogDetails';
 import Software from './components/Programs/Software';
-import DataScience from './components/Programs/DataScience';
+// import DataScience from './components/Programs/DataScience';
 import Cyber from './components/Programs/Cyber';
 import Dataa from './components/Programs/Dataa';
-import Cybersecurity from './components/Programs/Cybersecurity';
+// import Cybersecurity from './components/Programs/Cybersecurity';
 
 // ScrollToTop component to handle scrolling to top on route change
 const ScrollToTop: React.FC = () => {
@@ -39,10 +39,10 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:id" element={<BlogDetails />} />
         <Route path="/form" element={<Forms />} />
-        <Route path="/datascience" element={<DataScience />} />
+        {/* <Route path="/datascience" element={<DataScience />} /> */}
         <Route path="/cyber" element={<Cyber />} />
         <Route path="/dataa" element={<Dataa />} />
-        <Route path="/cybersecurity" element={<Cybersecurity />} />
+        {/* <Route path="/cybersecurity" element={<Cybersecurity />} /> */}
       </Routes>
     </div>
   );

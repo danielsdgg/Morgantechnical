@@ -171,7 +171,7 @@ const NavBar: React.FC = () => {
                       transition={{ duration: 0.4, delay: 0.4 }}
                     >
                       <Link
-                        to="/datascience"
+                        to="/dataa"
                         className="block w-full px-5 py-3 text-gray-800 font-inter text-sm relative hover:bg-white/40 hover:backdrop-blur-md hover:text-orange-600 hover:scale-105 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 group"
                         aria-label="Navigate to Data Science course"
                         role="menuitem"
@@ -186,7 +186,7 @@ const NavBar: React.FC = () => {
                       transition={{ duration: 0.4, delay: 0.5 }}
                     >
                       <Link
-                        to="/cybersecurity"
+                        to="/cyber"
                         className="block w-full px-5 py-3 text-gray-800 font-inter text-sm relative hover:bg-white/40 hover:backdrop-blur-md hover:text-orange-600 hover:scale-105 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 group"
                         aria-label="Navigate to Cyber Security course"
                         role="menuitem"
@@ -304,7 +304,7 @@ const NavBar: React.FC = () => {
                         <ul className="ml-4 mt-2">
                           <li>
                             <Link
-                              to="/datascience"
+                              to="/dataa"
                               onClick={toggleMenu}
                               className="block py-3 px-4 font-inter text-base hover:bg-indigo-700 rounded-lg transition-colors duration-200"
                             >
@@ -313,7 +313,7 @@ const NavBar: React.FC = () => {
                           </li>
                           <li>
                             <Link
-                              to="/cybersecurity"
+                              to="/cyber"
                               onClick={toggleMenu}
                               className="block py-3 px-4 font-inter text-base hover:bg-indigo-700 rounded-lg transition-colors duration-200"
                             >
