@@ -130,37 +130,31 @@ const Software: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('https://formcarry.com/s/-49z_wo5br3', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({
-          access_key: '23a3a6b6-8282-49b0-afc0-2b71138aad7a',
-          ...formData,
-          subject: `New Application: ${formData.fullName}`,
-        }),
+        body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-      if (result.success) {
-        setNotification('Your application was submitted successfully!');
-        setFormData({
-          fullName: '',
-          email: '',
-          phone: '',
-          gender: '',
-          highschool: '',
-          course: 'Software Engineering',
-          hearSay: '',
-        });
-        setTimeout(() => setNotification(null), 5000);
-      } else {
-        throw new Error(result.message || 'Failed to submit form');
-      }
+      if (!response.ok) throw new Error('Failed to submit form');
+
+      setNotification('Your application was submitted successfully!');
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        gender: '',
+        highschool: '',
+        course: 'Software Engineering',
+        hearSay: '',
+      });
+
+      setTimeout(() => setNotification(null), 5000);
     } catch (error) {
-      console.error('Web3Forms error:', error);
+      console.error('Formcarry error:', error);
       setNotification('Failed to send application. Please try again later.');
       setTimeout(() => setNotification(null), 5000);
     }
@@ -224,11 +218,11 @@ const Software: React.FC = () => {
           })}
         </script>
       </Helmet>
-      <NavBar />
+    <NavBar />
 
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-orange-500 to-orange-600 z-50"
-        style={{ width: `${scrollProgress}%`, paddingTop: 'env(safe-area-inset-top)' }}/>
+      style={{ width: `${scrollProgress}%`, paddingTop: 'env(safe-area-inset-top)' }}/>
 
       <div className={`bg-white text-black ${isModalOpen ? 'blur-lg' : ''} mt-16 sm:mt-0`}>
         {/* Section 1: Hero */}
@@ -826,286 +820,282 @@ const Software: React.FC = () => {
       </div>
 
       {/* Application Modal */}
-      {isModalOpen && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 px-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          role="dialog"
-          aria-labelledby="application-form-title"
-          aria-modal="true"
+      {
+  isModalOpen && (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      role="dialog"
+      aria-labelledby="application-form-title"
+      aria-modal="true"
+    >
+      <motion.div
+        className="relative w-full max-w-md sm:max-w-lg mx-auto bg-white/95 backdrop-blur-xl p-8 sm:p-10 rounded-2xl shadow-2xl border border-orange-400/20 overflow-auto max-h-[90vh]"
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+      >
+        {/* Close Button */}
+        <motion.button
+          onClick={closeModal}
+          className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm p-2 rounded-full border border-gray-200/20 text-gray-700 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 hover:text-white transition-all duration-300 group"
+          aria-label="Close application form"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
+          <span className="text-lg">✕</span>
+          <span className="absolute hidden group-hover:block bg-indigo-900 text-white text-xs rounded py-1 px-2 -top-8 right-0">
+            Close form
+          </span>
+        </motion.button>
+
+        {/* Notification */}
+        {notification && (
           <motion.div
-            className="relative w-full max-w-md sm:max-w-lg mx-auto bg-white/95 backdrop-blur-xl p-8 sm:p-10 rounded-2xl shadow-2xl border border-orange-400/20 overflow-auto max-h-[90vh]"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+            className={`mb-6 p-4 text-center rounded-xl ${
+              notification.includes('successfully')
+                ? 'bg-green-100/90 backdrop-blur-md border border-green-200 text-green-800'
+                : 'bg-red-100/90 backdrop-blur-md border border-red-200 text-red-800'
+            } shadow-md`}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            role="alert"
+            aria-describedby="notification-message"
           >
-            {/* Close Button */}
-            <motion.button
-              onClick={closeModal}
-              className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm p-2 rounded-full border border-gray-200/20 text-gray-700 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 hover:text-white transition-all duration-300 group"
-              aria-label="Close application form"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <span className="text-lg">✕</span>
-              <span className="absolute hidden group-hover:block bg-indigo-900 text-white text-xs rounded py-1 px-2 -top-8 right-0">
-                Close form
-              </span>
-            </motion.button>
+            <span id="notification-message">{notification}</span>
+          </motion.div>
+        )}
 
-            {/* Notification */}
-            {notification && (
-              <motion.div
-                className={`mb-6 p-4 text-center rounded-xl ${
-                  notification.includes('successfully')
-                    ? 'bg-green-100/90 backdrop-blur-md border border-green-200 text-green-800'
-                    : 'bg-red-100/90 backdrop-blur-md border border-red-200 text-red-800'
-                } shadow-md`}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                role="alert"
-                aria-describedby="notification-message"
-              >
-                <span id="notification-message">{notification}</span>
-              </motion.div>
-            )}
+        {/* Form Title */}
+        <motion.h2
+          id="application-form-title"
+          className="text-2xl sm:text-3xl font-bold font-inter text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-orange-600 mb-6 relative"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Apply for Software Engineering
+          <span className="absolute left-1/2 -bottom-2 w-24 h-1 bg-gradient-to-r from-orange-500 to-orange-600 transform -translate-x-1/2 rounded-full"></span>
+        </motion.h2>
 
-            {/* Form Title */}
-            <motion.h2
-              id="application-form-title"
-              className="text-2xl sm:text-3xl font-bold font-inter text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-orange-600 mb-6 relative"
+        {/* Form */}
+        <form onSubmit={sendEmail} className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Full Name */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Apply for Software Engineering
-              <span className="absolute left-1/2 -bottom-2 w-24 h-1 bg-gradient-to-r from-orange-500 to-orange-600 transform -translate-x-1/2 rounded-full"></span>
-            </motion.h2>
-
-            {/* Form */}
-            <form onSubmit={sendEmail} className="space-y-6">
+              <label
+                htmlFor="fullName"
+                className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+              >
+                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                Full Name
+              </label>
               <input
-                type="hidden"
-                name="access_key"
-                value="YOUR_ACCESS_KEY_HERE" // Replace with your Web3Forms access key
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+                placeholder="Enter your full name"
+                className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+                value={formData.fullName}
+                onChange={handleChange}
+                aria-label="Full name input for application"
               />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {/* Full Name */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                >
-                  <label
-                    htmlFor="fullName"
-                    className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
-                  >
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    required
-                    placeholder="Enter your full name"
-                    className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    aria-label="Full name input for application"
-                  />
-                </motion.div>
+            </motion.div>
 
-                {/* Email Address */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <label
-                    htmlFor="email"
-                    className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
-                  >
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    placeholder="Enter your email address"
-                    className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
-                    value={formData.email}
-                    onChange={handleChange}
-                    aria-label="Email address input for application"
-                  />
-                </motion.div>
-
-                {/* Phone Number */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <label
-                    htmlFor="phone"
-                    className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
-                  >
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    placeholder="Enter your phone number"
-                    className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    aria-label="Phone number input for application"
-                  />
-                </motion.div>
-
-                {/* Gender */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  <label
-                    htmlFor="gender"
-                    className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
-                  >
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                    Gender
-                  </label>
-                  <select
-                    id="gender"
-                    name="gender"
-                    className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
-                    value={formData.gender}
-                    onChange={handleChange}
-                    aria-label="Gender selection for application"
-                  >
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </motion.div>
-              </div>
-
-              {/* High School */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
+            {/* Email Address */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <label
+                htmlFor="email"
+                className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
               >
-                <label
-                  htmlFor="highschool"
-                  className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
-                >
-                  <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                  Have you completed high school?
-                </label>
-                <select
-                  id="highschool"
-                  name="highschool"
-                  className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
-                  value={formData.highschool}
-                  onChange={handleChange}
-                  aria-label="High school completion status for application"
-                >
-                  <option value="">Select</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </motion.div>
+                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="Enter your email address"
+                className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+                value={formData.email}
+                onChange={handleChange}
+                aria-label="Email address input for application"
+              />
+            </motion.div>
 
-              {/* Course of Study */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
+            {/* Phone Number */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <label
+                htmlFor="phone"
+                className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
               >
-                <label
-                  htmlFor="course"
-                  className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
-                >
-                  <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                  Course of Study
-                </label>
-                <select
-                  id="course"
-                  name="course"
-                  className="w-full bg-gradient-to-r from-gray-200 to-gray-300 border border-gray-200 rounded-xl p-3 shadow-inner italic text-gray-600 cursor-not-allowed font-inter text-sm sm:text-base"
-                  value={formData.course}
-                  onChange={handleChange}
-                  disabled
-                  aria-label="Course of study (Software Engineering, disabled)"
-                >
-                  <option value="Software Engineering">Software Engineering</option>
-                </select>
-              </motion.div>
+                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder="Enter your phone number"
+                className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+                value={formData.phone}
+                onChange={handleChange}
+                aria-label="Phone number input for application"
+              />
+            </motion.div>
 
-              {/* hearSay */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
+            {/* Gender */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <label
+                htmlFor="gender"
+                className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
               >
-                <label
-                  htmlFor="feedback"
-                  className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
-                >
-                  <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                  How did you hear about us? *
-                </label>
-                <textarea
-                  id="hearSay"
-                  name="hearSay"
-                  required
-                  placeholder="Tell us how you found Morgan Technical Training"
-                  className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base resize-y"
-                  rows={5}
-                  value={formData.hearSay}
-                  onChange={handleChange}
-                  aria-label="Feedback on how you heard about Morgan Technical Training"
-                ></textarea>
-              </motion.div>
+                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                Gender
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+                value={formData.gender}
+                onChange={handleChange}
+                aria-label="Gender selection for application"
+              >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </motion.div>
+          </div>
 
-              {/* Submit Button */}
-              <motion.div
-                className="flex justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                <motion.button
-                  type="submit"
-                  className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white px-8 py-4 rounded-full font-inter font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-800 hover:scale-105 transition-all duration-300 relative overflow-hidden"
-                  aria-label="Submit application form"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="relative z-10">Submit Application</span>
-                  <motion.span
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileHover={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  ></motion.span>
-                </motion.button>
-              </motion.div>
-            </form>
+          {/* High School */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <label
+              htmlFor="highschool"
+              className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+            >
+              <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+              Have you completed high school?
+            </label>
+            <select
+              id="highschool"
+              name="highschool"
+              className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base"
+              value={formData.highschool}
+              onChange={handleChange}
+              aria-label="High school completion status for application"
+            >
+              <option value="">Select</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </motion.div>
-        </motion.div>
-      )}
+
+          {/* Course of Study */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <label
+              htmlFor="course"
+              className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+            >
+              <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+              Course of Study
+            </label>
+            <select
+              id="course"
+              name="course"
+              className="w-full bg-gradient-to-r from-gray-200 to-gray-300 border border-gray-200 rounded-xl p-3 shadow-inner italic text-gray-600 cursor-not-allowed font-inter text-sm sm:text-base"
+              value={formData.course}
+              onChange={handleChange}
+              disabled
+              aria-label="Course of study (Software Engineering, disabled)"
+            >
+              <option value="Software Engineering">Software Engineering</option>
+            </select>
+          </motion.div>
+
+          {/* hearSay */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            <label
+              htmlFor="feedback"
+              className="flex items-center text-gray-800 font-inter font-semibold text-sm sm:text-base mb-2"
+            >
+              <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+              How did you hear about us? *
+            </label>
+            <textarea
+              id="hearSay"
+              name="hearSay"
+              required
+              placeholder="Tell us how you found Morgan Technical Training"
+              className="w-full bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 hover:scale-105 transition-all duration-300 font-inter text-sm sm:text-base resize-y"
+              rows={5}
+              value={formData.hearSay}
+              onChange={handleChange}
+              aria-label="Feedback on how you heard about Morgan Technical Training"
+            ></textarea>
+          </motion.div>
+
+          {/* Submit Button */}
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <motion.button
+              type="submit"
+              className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white px-8 py-4 rounded-full font-inter font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-800 hover:scale-105 transition-all duration-300 relative overflow-hidden"
+              aria-label="Submit application form"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10">Submit Application</span>
+              <motion.span
+                className="absolute inset-0 bg-white/20"
+                initial={{ scale: 0, opacity: 0 }}
+                whileHover={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              ></motion.span>
+            </motion.button>
+          </motion.div>
+        </form>
+      </motion.div>
+    </motion.div>
+  )}
 
       <ScrollButton />
       <Footer />
