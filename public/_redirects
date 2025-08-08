@@ -4,6 +4,3 @@ https://morgantechnicaltraining.com/* https://morgantechnicaltraining.co.ke/:spl
 
 # Redirect www to .co.ke
 https://www.morgantechnicaltraining.com/* https://morgantechnicaltraining.co.ke/:splat 301!
-
-# Optionally redirect Netlify subdomain
-https://morgantechnicaltraining.netlify.app/* https://morgantechnicaltraining.co.ke/:splat 301!
