@@ -1,2 +1,9 @@
 /*    /index.html   200
-https://danielmuiruri.netlify.app/*    https://morgantechnicaltraining.com/:splat    301
+# Redirect root domain to .co.ke
+https://morgantechnicaltraining.com/* https://morgantechnicaltraining.co.ke/:splat 301!
+
+# Redirect www to .co.ke
+https://www.morgantechnicaltraining.com/* https://morgantechnicaltraining.co.ke/:splat 301!
+
+# Optionally redirect Netlify subdomain
+https://morgantechnicaltraining.netlify.app/* https://morgantechnicaltraining.co.ke/:splat 301!
