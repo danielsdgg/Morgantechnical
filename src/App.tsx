@@ -23,7 +23,7 @@ const ScrollToTop: React.FC = () => {
 };
 
 function App() {
-  return ({}
+  return (
     <div className="App">
       <div className="bg-blue-100 border-l-4 border-blue-500 p-4 m-4 rounded-lg shadow-md">
   <h2 className="text-xl text-center font-bold text-blue-800 mb-2">
