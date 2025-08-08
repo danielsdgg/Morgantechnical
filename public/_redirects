@@ -1,6 +1,7 @@
-/*    /index.html   200
 # Redirect root domain to .co.ke
 https://morgantechnicaltraining.com/* https://morgantechnicaltraining.co.ke/:splat 301!
 
 # Redirect www to .co.ke
 https://www.morgantechnicaltraining.com/* https://morgantechnicaltraining.co.ke/:splat 301!
+
+https://morgantechnicaltraining.netlify.app/* https://morgantechnicaltraining.co.ke/:splat 301!
