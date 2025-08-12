@@ -118,7 +118,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Morgan Technical Training</title>
+        {/* <title>Morgan Technical Training</title>
         <meta
           name="description"
           content="Explore top tech courses at Morgan Technical Training in software engineering, cybersecurity, and data science. Start your career remotely."
@@ -145,7 +145,7 @@ const Home: React.FC = () => {
               "url": "https://morgantechnicaltraining.com"
             }
           `}
-        </script>
+        </script> */}
       </Helmet>
       <Navbar />
       <div>

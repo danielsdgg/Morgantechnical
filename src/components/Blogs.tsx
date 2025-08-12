@@ -120,14 +120,14 @@ const Blogs = () => {
     <>
       <Helmet>
         <title>Blog | Morgan Technical Training</title>
-        <meta
+        {/* <meta
           name="description"
           content="Stay updated with Morgan Technical Training’s blog. Explore tech trends, alumni success stories, and insights from our Nairobi-based tech bootcamp."
         />
         <meta
           name="keywords"
           content="tech blog, Morgan Technical Training, AI in education, cybersecurity trends, alumni success, Nairobi tech bootcamp"
-        />
+        /> */}
       </Helmet>
       <NavBar />
 

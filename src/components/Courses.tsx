@@ -54,7 +54,7 @@ const Courses: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Tech Courses at Morgan Technical Training | Software Engineering, Cybersecurity, Data Science</title>
+        {/* <title>Tech Courses at Morgan Technical Training | Software Engineering, Cybersecurity, Data Science</title>
         <meta
           name="description"
           content="Discover top tech courses at Morgan Technical Training in Kikuyu, Kenya. Learn Software Engineering, Cybersecurity, and Data Science remotely to launch your tech career."
@@ -106,7 +106,7 @@ const Courses: React.FC = () => {
               ],
             },
           })}
-        </script>
+        </script> */}
       </Helmet>
       <NavBar />
 
