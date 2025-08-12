@@ -98,7 +98,7 @@ const Contact: React.FC = () => {
   return (
     <>
     <Helmet>
-  <title>Contact Morgan Technical Training - Reach Us Out</title>
+  {/* <title>Contact Morgan Technical Training - Reach Us Out</title>
   <meta
     name="description"
     content="Get in touch with Morgan Technical Training, a tech bootcamp in Kikuyu Town, opposite Cleanshelf, Kenya. Call +254 726 152 560 or email morgantechnical72@gmail.com to learn about our software engineering, cybersecurity, and data science courses."
@@ -123,7 +123,7 @@ const Contact: React.FC = () => {
         "url": "https://morgantechnicaltraining.com"
       }
     `}
-  </script>
+  </script> */}
 </Helmet>
     <Navbar />
       {/* Section 1: Hero */}

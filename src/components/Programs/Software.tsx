@@ -184,7 +184,7 @@ const Software: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Software Engineering Course | Morgan Technical Training</title>
+        {/* <title>Software Engineering Course | Morgan Technical Training</title>
         <meta
           name="description"
           content="Join our Software Engineering course at Morgan Technical Training in Kikuyu, Kenya. Master full-stack development with HTML, CSS, JavaScript, React, and more remotely."
@@ -216,7 +216,7 @@ const Software: React.FC = () => {
             },
             'url': 'https://morgantechnicaltraining.com/software'
           })}
-        </script>
+        </script> */}
       </Helmet>
     <NavBar />
 
