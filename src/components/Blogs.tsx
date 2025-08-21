@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import NavBar from './Navbar';
 import { motion } from 'framer-motion';
 import Footer from './Footer';
@@ -118,7 +117,6 @@ const Blogs = () => {
 
   return (
     <>
-      <Helmet>
         <title>Blog | Morgan Technical Training</title>
         {/* <meta
           name="description"
@@ -128,7 +126,6 @@ const Blogs = () => {
           name="keywords"
           content="tech blog, Morgan Technical Training, AI in education, cybersecurity trends, alumni success, Nairobi tech bootcamp"
         /> */}
-      </Helmet>
       <NavBar />
 
       {/* Section 1: Intro */}

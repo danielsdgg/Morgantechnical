@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import NavBar from './Navbar';
 import { FaArrowLeft } from 'react-icons/fa';
 import { motion } from 'framer-motion';
@@ -135,17 +134,7 @@ const BlogDetails:React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{`${blog.title} | Morgan Technical Training`}</title>
-        <meta
-          name="description"
-          content={`${blog.content.substring(0, 150)}... Explore tech insights, alumni stories, and more at Morgan Technical Training's blog.`}
-        />
-        <meta
-          name="keywords"
-          content={`Morgan Technical Training, ${blog.title.toLowerCase()}, tech blog, Nairobi tech bootcamp, AI education, cybersecurity trends, alumni success`}
-        />
-      </Helmet>
+      
       <NavBar />
 
       {/* Section 1: Blog Post Details */}

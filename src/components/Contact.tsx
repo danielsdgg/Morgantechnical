@@ -3,7 +3,6 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { motion } from 'framer-motion';
 import logo from '../assets/data.jpg';
-import { Helmet } from 'react-helmet-async'; 
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -97,7 +96,6 @@ const Contact: React.FC = () => {
 
   return (
     <>
-    <Helmet>
   {/* <title>Contact Morgan Technical Training - Reach Us Out</title>
   <meta
     name="description"
@@ -124,7 +122,6 @@ const Contact: React.FC = () => {
       }
     `}
   </script> */}
-</Helmet>
     <Navbar />
       {/* Section 1: Hero */}
       <section

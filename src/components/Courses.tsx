@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+// import { Helmet } from 'react-helmet-async';
 import NavBar from './Navbar';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
@@ -53,7 +53,6 @@ const Courses: React.FC = () => {
 
   return (
     <>
-      <Helmet>
         {/* <title>Tech Courses at Morgan Technical Training | Software Engineering, Cybersecurity, Data Science</title>
         <meta
           name="description"
@@ -107,7 +106,6 @@ const Courses: React.FC = () => {
             },
           })}
         </script> */}
-      </Helmet>
       <NavBar />
 
       {/* Section 1: Intro to Courses */}

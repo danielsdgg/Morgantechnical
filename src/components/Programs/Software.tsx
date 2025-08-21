@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import NavBar from '../Navbar';
 import Footer from '../Footer';
 import ScrollButton from '../ScrollButton';
@@ -183,7 +182,6 @@ const Software: React.FC = () => {
 
   return (
     <>
-      <Helmet>
         {/* <title>Software Engineering Course | Morgan Technical Training</title>
         <meta
           name="description"
@@ -217,7 +215,6 @@ const Software: React.FC = () => {
             'url': 'https://morgantechnicaltraining.com/software'
           })}
         </script> */}
-      </Helmet>
     <NavBar />
 
       {/* Progress Bar */}

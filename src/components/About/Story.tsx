@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '../Navbar';
 import Footer from '../Footer';
 import ScrollButton from '../ScrollButton';
-import { Helmet } from 'react-helmet-async';
 
 const Story: React.FC = () => {
   const [visibleSections, setVisibleSections] = useState({
@@ -49,7 +48,7 @@ const Story: React.FC = () => {
 
   return (
     <>
-    <Helmet>
+    
         {/* <title>About Morgan Technical Training | Explore Tech Courses</title>
         <meta
           name="description"
@@ -79,7 +78,6 @@ const Story: React.FC = () => {
             'email': 'morgantechnical72@gmail.com'
           })}
         </script> */}
-      </Helmet>
       <NavBar />
       {/* Section 1: Mission & Vision (Retained) */}
       <section
